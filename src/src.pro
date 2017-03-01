@@ -1,12 +1,12 @@
 include(../defaults.pri)
 
-CONFIG   += console
-CONFIG   -= app_bundle
-CONFIG   -= qt
+CONFIG += console
+CONFIG -= app_bundle
+CONFIG += c++14
 
 TEMPLATE = lib
 
 TARGET = optymalizacja
 
 SOURCES += Dummy.cpp
-HEADERS += Dummy.h
+HEADERS += Dummy.hpp
