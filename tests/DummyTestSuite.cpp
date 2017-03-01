@@ -8,12 +8,12 @@ public:
     Dummy sut;
 };
 
-TEST_F(DummyTestSuite, shouldReturn5AfterInicjalization)
+TEST_F(DummyTestSuite, shouldReturnFiveAfterInitialization)
 {
     ASSERT_EQ(sut.getP(), 5);
 }
 
-TEST_F(DummyTestSuite, shouldReturn5AfterInicjalizationFail)
+TEST_F(DummyTestSuite, shouldReturnFiveAfterInitializationFail)
 {
     ASSERT_EQ(sut.getP(), 3);
 }
