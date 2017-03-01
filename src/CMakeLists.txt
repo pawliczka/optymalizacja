@@ -3,7 +3,8 @@ cmake_minimum_required(VERSION 2.8)
 project(Optymalizacja)
 
 set(SOURCES
-
+    Dummy.cpp
+    Dummy.hpp
 )
 
 add_library(${PROJECT_NAME}-lib ${SOURCES})
