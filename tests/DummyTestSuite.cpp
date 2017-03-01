@@ -1,10 +1,9 @@
-#include <gtest/gtest.h>
 #include "Dummy.hpp"
+#include <gtest/gtest.h>
 
 using namespace testing;
 
-class DummyTestSuite : public Test
-{
+class DummyTestSuite : public Test {
 public:
     Dummy sut;
 };

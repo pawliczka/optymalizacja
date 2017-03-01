@@ -1,8 +1,8 @@
 #pragma once
 
-class Dummy
-{
+class Dummy {
     int p = 5;
+
 public:
     int getP() const;
 };
