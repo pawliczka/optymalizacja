@@ -9,4 +9,4 @@ TEMPLATE = app
 SOURCES += main.cpp \
            DummyTestSuite.cpp
 
-LIBS += -lgtest -L../src -loptymalizacja -lpthread
+LIBS += -lgmock -L../src -loptymalizacja -lpthread
