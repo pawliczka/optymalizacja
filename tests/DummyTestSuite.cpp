@@ -1,9 +1,7 @@
 #include "Dummy.hpp"
-#include <gtest/gtest.h>
+#include <gmock/gmock.h>
 
-using namespace testing;
-
-class DummyTestSuite : public Test {
+class DummyTestSuite : public testing::Test {
 public:
     Dummy sut;
 };
