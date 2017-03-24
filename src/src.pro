@@ -14,11 +14,14 @@ TARGET = optymalizacja
 
 SOURCES += \
     mainwindow.cpp \
-    EquationConventer.cpp
+    EquationConventer.cpp \
+    SingleExpresionConventer.cpp
 HEADERS += \
     mainwindow.h \
     EquationConventer.hpp \
-    IEquationConventer.hpp
+    IEquationConventer.hpp \
+    SingleExpresionConventer.hpp \
+    ISingleExpresionConventer.hpp
 
 FORMS += \
     mainwindow.ui

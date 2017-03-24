@@ -7,6 +7,7 @@ CONFIG += c++14
 TEMPLATE = app
 
 SOURCES += main.cpp \
-    EquationConventerTestSuite.cpp
+    EquationConventerTestSuite.cpp \
+    SingleExpresionConventerTestSuite.cpp
 
 LIBS += -lgmock -L../src -loptymalizacja -lpthread
