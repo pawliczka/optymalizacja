@@ -8,12 +8,17 @@ SingleExpresionConventer::SingleExpresionConventer()
 {
 }
 
-std::pair< int, int > SingleExpresionConventer::convert( std::string& expresion )
+std::pair< int, int > SingleExpresionConventer::convert( std::string expresion )
 {
-    auto& expresionWithoutWhiteCharacters = removeWhiteCharacters( expresion );
-    if ( expresionWithoutWhiteCharacters == "" )
+    m_expresionWithoutWhiteCharacters = removeWhiteCharacters( expresion );
+    if ( isEmptyExpresion() )
         return std::make_pair( 0, 0 );
-    return splitExpresionToPair( expresionWithoutWhiteCharacters );
+    return splitExpresionToPair();
+}
+
+bool SingleExpresionConventer::isEmptyExpresion()
+{
+    return m_expresionWithoutWhiteCharacters == "";
 }
 
 std::string& SingleExpresionConventer::removeWhiteCharacters( std::string& expresion )
@@ -22,29 +27,32 @@ std::string& SingleExpresionConventer::removeWhiteCharacters( std::string& expre
     return expresion;
 }
 
-std::pair< int, int > SingleExpresionConventer::splitExpresionToPair( std::string& expresion )
+void SingleExpresionConventer::splitExpresionByX()
 {
-    std::vector< std::string > splitedExpresion;
-    boost::split( splitedExpresion, expresion, boost::is_any_of( "x" ) );
-    if ( splitedExpresion.size() == 2 )
+    boost::split( m_splitedExpresion, m_expresionWithoutWhiteCharacters, boost::is_any_of( "x" ) );
+}
+
+std::pair< int, int > SingleExpresionConventer::splitExpresionToPair()
+{
+    splitExpresionByX();
+    if ( m_splitedExpresion.size() == 2 )
     {
-        return convertFullyExpansion( splitedExpresion );
+        return convertFullyExpansion();
     }
     else
-        return std::make_pair( boost::lexical_cast< int >( splitedExpresion[ 0 ] ), 0 );
+        return std::make_pair( boost::lexical_cast< int >( m_splitedExpresion[ 0 ] ), 0 );
 }
 
-
-std::pair< int, int > SingleExpresionConventer::convertFullyExpansion( std::vector< std::string >& splitedExpresion )
+std::pair< int, int > SingleExpresionConventer::convertFullyExpansion()
 {
-    if ( splitedExpresion[ 0 ] == "" )
-        return std::make_pair( 1, boost::lexical_cast< int >( splitedExpresion[ 1 ] ) );
+    if ( isExpresionWithoutCoefficient() )
+        return std::make_pair( 1, boost::lexical_cast< int >( m_splitedExpresion[ 1 ] ) );
     else
-        return std::make_pair(
-            boost::lexical_cast< int >( splitedExpresion[ 0 ] ), boost::lexical_cast< int >( splitedExpresion[ 1 ] ) );
+        return std::make_pair( boost::lexical_cast< int >( m_splitedExpresion[ 0 ] ),
+            boost::lexical_cast< int >( m_splitedExpresion[ 1 ] ) );
 }
 
-std::pair< int, int > SingleExpresionConventer::convertWithoutVariable( std::vector< std::string >& splitedExpresion )
+bool SingleExpresionConventer::isExpresionWithoutCoefficient()
 {
-    return std::make_pair( boost::lexical_cast< int >( splitedExpresion[ 0 ] ), 0 );
+    return m_splitedExpresion[ 0 ] == "";
 }

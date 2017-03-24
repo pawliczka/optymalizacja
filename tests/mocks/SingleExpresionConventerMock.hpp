@@ -4,5 +4,5 @@
 class SingleExpresionConventerMock : public IEquationConventer
 {
 public:
-    MOCK_METHOD1( convert, std::pair< int, int >( std::string& ) );
+    MOCK_METHOD1( convert, std::pair< int, int >( std::string ) );
 };
