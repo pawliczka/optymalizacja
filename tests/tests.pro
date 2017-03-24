@@ -10,4 +10,3 @@ SOURCES += main.cpp \
     EquationConventerTestSuite.cpp
 
 LIBS += -lgmock -L../src -loptymalizacja -lpthread
-EquationConventerMock.hpp
