@@ -7,7 +7,7 @@ Term TermConverter::convert( std::string expresion )
 {
     m_expresionWithoutWhiteCharacters = removeWhiteCharacters( expresion );
     if ( isEmptyExpresion() )
-        return std::make_pair( 0, 0 );
+        return Term( 0, 0 );
     return splitExpresionToPair();
 }
 
@@ -33,15 +33,15 @@ Term TermConverter::splitExpresionToPair()
     if ( isFullyExpresion() )
         return convertFullyExpresion();
     else
-        return std::make_pair( boost::lexical_cast< int >( m_splitedExpresion[ 0 ] ), 0 );
+        return Term( boost::lexical_cast< int >( m_splitedExpresion[ 0 ] ), 0 );
 }
 
 Term TermConverter::convertFullyExpresion()
 {
     if ( isExpresionWithoutCoefficient() )
-        return std::make_pair( 1, boost::lexical_cast< int >( m_splitedExpresion[ 1 ] ) );
+        return Term( 1, boost::lexical_cast< int >( m_splitedExpresion[ 1 ] ) );
     else
-        return std::make_pair( boost::lexical_cast< int >( m_splitedExpresion[ 0 ] ),
+        return Term( boost::lexical_cast< int >( m_splitedExpresion[ 0 ] ),
             boost::lexical_cast< int >( m_splitedExpresion[ 1 ] ) );
 }
 
