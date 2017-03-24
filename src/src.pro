@@ -12,10 +12,13 @@ TEMPLATE = lib
 
 TARGET = optymalizacja
 
-SOURCES += Dummy.cpp \
-    mainwindow.cpp
-HEADERS += Dummy.hpp \
-    mainwindow.h
+SOURCES += \
+    mainwindow.cpp \
+    EquationConventer.cpp
+HEADERS += \
+    mainwindow.h \
+    EquationConventer.hpp \
+    IEquationConventer.hpp
 
 FORMS += \
     mainwindow.ui
