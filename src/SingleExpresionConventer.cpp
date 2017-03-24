@@ -36,12 +36,12 @@ std::pair< int, int > SingleExpresionConventer::splitExpresionToPair()
 {
     splitExpresionByX();
     if ( m_splitedExpresion.size() == 2 )
-        return convertFullyExpansion();
+        return convertFullyExpresion();
     else
         return std::make_pair( boost::lexical_cast< int >( m_splitedExpresion[ 0 ] ), 0 );
 }
 
-std::pair< int, int > SingleExpresionConventer::convertFullyExpansion()
+std::pair< int, int > SingleExpresionConventer::convertFullyExpresion()
 {
     if ( isExpresionWithoutCoefficient() )
         return std::make_pair( 1, boost::lexical_cast< int >( m_splitedExpresion[ 1 ] ) );
