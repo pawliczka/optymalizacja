@@ -43,3 +43,9 @@ TEST_F( SingleExpresionConventerTestSuite, shouldReturnOneOnePairWhenReceiveX1St
     ASSERT_EQ( result, std::make_pair( 1, 1 ) );
 }
 
+TEST_F( SingleExpresionConventerTestSuite, shouldReturnThreeTwoPairWhenReceive3X2String )
+{
+    std::string expresion = " 3x2";
+    auto result = sut.convert( expresion );
+    ASSERT_EQ( result, std::make_pair( 3, 2 ) );
+}
