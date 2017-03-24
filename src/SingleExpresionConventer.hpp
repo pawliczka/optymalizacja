@@ -14,9 +14,10 @@ private:
 
     std::string& removeWhiteCharacters( std::string& expresion );
     std::pair< int, int > splitExpresionToPair();
-    std::pair< int, int > convertFullyExpansion();
+    std::pair< int, int > convertFullyExpresion();
     std::pair< int, int > convertWithoutVariable( const std::vector< std::string >& splitedExpresion );
     void splitExpresionByX();
     bool isEmptyExpresion();
     bool isExpresionWithoutCoefficient();
+    bool isFullyExpresion();
 };
