@@ -36,9 +36,7 @@ std::pair< int, int > SingleExpresionConventer::splitExpresionToPair()
 {
     splitExpresionByX();
     if ( m_splitedExpresion.size() == 2 )
-    {
         return convertFullyExpansion();
-    }
     else
         return std::make_pair( boost::lexical_cast< int >( m_splitedExpresion[ 0 ] ), 0 );
 }
