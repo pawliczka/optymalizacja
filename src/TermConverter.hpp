@@ -16,7 +16,6 @@ private:
     Term convertFullyExpresion();
     Term convertWithoutVariable( const std::vector< std::string >& splitedExpresion );
     void splitExpresionByX();
-    bool isEmptyExpresion();
     bool isExpresionWithoutCoefficient();
     bool isFullyExpresion();
 };

@@ -6,14 +6,9 @@
 Term TermConverter::convert( std::string expresion )
 {
     m_expresionWithoutWhiteCharacters = removeWhiteCharacters( expresion );
-    if ( isEmptyExpresion() )
+    if ( m_expresionWithoutWhiteCharacters.empty() )
         return Term( 0, 0 );
     return splitExpresionToPair();
-}
-
-bool TermConverter::isEmptyExpresion()
-{
-    return m_expresionWithoutWhiteCharacters == "";
 }
 
 std::string& TermConverter::removeWhiteCharacters( std::string& expresion )
