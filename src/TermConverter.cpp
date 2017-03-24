@@ -1,14 +1,14 @@
-#include "SingleExpresionConventer.hpp"
+#include "TermConverter.hpp"
 #include <boost/algorithm/string.hpp>
 #include <algorithm>
 #include <cctype>
 #include <boost/lexical_cast.hpp>
 
-SingleExpresionConventer::SingleExpresionConventer()
+TermConverter::TermConverter()
 {
 }
 
-std::pair< int, int > SingleExpresionConventer::convert( std::string expresion )
+Term TermConverter::convert( std::string expresion )
 {
     m_expresionWithoutWhiteCharacters = removeWhiteCharacters( expresion );
     if ( isEmptyExpresion() )
@@ -16,23 +16,23 @@ std::pair< int, int > SingleExpresionConventer::convert( std::string expresion )
     return splitExpresionToPair();
 }
 
-bool SingleExpresionConventer::isEmptyExpresion()
+bool TermConverter::isEmptyExpresion()
 {
     return m_expresionWithoutWhiteCharacters == "";
 }
 
-std::string& SingleExpresionConventer::removeWhiteCharacters( std::string& expresion )
+std::string& TermConverter::removeWhiteCharacters( std::string& expresion )
 {
     expresion.erase( std::remove( expresion.begin(), expresion.end(), ' ' ), expresion.end() );
     return expresion;
 }
 
-void SingleExpresionConventer::splitExpresionByX()
+void TermConverter::splitExpresionByX()
 {
     boost::split( m_splitedExpresion, m_expresionWithoutWhiteCharacters, boost::is_any_of( "x" ) );
 }
 
-std::pair< int, int > SingleExpresionConventer::splitExpresionToPair()
+Term TermConverter::splitExpresionToPair()
 {
     splitExpresionByX();
     if ( isFullyExpresion() )
@@ -41,7 +41,7 @@ std::pair< int, int > SingleExpresionConventer::splitExpresionToPair()
         return std::make_pair( boost::lexical_cast< int >( m_splitedExpresion[ 0 ] ), 0 );
 }
 
-std::pair< int, int > SingleExpresionConventer::convertFullyExpresion()
+Term TermConverter::convertFullyExpresion()
 {
     if ( isExpresionWithoutCoefficient() )
         return std::make_pair( 1, boost::lexical_cast< int >( m_splitedExpresion[ 1 ] ) );
@@ -50,12 +50,12 @@ std::pair< int, int > SingleExpresionConventer::convertFullyExpresion()
             boost::lexical_cast< int >( m_splitedExpresion[ 1 ] ) );
 }
 
-bool SingleExpresionConventer::isExpresionWithoutCoefficient()
+bool TermConverter::isExpresionWithoutCoefficient()
 {
     return m_splitedExpresion[ 0 ] == "";
 }
 
-bool SingleExpresionConventer::isFullyExpresion()
+bool TermConverter::isFullyExpresion()
 {
     return m_splitedExpresion.size() == 2;
 }

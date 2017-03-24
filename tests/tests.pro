@@ -8,6 +8,6 @@ TEMPLATE = app
 
 SOURCES += main.cpp \
     EquationConventerTestSuite.cpp \
-    SingleExpresionConventerTestSuite.cpp
+    TermConverterTestSuite.cpp
 
 LIBS += -lgmock -L../src -loptymalizacja -lpthread
