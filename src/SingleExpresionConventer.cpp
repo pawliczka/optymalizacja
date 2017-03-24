@@ -4,6 +4,6 @@ SingleExpresionConventer::SingleExpresionConventer()
 {
 }
 
-std::pair< int, int > SingleExpresionConventer::convert(std::string expresion)
+std::pair< int, int > SingleExpresionConventer::convert( const std::string& expresion )
 {
 }

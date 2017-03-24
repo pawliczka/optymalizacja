@@ -4,5 +4,5 @@
 class EquationConventer : public IEquationConventer
 {
 public:
-    int convert( std::string expresion ) override;
+    int convert( const std::string& expresion ) override;
 };

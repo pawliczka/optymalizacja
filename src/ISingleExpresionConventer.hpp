@@ -4,5 +4,5 @@
 
 class ISingleExpresionConventer
 {
-    virtual std::pair< int, int > convert( std::string expresion ) = 0;
+    virtual std::pair< int, int > convert( const std::string& expresion ) = 0;
 };

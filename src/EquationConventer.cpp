@@ -1,5 +1,5 @@
 #include "EquationConventer.hpp"
 
-int EquationConventer::convert( std::string expresion )
+int EquationConventer::convert( const std::string& expresion )
 {
 }
