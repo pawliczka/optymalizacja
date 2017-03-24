@@ -2,5 +2,4 @@
 
 int EquationConventer::convert()
 {
-
 }

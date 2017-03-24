@@ -1,5 +1,6 @@
 #pragma once
-class IEquationConventer {
+class IEquationConventer
+{
 public:
     virtual int convert() = 0;
 };
