@@ -49,3 +49,17 @@ TEST_F( SingleExpresionConventerTestSuite, shouldReturnThreeTwoPairWhenReceive3X
     auto result = sut.convert( expresion );
     ASSERT_EQ( result, std::make_pair( 3, 2 ) );
 }
+
+TEST_F( SingleExpresionConventerTestSuite, shouldReturnMinusThreeTenPairWhenReceiveMinus3x10String )
+{
+    std::string expresion = " -3x10";
+    auto result = sut.convert( expresion );
+    ASSERT_EQ( result, std::make_pair( -3, 10 ) );
+}
+
+TEST_F( SingleExpresionConventerTestSuite, shouldReturnMinusFiftyThreeTenPairWhenReceiveMinus53x10String )
+{
+    std::string expresion = " -53x10 ";
+    auto result = sut.convert( expresion );
+    ASSERT_EQ( result, std::make_pair( -53, 10 ) );
+}
