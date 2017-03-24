@@ -5,7 +5,6 @@
 class TermConverter : public ITermConverter
 {
 public:
-    TermConverter();
     Term convert( std::string expresion ) override;
 
 private:

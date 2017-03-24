@@ -4,10 +4,6 @@
 #include <cctype>
 #include <boost/lexical_cast.hpp>
 
-TermConverter::TermConverter()
-{
-}
-
 Term TermConverter::convert( std::string expresion )
 {
     m_expresionWithoutWhiteCharacters = removeWhiteCharacters( expresion );
