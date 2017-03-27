@@ -1,5 +1,4 @@
 #include "TermConverter.hpp"
-#include <algorithm>
 #include <boost/algorithm/string.hpp>
 #include <boost/lexical_cast.hpp>
 
@@ -34,19 +33,19 @@ void TermConverter::splitExpresionByX()
 {
     std::vector<std::string> splitedExpresion;
     boost::split(splitedExpresion, m_expresionWithoutWhiteCharacters, boost::is_any_of("x"));
-    if(isTermWithVariable(splitedExpresion))
+    if(isTermWithVariable(splitedExpresion)) /* handle "3x1" */
     {
-        if(isExpresionWithoutCoefficient(splitedExpresion))
+        if(isExpresionWithoutCoefficient(splitedExpresion)) /* handle "x1" */
         {
             m_splitedExpresion = {1, boost::lexical_cast<int>(splitedExpresion[1])};
         }
-        else
+        else /* handle "3x1" */
         {
             m_splitedExpresion = {boost::lexical_cast<int>(splitedExpresion[0]),
                                   boost::lexical_cast<int>(splitedExpresion[1])};
         }
     }
-    else
+    else /* handle "1" */
     {
         m_splitedExpresion = {boost::lexical_cast<int>(splitedExpresion[0]), 0};
     }
