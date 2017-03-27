@@ -1,8 +1,16 @@
 #pragma once
 #include "IEquationConventer.hpp"
+#include "ITermConverter.hpp"
+#include <memory>
 
 class EquationConventer : public IEquationConventer
 {
 public:
-    int convert( const std::string& expresion ) override;
+    EquationConventer(std::shared_ptr<ITermConverter> _termConverter) :
+        m_termConverter(_termConverter)
+    {}
+    int convert( const std::string expresion ) override;
+
+private:
+    std::shared_ptr<ITermConverter> m_termConverter;
 };

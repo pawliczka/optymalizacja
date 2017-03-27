@@ -4,5 +4,5 @@
 class IEquationConventer
 {
 public:
-    virtual int convert( const std::string& expresion ) = 0;
+    virtual int convert( const std::string expresion ) = 0;
 };
