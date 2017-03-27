@@ -11,5 +11,5 @@ private:
     std::string m_expresionWithoutWhiteCharacters;
     Term m_splitedExpresion;
 
-    void splitExpresionByX();
+    void splitTermByX();
 };

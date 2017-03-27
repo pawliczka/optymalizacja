@@ -11,7 +11,7 @@ std::string & removeWhiteCharacters(std::string & expresion)
 }
 bool isExpresionWithoutCoefficient(const std::vector<std::string> & splitedExpresion)
 {
-    return splitedExpresion[0].empty();
+    return splitedExpresion.front().empty();
 }
 
 bool isTermWithVariable(const std::vector<std::string> & splitedExpresion)
@@ -24,14 +24,14 @@ Term TermConverter::convert(std::string expresion)
 {
     m_expresionWithoutWhiteCharacters = removeWhiteCharacters(expresion);
     if(m_expresionWithoutWhiteCharacters.empty())
-        return Term(0, 0);
-    splitExpresionByX();
+        return {};
+    splitTermByX();
     return m_splitedExpresion;
 }
 
-void TermConverter::splitExpresionByX()
+void TermConverter::splitTermByX()
 {
-    std::vector<std::string> splitedExpresion;
+    std::vector<std::string> splitedExpresion {};
     boost::split(splitedExpresion, m_expresionWithoutWhiteCharacters, boost::is_any_of("x"));
     if(isTermWithVariable(splitedExpresion)) /* handle "3x1" */
     {
