@@ -15,13 +15,16 @@ TARGET = optymalizacja
 SOURCES += \
     mainwindow.cpp \
     EquationConventer.cpp \
-    TermConverter.cpp
+    TermConverter.cpp \
+    Equation.cpp
 HEADERS += \
     mainwindow.h \
     EquationConventer.hpp \
     IEquationConventer.hpp \
     ITermConverter.hpp \
-    TermConverter.hpp
+    TermConverter.hpp \
+    Equation.hpp \
+    ComparisonOperator.hpp
 
 FORMS += \
     mainwindow.ui
