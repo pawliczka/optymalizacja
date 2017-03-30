@@ -1,4 +1,4 @@
-#include "equation.hpp"
+#include "Equation.hpp"
 
 Equation::Equation()
 {

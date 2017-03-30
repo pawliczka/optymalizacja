@@ -9,7 +9,7 @@ public:
     EquationConventer(std::shared_ptr<ITermConverter> _termConverter) :
         m_termConverter(_termConverter)
     {}
-    int convert( const std::string expresion ) override;
+    Equation convert( const std::string expresion ) override;
 
 private:
     std::shared_ptr<ITermConverter> m_termConverter;

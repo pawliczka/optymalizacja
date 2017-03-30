@@ -1,5 +1,12 @@
-#ifndef COMPARISONOPERATOR_HPP
-#define COMPARISONOPERATOR_HPP
+#pragma once
 
-#endif // COMPARISONOPERATOR_HPP
+enum class ComparisonOperator
+{
+    Greater,
+    GreaterEqual,
+    Equal,
+    LessEqual,
+    Less
+};
+
 

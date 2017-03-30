@@ -1,8 +1,10 @@
 #pragma once
 #include <string>
+#include "Equation.hpp"
+
 
 class IEquationConventer
 {
 public:
-    virtual int convert( const std::string expresion ) = 0;
+    virtual Equation convert( const std::string expresion ) = 0;
 };

@@ -1,11 +1,14 @@
-#ifndef EQUATION_H
-#define EQUATION_H
-
+#pragma once
+#include "ComparisonOperator.hpp"
+#include <vector>
 
 class Equation
 {
 public:
     Equation();
+private:
+    std::vector<int> m_coefficients;
+    ComparisonOperator m_comparisonOperator;
 };
 
-#endif // EQUATION_H
+
