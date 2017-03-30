@@ -17,6 +17,7 @@ SOURCES += \
     EquationConventer.cpp \
     TermConverter.cpp \
     Equation.cpp
+
 HEADERS += \
     mainwindow.h \
     EquationConventer.hpp \

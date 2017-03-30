@@ -10,4 +10,8 @@ SOURCES += main.cpp \
     EquationConventerTestSuite.cpp \
     TermConverterTestSuite.cpp
 
+HEADERS += \
+    mocks/EquationConventerMock.hpp \
+    mocks/TermConverterMock.hpp
+
 LIBS += -lgmock -L../src -loptymalizacja -lpthread
