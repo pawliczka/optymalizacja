@@ -8,7 +8,8 @@ TEMPLATE = app
 
 SOURCES += main.cpp \
     EquationConventerTestSuite.cpp \
-    TermConverterTestSuite.cpp
+    TermConverterTestSuite.cpp \
+    EquationTestSuite.cpp
 
 HEADERS += \
     mocks/EquationConventerMock.hpp \

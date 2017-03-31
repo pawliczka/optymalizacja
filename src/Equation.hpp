@@ -1,14 +1,16 @@
 #pragma once
 #include "ComparisonOperator.hpp"
+#include <limits>
 #include <vector>
+
 
 class Equation
 {
 public:
     Equation();
-    int getCoefficient(int index);
+    int getCoefficient(unsigned int index);
     ComparisonOperator getComparisonOperator();
-    void setCoefficient(int value, int index);
+    void setCoefficient(int value, unsigned int index);
     void setComparisonOperator(ComparisonOperator comparisonOperator);
 private:
     std::vector<int> m_coefficients;
