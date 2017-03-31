@@ -24,3 +24,8 @@ TEST_F(EquationTestSuite, shouldReturnNumericLimitsMaxAfterReceivingIndexOutOfRa
 
 }
 
+TEST_F(EquationTestSuite, shouldSetComparisonOperatorToEqual)
+{
+    sut.setComparisonOperator(ComparisonOperator::Equal);
+    ASSERT_EQ(sut.getComparisonOperator(), ComparisonOperator::Equal);
+}
