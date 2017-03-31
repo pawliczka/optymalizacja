@@ -12,6 +12,9 @@ public:
     ComparisonOperator getComparisonOperator();
     void setCoefficient(int value, unsigned int index);
     void setComparisonOperator(ComparisonOperator comparisonOperator);
+    int getIndexOfLastCofficient();
+    bool operator== (Equation equationSecond) const;
+
 private:
     std::vector<int> m_coefficients;
     ComparisonOperator m_comparisonOperator;

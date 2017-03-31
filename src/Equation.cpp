@@ -30,3 +30,29 @@ void Equation::setComparisonOperator(ComparisonOperator comparisonOperator)
     m_comparisonOperator=comparisonOperator;
 }
 
+int Equation::getIndexOfLastCofficient()
+{
+    return m_coefficients.size()-1;
+}
+
+bool Equation::operator== (Equation equationSecond) const
+{
+    if (m_comparisonOperator == equationSecond.getComparisonOperator())
+    {
+        bool isTheSame = true;
+        if ((m_coefficients.size()-1) == equationSecond.getIndexOfLastCofficient())
+        {
+            unsigned int index = 0;
+            while(isTheSame && (index < m_coefficients.size()))
+            {
+                if(m_coefficients[index] != equationSecond.getCoefficient(index))
+                    isTheSame=false;
+                index++;
+            }
+        }
+        return isTheSame;
+    }
+    else
+        return false;
+}
+
