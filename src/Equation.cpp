@@ -1,4 +1,5 @@
 #include "Equation.hpp"
+#include <algorithm>
 
 Equation::Equation()
 {
@@ -37,22 +38,12 @@ int Equation::getIndexOfLastCofficient()
 
 bool Equation::operator== (Equation equationSecond) const
 {
-    if (m_comparisonOperator == equationSecond.getComparisonOperator())
-    {
-        bool isTheSame = true;
-        if ((m_coefficients.size()-1) == equationSecond.getIndexOfLastCofficient())
-        {
-            unsigned int index = 0;
-            while(isTheSame && (index < m_coefficients.size()))
-            {
-                if(m_coefficients[index] != equationSecond.getCoefficient(index))
-                    isTheSame=false;
-                index++;
-            }
-        }
-        return isTheSame;
-    }
-    else
+    if (m_comparisonOperator != equationSecond.getComparisonOperator())
         return false;
-}
 
+    if (!std::equal(m_coefficients.begin(),m_coefficients.end(),equationSecond.m_coefficients.begin()))
+        return false;
+
+    return true;
+
+}
