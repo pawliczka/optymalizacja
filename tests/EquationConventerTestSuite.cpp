@@ -19,7 +19,6 @@ public:
 
 TEST_F(EquationConventerTestSuite, xxx)
 {
-    //EXPECT_CALL(*termConverter, convert("2x1")).WillOnce(Return(std::make_pair(2, 1)));
-
+    sut.convert("2x3-2x2+x1+1>=0");
 }
 

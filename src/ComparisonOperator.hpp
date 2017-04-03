@@ -6,7 +6,8 @@ enum class ComparisonOperator
     GreaterEqual,
     Equal,
     LessEqual,
-    Less
+    Less,
+    None
 };
 
 
