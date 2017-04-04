@@ -6,7 +6,7 @@ Equation::Equation()
 
 }
 
-int Equation::getCoefficient(unsigned int index)
+int Equation::getCoefficient(unsigned int index) const
 {
     if(index<m_coefficients.size())
         return m_coefficients[index];

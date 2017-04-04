@@ -8,7 +8,7 @@ class Equation
 {
 public:
     Equation();
-    int getCoefficient(unsigned int index);
+    int getCoefficient(unsigned int index) const;
     ComparisonOperator getComparisonOperator() const;
     void setCoefficient(int value, unsigned int index);
     void setComparisonOperator(ComparisonOperator comparisonOperator);
