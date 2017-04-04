@@ -36,7 +36,7 @@ int Equation::getIndexOfLastCofficient()
     return m_coefficients.size()-1;
 }
 
-bool Equation::operator== (Equation equationSecond) const
+bool Equation::operator== (const Equation& equationSecond) const
 {
     if (m_comparisonOperator != equationSecond.getComparisonOperator())
         return false;
