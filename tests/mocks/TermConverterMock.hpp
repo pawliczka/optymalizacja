@@ -4,5 +4,5 @@
 class TermConverterMock : public ITermConverter
 {
 public:
-    MOCK_METHOD1( convert, Term( std::string ) );
+    MOCK_METHOD1(convert, Term(std::string));
 };

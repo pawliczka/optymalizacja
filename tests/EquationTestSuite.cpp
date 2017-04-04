@@ -12,7 +12,7 @@ TEST_F(EquationTestSuite, shouldSetCoefficentEqualToOneOnIndexZero)
 {
     unsigned int index = 0;
     int value = 1;
-    sut.setCoefficient(value,index);
+    sut.setCoefficient(value, index);
     ASSERT_EQ(sut.getCoefficient(index), value);
 }
 
@@ -31,8 +31,8 @@ TEST_F(EquationTestSuite, shouldSetComparisonOperatorToEqual)
 
 TEST_F(EquationTestSuite, shouldReturnSevenAsLastIndexofCoefficientAfterReceivingSevenIndex)
 {
-    sut.setCoefficient(1,7);
-    ASSERT_EQ(sut.getIndexOfLastCofficient(),7);
+    sut.setCoefficient(1, 7);
+    ASSERT_EQ(sut.getIndexOfLastCofficient(), 7);
 }
 
 TEST_F(EquationTestSuite, shouldReturnTrueAfterComparingSameEquations)
@@ -40,9 +40,9 @@ TEST_F(EquationTestSuite, shouldReturnTrueAfterComparingSameEquations)
     Equation equationFirst, equationSecond;
     equationFirst.setComparisonOperator(ComparisonOperator::GreaterEqual);
     equationSecond.setComparisonOperator(ComparisonOperator::GreaterEqual);
-    equationFirst.setCoefficient(2,15);
-    equationSecond.setCoefficient(2,15);
-    equationFirst.setCoefficient(8,57);
-    equationSecond.setCoefficient(8,57);
-    ASSERT_EQ(equationFirst,equationSecond);
+    equationFirst.setCoefficient(2, 15);
+    equationSecond.setCoefficient(2, 15);
+    equationFirst.setCoefficient(8, 57);
+    equationSecond.setCoefficient(8, 57);
+    ASSERT_EQ(equationFirst, equationSecond);
 }

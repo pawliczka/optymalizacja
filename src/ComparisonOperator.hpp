@@ -9,5 +9,3 @@ enum class ComparisonOperator
     Less,
     None
 };
-
-

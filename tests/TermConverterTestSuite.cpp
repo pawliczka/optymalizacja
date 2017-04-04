@@ -8,50 +8,50 @@ public:
     TermConverter sut;
 };
 
-TEST_F( TermConverterTestSuite, shouldReturnZeroZeroPairWhenReceiveEmptyString )
+TEST_F(TermConverterTestSuite, shouldReturnZeroZeroPairWhenReceiveEmptyString)
 {
-    auto result = sut.convert( "" );
-    ASSERT_EQ( result, std::make_pair( 0, 0 ) );
+    auto result = sut.convert("");
+    ASSERT_EQ(result, std::make_pair(0, 0));
 }
 
-TEST_F( TermConverterTestSuite, shouldReturnZeroZeroPairWhenReceiveEmptyStringwithSpaces )
+TEST_F(TermConverterTestSuite, shouldReturnZeroZeroPairWhenReceiveEmptyStringwithSpaces)
 {
-    auto result = sut.convert( "   " );
-    ASSERT_EQ( result, std::make_pair( 0, 0 ) );
+    auto result = sut.convert("   ");
+    ASSERT_EQ(result, std::make_pair(0, 0));
 }
 
-TEST_F( TermConverterTestSuite, shouldReturnOneZeroPairWhenReceive1String )
+TEST_F(TermConverterTestSuite, shouldReturnOneZeroPairWhenReceive1String)
 {
-    auto result = sut.convert( "1" );
-    ASSERT_EQ( result, std::make_pair( 1, 0 ) );
+    auto result = sut.convert("1");
+    ASSERT_EQ(result, std::make_pair(1, 0));
 }
 
-TEST_F( TermConverterTestSuite, shouldReturnOneZeroPairWhenReceive1StringWithSpace )
+TEST_F(TermConverterTestSuite, shouldReturnOneZeroPairWhenReceive1StringWithSpace)
 {
-    auto result = sut.convert( " 1" );
-    ASSERT_EQ( result, std::make_pair( 1, 0 ) );
+    auto result = sut.convert(" 1");
+    ASSERT_EQ(result, std::make_pair(1, 0));
 }
 
-TEST_F( TermConverterTestSuite, shouldReturnOneOnePairWhenReceiveX1StringWithSpace )
+TEST_F(TermConverterTestSuite, shouldReturnOneOnePairWhenReceiveX1StringWithSpace)
 {
-    auto result = sut.convert( " x1" );
-    ASSERT_EQ( result, std::make_pair( 1, 1 ) );
+    auto result = sut.convert(" x1");
+    ASSERT_EQ(result, std::make_pair(1, 1));
 }
 
-TEST_F( TermConverterTestSuite, shouldReturnThreeTwoPairWhenReceive3X2String )
+TEST_F(TermConverterTestSuite, shouldReturnThreeTwoPairWhenReceive3X2String)
 {
-    auto result = sut.convert( " 3x2" );
-    ASSERT_EQ( result, std::make_pair( 3, 2 ) );
+    auto result = sut.convert(" 3x2");
+    ASSERT_EQ(result, std::make_pair(3, 2));
 }
 
-TEST_F( TermConverterTestSuite, shouldReturnMinusThreeTenPairWhenReceiveMinus3x10String )
+TEST_F(TermConverterTestSuite, shouldReturnMinusThreeTenPairWhenReceiveMinus3x10String)
 {
-    auto result = sut.convert( " -3x10" );
-    ASSERT_EQ( result, std::make_pair( -3, 10 ) );
+    auto result = sut.convert(" -3x10");
+    ASSERT_EQ(result, std::make_pair(-3, 10));
 }
 
-TEST_F( TermConverterTestSuite, shouldReturnMinusFiftyThreeTenPairWhenReceiveMinus53x10String )
+TEST_F(TermConverterTestSuite, shouldReturnMinusFiftyThreeTenPairWhenReceiveMinus53x10String)
 {
-    auto result = sut.convert( " -53x10 " );
-    ASSERT_EQ( result, std::make_pair( -53, 10 ) );
+    auto result = sut.convert(" -53x10 ");
+    ASSERT_EQ(result, std::make_pair(-53, 10));
 }

@@ -3,12 +3,11 @@
 
 Equation::Equation()
 {
-
 }
 
 int Equation::getCoefficient(unsigned int index) const
 {
-    if(index<m_coefficients.size())
+    if (index < m_coefficients.size())
         return m_coefficients[index];
     else
         return std::numeric_limits<int>::max();
@@ -22,28 +21,27 @@ ComparisonOperator Equation::getComparisonOperator() const
 void Equation::setCoefficient(int value, unsigned int index)
 {
     if (index >= m_coefficients.size())
-        m_coefficients.resize(index+1, 0);
-    m_coefficients[index]+=value;
+        m_coefficients.resize(index + 1, 0);
+    m_coefficients[index] += value;
 }
 
 void Equation::setComparisonOperator(ComparisonOperator comparisonOperator)
 {
-    m_comparisonOperator=comparisonOperator;
+    m_comparisonOperator = comparisonOperator;
 }
 
 int Equation::getIndexOfLastCofficient()
 {
-    return m_coefficients.size()-1;
+    return m_coefficients.size() - 1;
 }
 
-bool Equation::operator== (const Equation& equationSecond) const
+bool Equation::operator==(const Equation& equationSecond) const
 {
     if (m_comparisonOperator != equationSecond.getComparisonOperator())
         return false;
 
-    if (!std::equal(m_coefficients.begin(),m_coefficients.end(),equationSecond.m_coefficients.begin()))
+    if (!std::equal(m_coefficients.begin(), m_coefficients.end(), equationSecond.m_coefficients.begin()))
         return false;
 
     return true;
-
 }

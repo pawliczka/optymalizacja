@@ -6,5 +6,5 @@
 class IEquationConventer
 {
 public:
-    virtual Equation convert( const std::string expresion ) = 0;
+    virtual Equation convert(const std::string expresion) = 0;
 };

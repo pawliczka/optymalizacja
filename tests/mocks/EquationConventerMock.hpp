@@ -4,5 +4,5 @@
 class EquationConventerMock : public IEquationConventer
 {
 public:
-    MOCK_METHOD1( convert, Equation(const std::string) );
+    MOCK_METHOD1(convert, Equation(const std::string));
 };
