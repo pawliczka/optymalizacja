@@ -14,7 +14,7 @@ int Equation::getCoefficient(unsigned int index)
         return std::numeric_limits<int>::max();
 }
 
-ComparisonOperator Equation::getComparisonOperator()
+ComparisonOperator Equation::getComparisonOperator() const
 {
     return m_comparisonOperator;
 }
@@ -22,8 +22,8 @@ ComparisonOperator Equation::getComparisonOperator()
 void Equation::setCoefficient(int value, unsigned int index)
 {
     if (index >= m_coefficients.size())
-        m_coefficients.resize(index+1);
-    m_coefficients[index]=value;
+        m_coefficients.resize(index+1, 0);
+    m_coefficients[index]+=value;
 }
 
 void Equation::setComparisonOperator(ComparisonOperator comparisonOperator)

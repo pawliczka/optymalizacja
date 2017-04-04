@@ -9,11 +9,11 @@ class Equation
 public:
     Equation();
     int getCoefficient(unsigned int index);
-    ComparisonOperator getComparisonOperator();
+    ComparisonOperator getComparisonOperator() const;
     void setCoefficient(int value, unsigned int index);
     void setComparisonOperator(ComparisonOperator comparisonOperator);
     int getIndexOfLastCofficient();
-    bool operator== (Equation equationSecond) const;
+    bool operator== (const Equation& equationSecond) const;
 
 private:
     std::vector<int> m_coefficients;
