@@ -4,33 +4,48 @@
 #include <boost/lambda/lambda.hpp>
 #include <iostream>
 #include <algorithm>
+#include <regex>
 
 namespace
 {
-ComparisonOperator convertStringToComparasionOperator(const std::string& expresion)
+ComparisonOperator convertStringToComparasionOperator(const std::string& expression)
 {
-    if (expresion == "=")
+    if (expression == "=")
         return ComparisonOperator::Equal;
-    if (expresion == ">=")
+    if (expression == ">=")
         return ComparisonOperator::GreaterEqual;
-    if (expresion == "<=")
+    if (expression == "<=")
         return ComparisonOperator::LessEqual;
-    if (expresion == "<")
+    if (expression == "<")
         return ComparisonOperator::Less;
-    if (expresion == ">")
+    if (expression == ">")
         return ComparisonOperator::Greater;
     return ComparisonOperator::None;
 }
+
+std::string returnFoundComparisonOperatorAsString(const std::string& expression)
+{
+    std::vector<std::string> key={">=","<=",">","<","="};
+    for(int index=0;index<key.size();index++)
+    {
+        if(std::regex_search(expression,std::regex(key[index])))
+            return key[index];
+    }
+    return "";
+}
 }
 
-Equation EquationConventer::convert(const std::string expresion)
+Equation EquationConventer::convert(const std::string expression)
 {
-    std::vector<std::string> splitedExpresion{};
-    boost::iter_split(splitedExpresion, expresion, boost::first_finder(">="));
-    boost::replace_all(splitedExpresion[0], "-", "+-");
-    std::vector<std::string> splitedExpresion1{};
-    boost::split(splitedExpresion1, splitedExpresion[0], boost::is_any_of("+"));
-    std::for_each(splitedExpresion1.begin(), splitedExpresion1.end(),
+    std::string foundOperator=returnFoundComparisonOperatorAsString(expression);
+
+    std::vector<std::string> splitedExpresionByCompOperator{};
+
+    boost::iter_split(splitedExpresionByCompOperator, expression, boost::first_finder(foundOperator));
+    boost::replace_all(splitedExpresionByCompOperator[0], "-", "+-");
+    std::vector<std::string> splitedExpresionIntoTerms{};
+    boost::split(splitedExpresionIntoTerms, splitedExpresionByCompOperator[0], boost::is_any_of("+"));
+    std::for_each(splitedExpresionIntoTerms.begin(), splitedExpresionIntoTerms.end(),
         [this](auto& expresion1) { m_termConverter->convert(expresion1); });
     return Equation();
 }
