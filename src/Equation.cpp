@@ -25,6 +25,13 @@ void Equation::setCoefficient(int value, unsigned int index)
     m_coefficients[index] += value;
 }
 
+void Equation::setCoefficient(Term term)
+{
+    if (term.second >= m_coefficients.size())
+        m_coefficients.resize(term.second + 1, 0);
+    m_coefficients[term.second] += term.first;
+}
+
 void Equation::setComparisonOperator(ComparisonOperator comparisonOperator)
 {
     m_comparisonOperator = comparisonOperator;

@@ -35,6 +35,11 @@ TEST_F(EquationTestSuite, shouldReturnSevenAsLastIndexofCoefficientAfterReceivin
     ASSERT_EQ(sut.getIndexOfLastCofficient(), 7);
 }
 
+TEST_F(EquationTestSuite, shouldReturnSevenAsLastIndexofCoefficientAfterReceivingSevenIndexAsTerm)
+{
+    sut.setCoefficient({1,7});
+    ASSERT_EQ(sut.getIndexOfLastCofficient(), 7);
+}
 TEST_F(EquationTestSuite, shouldReturnTrueAfterComparingSameEquations)
 {
     Equation equationFirst, equationSecond;
