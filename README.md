@@ -1,4 +1,4 @@
-Największa spierodlina świata będzie tutaj komitowana.
+Największy syf świata będzie tutaj komitowany.
 Oglądasz na własną odpowiedzialność
 
                               _

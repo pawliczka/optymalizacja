@@ -40,7 +40,6 @@ Equation EquationConventer::convert(const std::string expression)
 
     Equation equation;
     std::string foundOperator=returnFoundComparisonOperatorAsString(expression);
-
     equation.setComparisonOperator(convertStringToComparasionOperator(foundOperator));
 
     std::vector<std::string> splitedExpresionByCompOperator{};
@@ -49,25 +48,23 @@ Equation EquationConventer::convert(const std::string expression)
     boost::replace_all(splitedExpresionByCompOperator[0], "-", "+-");
     boost::replace_all(splitedExpresionByCompOperator[1], "-", "+-");
 
-
     std::vector<std::string> splitedExpresionIntoTermsLeftSide{};
     std::vector<std::string> splitedExpresionIntoTermsRightSide{};
 
     boost::split(splitedExpresionIntoTermsLeftSide, splitedExpresionByCompOperator[0], boost::is_any_of("+"));
     boost::split(splitedExpresionIntoTermsRightSide, splitedExpresionByCompOperator[1], boost::is_any_of("+"));
 
-    if(splitedExpresionIntoTermsRightSide.size()==2)
-    std::cout<<splitedExpresionIntoTermsRightSide[1]<<std::endl;
-
     std::for_each(splitedExpresionIntoTermsLeftSide.begin(), splitedExpresionIntoTermsLeftSide.end(),
-        [this, &equation](auto& expresion1) {
-        equation.setCoefficient(m_termConverter->convert(expresion1)); });
+        [this, &equation](auto& expression) {
+        equation.setCoefficient(m_termConverter->convert(expression)); });
 
     std::for_each(splitedExpresionIntoTermsRightSide.begin(), splitedExpresionIntoTermsRightSide.end(),
-        [this, &equation](auto& expresion1) {
-        Term term=m_termConverter->convert(expresion1);
+        [this, &equation](auto& expression) {
+        if(expression=="")
+            return;
+        Term term=m_termConverter->convert(expression);
         term.first=term.first*(-1);
         equation.setCoefficient(term);});
 
-    return std::move(equation);
+     return std::move(equation);
 }

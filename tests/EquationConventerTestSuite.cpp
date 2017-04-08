@@ -20,12 +20,13 @@ namespace
 class EquationConventerTestSuite : public Test
 {
     using ExpectCallsList = std::list<std::pair<std::string, Term>>;
+    using TermList = std::list<Term>;
 
 public:
     EquationConventerTestSuite()
         : sut(termConverter)
     {
-        EXPECT_CALL(*termConverter,convert("")).WillRepeatedly(Return(Term(0,0)));
+
     }
     std::shared_ptr<TermConverterMock> termConverter = std::make_shared<testing::StrictMock<TermConverterMock>>();
     EquationConventer sut;
@@ -36,6 +37,13 @@ public:
         for (const auto& expectCall : expectCallsList)
         {
             EXPECT_CALL(*termConverter, convert(expectCall.first)).WillOnce(Return(expectCall.second));
+        }
+    }
+    void setCoefficients(TermList termList)
+    {
+        for(const auto& term : termList)
+        {
+            equation.setCoefficient(term);
         }
     }
 };
@@ -53,10 +61,7 @@ TEST_F(EquationConventerTestSuite, ZeroOnTheRightSide)
     expectTermConverterCalls({{"2x3", Term(2, 3)}, {"-2x2", Term(-2, 2)}, {"x1", Term(1, 1)}, {"1", Term(1, 0)}});
     expectTermConverterCalls({{"0", Term(0,0)}});
     equation.setComparisonOperator(ComparisonOperator::GreaterEqual);
-    equation.setCoefficient({1,0});
-    equation.setCoefficient({1,1});
-    equation.setCoefficient({-2,2});
-    equation.setCoefficient({2,3});
+    setCoefficients({{1,0},{1,1},{-2,2},{2,3}});
     ASSERT_EQ(equation,sut.convert("2x3-2x2+x1+1>=0"));
 }
 
@@ -68,10 +73,7 @@ TEST_F(EquationConventerTestSuite, SevenOnTheRightSide)
                               {"1", Term(1, 0)}});
     expectTermConverterCalls({{"7", Term(7,0)}});
     equation.setComparisonOperator(ComparisonOperator::GreaterEqual);
-    equation.setCoefficient({-6,0});
-    equation.setCoefficient({1,1});
-    equation.setCoefficient({-2,2});
-    equation.setCoefficient({2,3});
+    setCoefficients({{-6,0}, {1,1}, {-2,2}, {2,3}});
     ASSERT_EQ(equation,sut.convert("2x3-2x2+x1+1>=7"));
 }
 
@@ -83,10 +85,7 @@ TEST_F(EquationConventerTestSuite, MinusSevenOnTheRightSide)
                               {"1", Term(1, 0)}});
     expectTermConverterCalls({{"-7", Term(-7,0)}});
     equation.setComparisonOperator(ComparisonOperator::GreaterEqual);
-    equation.setCoefficient({8,0});
-    equation.setCoefficient({1,1});
-    equation.setCoefficient({-2,2});
-    equation.setCoefficient({2,3});
+    setCoefficients({{8,0}, {1,1}, {-2,2}, {2,3}});
     ASSERT_EQ(equation,sut.convert("2x3-2x2+x1+1>=-7"));
 }
 
@@ -101,11 +100,7 @@ TEST_F(EquationConventerTestSuite, WyjebaneWKosmosRownanko)
                               {"5x1", Term(5,1)},
                               {"-4", Term(-4,0)}});
     equation.setComparisonOperator(ComparisonOperator::GreaterEqual);
-    equation.setCoefficient({5,0});
-    equation.setCoefficient({-4,1});
-    equation.setCoefficient({1,2});
-    equation.setCoefficient({2,3});
-    equation.setCoefficient({3,6});
+    setCoefficients({{5,0},{-4,1},{1,2},{2,3},{3,6}});
 
     ASSERT_EQ(equation,sut.convert("2x3-2x2+x1+1>=-3x6-3x2+5x1-4"));
 }
