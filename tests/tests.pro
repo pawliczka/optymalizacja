@@ -13,6 +13,7 @@ SOURCES += main.cpp \
 
 HEADERS += \
     mocks/EquationConventerMock.hpp \
-    mocks/TermConverterMock.hpp
+    mocks/TermConverterMock.hpp \
+    mocks/EquationMock.hpp
 
 LIBS += -lgmock -L../src -loptymalizacja -lpthread

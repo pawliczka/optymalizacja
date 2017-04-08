@@ -25,7 +25,8 @@ HEADERS += \
     ITermConverter.hpp \
     TermConverter.hpp \
     Equation.hpp \
-    ComparisonOperator.hpp
+    ComparisonOperator.hpp \
+    IEquation.hpp
 
 FORMS += \
     mainwindow.ui
