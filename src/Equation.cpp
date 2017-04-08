@@ -1,5 +1,6 @@
 #include "Equation.hpp"
 #include <algorithm>
+#include <iostream>
 
 int Equation::getCoefficient(unsigned int index) const
 {

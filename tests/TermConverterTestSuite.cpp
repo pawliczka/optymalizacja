@@ -14,6 +14,14 @@ TEST_F(TermConverterTestSuite, shouldReturnZeroZeroPairWhenReceiveEmptyString)
     ASSERT_EQ(result, std::make_pair(0, 0));
 }
 
+TEST_F(TermConverterTestSuite, shouldReturnMinusSevenZeroPairWhenReceiveMinusSeven)
+{
+    auto result = sut.convert("-1");
+    ASSERT_EQ(result, std::make_pair(-1, 0));
+    result=sut.convert("-7");
+    ASSERT_EQ(result, std::make_pair(-7, 0));
+}
+
 TEST_F(TermConverterTestSuite, shouldReturnZeroZeroPairWhenReceiveEmptyStringwithSpaces)
 {
     auto result = sut.convert("   ");
