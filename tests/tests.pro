@@ -9,7 +9,8 @@ TEMPLATE = app
 SOURCES += main.cpp \
     EquationConventerTestSuite.cpp \
     TermConverterTestSuite.cpp \
-    EquationTestSuite.cpp
+    EquationTestSuite.cpp \
+    EquationManagerTestSuite.cpp
 
 HEADERS += \
     mocks/EquationConventerMock.hpp \
