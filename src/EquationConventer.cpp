@@ -37,7 +37,10 @@ std::string returnFoundComparisonOperatorAsString(const std::string& expression)
 
 Equation EquationConventer::convert(const std::string expression)
 {
+    Equation equation;
     std::string foundOperator=returnFoundComparisonOperatorAsString(expression);
+
+    equation.setComparisonOperator(convertStringToComparasionOperator(foundOperator));
 
     std::vector<std::string> splitedExpresionByCompOperator{};
 
@@ -46,6 +49,6 @@ Equation EquationConventer::convert(const std::string expression)
     std::vector<std::string> splitedExpresionIntoTerms{};
     boost::split(splitedExpresionIntoTerms, splitedExpresionByCompOperator[0], boost::is_any_of("+"));
     std::for_each(splitedExpresionIntoTerms.begin(), splitedExpresionIntoTerms.end(),
-        [this](auto& expresion1) { m_termConverter->convert(expresion1); });
-    return Equation();
+        [this, &equation](auto& expresion1) { equation.setCoefficient(m_termConverter->convert(expresion1)); });
+    return std::move(equation);
 }

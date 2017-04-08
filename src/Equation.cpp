@@ -37,7 +37,7 @@ void Equation::setComparisonOperator(ComparisonOperator comparisonOperator)
     m_comparisonOperator = comparisonOperator;
 }
 
-int Equation::getIndexOfLastCofficient()
+int Equation::getIndexOfLastCofficient() const
 {
     return m_coefficients.size() - 1;
 }

@@ -16,7 +16,7 @@ public:
     void setCoefficient(int value, unsigned int index);
     void setCoefficient(Term term);
     void setComparisonOperator(ComparisonOperator comparisonOperator);
-    int getIndexOfLastCofficient();
+    int getIndexOfLastCofficient() const;
     bool operator==(const Equation& equationSecond) const;
 
 private:
