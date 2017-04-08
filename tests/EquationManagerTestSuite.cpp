@@ -20,5 +20,6 @@ public:
 
 TEST_F(EquationManagerTestSuite, init)
 {
-    sut.convertToEquations();
+    sut.convertToEquations("x1+1=3x+5/nx1+2=3"
+                           );
 }

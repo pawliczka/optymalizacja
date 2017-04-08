@@ -10,4 +10,4 @@ public:
     virtual void setCoefficient(Term term) = 0;
     virtual void setComparisonOperator(ComparisonOperator comparisonOperator) = 0;
     virtual int getIndexOfLastCofficient() const = 0;
-}
+};
