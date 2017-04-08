@@ -10,10 +10,15 @@ using Term = std::pair<Coefficient, Index>;
 class Equation
 {
 public:
-    Equation();
+    Equation() {}
+    Equation(std::vector<int> coefficients, ComparisonOperator compOperator)
+        : m_coefficients(coefficients)
+        , m_comparisonOperator(compOperator)
+    {
+    }
+
     int getCoefficient(unsigned int index) const;
     ComparisonOperator getComparisonOperator() const;
-    void setCoefficient(int value, unsigned int index);
     void setCoefficient(Term term);
     void setComparisonOperator(ComparisonOperator comparisonOperator);
     int getIndexOfLastCofficient() const;

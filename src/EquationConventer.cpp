@@ -26,7 +26,7 @@ ComparisonOperator convertStringToComparasionOperator(const std::string& express
 std::string returnFoundComparisonOperatorAsString(const std::string& expression)
 {
     std::vector<std::string> key={">=","<=",">","<","="};
-    for(int index=0;index<key.size();index++)
+    for(unsigned index=0;index<key.size();index++)
     {
         if(std::regex_search(expression,std::regex(key[index])))
             return key[index];

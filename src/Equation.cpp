@@ -1,10 +1,6 @@
 #include "Equation.hpp"
 #include <algorithm>
 
-Equation::Equation()
-{
-}
-
 int Equation::getCoefficient(unsigned int index) const
 {
     if (index < m_coefficients.size())
@@ -16,13 +12,6 @@ int Equation::getCoefficient(unsigned int index) const
 ComparisonOperator Equation::getComparisonOperator() const
 {
     return m_comparisonOperator;
-}
-
-void Equation::setCoefficient(int value, unsigned int index)
-{
-    if (index >= m_coefficients.size())
-        m_coefficients.resize(index + 1, 0);
-    m_coefficients[index] += value;
 }
 
 void Equation::setCoefficient(Term term)
