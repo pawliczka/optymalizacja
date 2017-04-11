@@ -45,3 +45,10 @@ TEST_F(EquationTestSuite, shouldReturnTrueAfterComparingSameEquations)
     equationSecond.setCoefficient({8, 57});
     ASSERT_EQ(equationFirst, equationSecond);
 }
+
+TEST_F(EquationTestSuite, shouldPrintProperString)
+{
+    sut = Equation({-2,-12,3,2},ComparisonOperator::GreaterEqual);
+    EXPECT_EQ("2x3+3x2-12x1-2<=0",sut.toString());
+}
+

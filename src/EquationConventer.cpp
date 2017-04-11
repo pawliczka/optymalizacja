@@ -1,34 +1,19 @@
 #include "EquationConventer.hpp"
 #include "ComparisonOperator.hpp"
+#include <algorithm>
 #include <boost/algorithm/string.hpp>
 #include <boost/lambda/lambda.hpp>
 #include <iostream>
-#include <algorithm>
 #include <regex>
 
 namespace
 {
-ComparisonOperator convertStringToComparasionOperator(const std::string& expression)
+std::string returnFoundComparisonOperatorAsString(const std::string & expression)
 {
-    if (expression == "=")
-        return ComparisonOperator::Equal;
-    if (expression == ">=")
-        return ComparisonOperator::GreaterEqual;
-    if (expression == "<=")
-        return ComparisonOperator::LessEqual;
-    if (expression == "<")
-        return ComparisonOperator::Less;
-    if (expression == ">")
-        return ComparisonOperator::Greater;
-    return ComparisonOperator::None;
-}
-
-std::string returnFoundComparisonOperatorAsString(const std::string& expression)
-{
-    std::vector<std::string> key={">=","<=",">","<","="};
-    for(unsigned index=0;index<key.size();index++)
+    std::vector<std::string> key = {">=", "<=", ">", "<", "="};
+    for(unsigned index = 0; index < key.size(); index++)
     {
-        if(std::regex_search(expression,std::regex(key[index])))
+        if(std::regex_search(expression, std::regex(key[index])))
             return key[index];
     }
     return "";
@@ -39,8 +24,8 @@ Equation EquationConventer::convert(const std::string expression)
 {
 
     Equation equation;
-    std::string foundOperator=returnFoundComparisonOperatorAsString(expression);
-    equation.setComparisonOperator(convertStringToComparasionOperator(foundOperator));
+    std::string foundOperator = returnFoundComparisonOperatorAsString(expression);
+    equation.setComparisonOperator(foundOperator);
 
     std::vector<std::string> splitedExpresionByCompOperator{};
 
@@ -54,17 +39,19 @@ Equation EquationConventer::convert(const std::string expression)
     boost::split(splitedExpresionIntoTermsLeftSide, splitedExpresionByCompOperator[0], boost::is_any_of("+"));
     boost::split(splitedExpresionIntoTermsRightSide, splitedExpresionByCompOperator[1], boost::is_any_of("+"));
 
-    std::for_each(splitedExpresionIntoTermsLeftSide.begin(), splitedExpresionIntoTermsLeftSide.end(),
-        [this, &equation](auto& expression) {
-        equation.setCoefficient(m_termConverter->convert(expression)); });
+    std::for_each(
+        splitedExpresionIntoTermsLeftSide.begin(), splitedExpresionIntoTermsLeftSide.end(),
+        [this, &equation](auto & expression) { equation.setCoefficient(m_termConverter->convert(expression)); });
 
-    std::for_each(splitedExpresionIntoTermsRightSide.begin(), splitedExpresionIntoTermsRightSide.end(),
-        [this, &equation](auto& expression) {
-        if(expression=="")
-            return;
-        Term term=m_termConverter->convert(expression);
-        term.first=term.first*(-1);
-        equation.setCoefficient(term);});
+    std::for_each(
+        splitedExpresionIntoTermsRightSide.begin(), splitedExpresionIntoTermsRightSide.end(),
+        [this, &equation](auto & expression) {
+            if(expression == "")
+                return;
+            Term term = m_termConverter->convert(expression);
+            term.first = term.first * (-1);
+            equation.setCoefficient(term);
+        });
 
-     return std::move(equation);
+    return equation;
 }

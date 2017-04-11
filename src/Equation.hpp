@@ -3,6 +3,7 @@
 #include "IEquation.hpp"
 #include <limits>
 #include <vector>
+#include <string>
 
 using Coefficient = int;
 using Index = int;
@@ -22,8 +23,10 @@ public:
     ComparisonOperator getComparisonOperator() const;
     void setCoefficient(Term term);
     void setComparisonOperator(ComparisonOperator comparisonOperator);
+    void setComparisonOperator(std::string comparisonOperator);
     int getIndexOfLastCofficient() const;
     bool operator==(const Equation& equationSecond) const;
+    std::string toString();
 
 private:
     std::vector<int> m_coefficients;
