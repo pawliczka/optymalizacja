@@ -120,7 +120,12 @@ std::string Equation::getNonFirstElementAsString()
 
 std::string Equation::getFirstElementAsString()
 {
-    return std::to_string(m_coefficients[m_coefficients.size() - 1]) + "x" + std::to_string(m_coefficients.size() - 1);
+    auto index = getIndexOfLastCofficient();
+    if (getCoefficient(index) == 0)
+    {
+        return "";
+    }
+    return std::to_string(m_coefficients[index]) + "x" + std::to_string(index);
 }
 
 std::string Equation::getComparisonOperatorAndZeroAsString()

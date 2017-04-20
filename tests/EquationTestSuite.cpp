@@ -34,6 +34,7 @@ TEST_F(EquationTestSuite, shouldReturnSevenAsLastIndexofCoefficientAfterReceivin
     sut.setCoefficient({1, 7});
     ASSERT_EQ(sut.getIndexOfLastCofficient(), 7);
 }
+
 TEST_F(EquationTestSuite, shouldReturnTrueAfterComparingSameEquations)
 {
     Equation equationFirst, equationSecond;
@@ -68,4 +69,10 @@ TEST_F(EquationTestSuite, shouldNotPrintEquationWithZeroCoefficientsIndex0)
 {
     sut = Equation({0, -12, 0, 2}, ComparisonOperator::GreaterEqual);
     EXPECT_EQ("2x3-12x1<=0", sut.toString());
+}
+
+TEST_F(EquationTestSuite, shouldNotPrintEquationWithZeroCoefficientsIndexLast)
+{
+    sut = Equation({0, -12, 0, 0}, ComparisonOperator::GreaterEqual);
+    EXPECT_EQ("-12x1<=0", sut.toString());
 }
