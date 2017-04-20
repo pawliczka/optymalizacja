@@ -89,14 +89,32 @@ bool Equation::operator==(const Equation& equationSecond) const
     return true;
 }
 
+std::string Equation::getTermAsString(int index)
+{
+    if (m_coefficients[index] == 0)
+    {
+        return "";
+    }
+    std::string equation = "+";
+    if (index != 0)
+    {
+        equation += std::to_string(m_coefficients[index]) + "x" + std::to_string(index);
+    }
+    else
+    {
+        equation += std::to_string(m_coefficients[0]);
+    }
+    boost::replace_all(equation, "+-", "-");
+    return equation;
+}
+
 std::string Equation::getNonFirstElementAsString()
 {
     std::string equation = "";
-    for (int i = m_coefficients.size() - 2; i > 0; i--)
+    for (int index = m_coefficients.size() - 2; index >= 0; index--)
     {
-        equation += std::string("+") + (std::to_string(m_coefficients[i]) + "x" + std::to_string(i));
+        equation += getTermAsString(index);
     }
-    boost::replace_all(equation, "+-", "-");
     return equation;
 }
 
@@ -107,12 +125,10 @@ std::string Equation::getFirstElementAsString()
 
 std::string Equation::getComparisonOperatorAndZeroAsString()
 {
-    return std::to_string(*m_coefficients.begin()) + convertComparasionOperatorToString(m_comparisonOperator) +
-           std::string("0");
+    return convertComparasionOperatorToString(m_comparisonOperator) + std::string("0");
 }
 
 std::string Equation::toString()
 {
     return getFirstElementAsString() + getNonFirstElementAsString() + getComparisonOperatorAndZeroAsString();
 }
-

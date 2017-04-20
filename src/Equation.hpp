@@ -34,6 +34,7 @@ private:
 
     std::vector<int> m_coefficients;
     ComparisonOperator m_comparisonOperator;
-    std::__cxx11::string getNonFirstElementAsString();
-    std::__cxx11::string getComparisonOperatorAndZeroAsString();
+    std::string getNonFirstElementAsString();
+    std::string getComparisonOperatorAndZeroAsString();
+    std::string getTermAsString(int index);
 };
