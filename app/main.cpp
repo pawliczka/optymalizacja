@@ -1,12 +1,12 @@
 #include <QApplication>
 #include <QWidget>
 #include <iostream>
-#include "mainwindow.h"
+#include "Controler.hpp"
 
 int main(int argc, char* argv[])
 {
     QApplication a(argc, argv);
-    mainWindow w;
-    w.show();
+    View view;
+    Controler contr(view);
     return a.exec();
 }
