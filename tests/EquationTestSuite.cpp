@@ -60,8 +60,8 @@ TEST_F(EquationTestSuite, shouldPrintLastTermWithSign)
 
 TEST_F(EquationTestSuite, shouldNotPrintEquationWithZeroCoefficients)
 {
-    sut = Equation({-2, -12, 0, 2}, ComparisonOperator::GreaterEqual);
-    EXPECT_EQ("2x3-12x1-2<=0", sut.toString());
+    sut = Equation({-2, -12, 0, 2}, ComparisonOperator::Equal);
+    EXPECT_EQ("2x3-12x1-2=0", sut.toString());
 }
 
 TEST_F(EquationTestSuite, shouldNotPrintEquationWithZeroCoefficientsIndex0)

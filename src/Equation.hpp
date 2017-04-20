@@ -31,10 +31,10 @@ public:
 
 private:
     std::string getFirstElementAsString();
-
-    std::vector<int> m_coefficients;
-    ComparisonOperator m_comparisonOperator;
     std::string getNonFirstElementAsString();
     std::string getComparisonOperatorAndZeroAsString();
     std::string getTermAsString(int index);
+
+    std::vector<int> m_coefficients;
+    ComparisonOperator m_comparisonOperator;
 };
