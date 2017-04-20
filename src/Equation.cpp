@@ -36,6 +36,13 @@ std::string convertComparasionOperatorToString(const ComparisonOperator expressi
 }
 }
 
+std::ostream& operator<<(std::ostream& stream, const Equation& equation)
+{
+    for (int i = equation.getIndexOfLastCofficient(); i >= 0; i--)
+        stream << equation.getCoefficient(i) << "x" << i << " ";
+    return stream;
+}
+
 int Equation::getCoefficient(unsigned int index) const
 {
     if(index < m_coefficients.size())
@@ -51,7 +58,7 @@ ComparisonOperator Equation::getComparisonOperator() const
 
 void Equation::setCoefficient(Term term)
 {
-    if(term.second >= m_coefficients.size())
+    if(term.second >= static_cast<int>(m_coefficients.size()))
         m_coefficients.resize(term.second + 1, 0);
     m_coefficients[term.second] += term.first;
 }

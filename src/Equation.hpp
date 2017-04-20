@@ -4,6 +4,7 @@
 #include <limits>
 #include <vector>
 #include <string>
+#include <ostream>
 
 using Coefficient = int;
 using Index = int;
@@ -18,7 +19,7 @@ public:
         , m_comparisonOperator(compOperator)
     {
     }
-
+    friend std::ostream& operator<<(std::ostream& stream, Equation const& equation);
     int getCoefficient(unsigned int index) const;
     ComparisonOperator getComparisonOperator() const;
     void setCoefficient(Term term);

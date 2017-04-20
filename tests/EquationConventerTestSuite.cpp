@@ -8,16 +8,6 @@
 
 using namespace testing;
 
-namespace
-{
-std::ostream& operator<<(std::ostream& stream, Equation const& equation)
-{
-    for (int i = equation.getIndexOfLastCofficient(); i >= 0; i--)
-        stream << equation.getCoefficient(i) << "x" << i << " ";
-    return stream;
-}
-}
-
 class EquationConventerTestSuite : public Test
 {
     using ExpectCallsList = std::list<std::pair<std::string, Term>>;
