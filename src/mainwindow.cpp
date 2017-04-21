@@ -6,7 +6,7 @@ mainWindow::mainWindow(QWidget* parent)
     , ui(new Ui::mainWindow)
 {
     ui->setupUi(this);
-    connect(ui->btn_go, &QPushButton::clicked, this, &mainWindow::foo);
+    show();
 }
 
 mainWindow::~mainWindow()
@@ -14,8 +14,7 @@ mainWindow::~mainWindow()
     delete ui;
 }
 
-void mainWindow::foo()
+QPushButton *mainWindow::getPushBtn()
 {
-    auto entered_text = ui->text_edit->toPlainText();
-    ui->text_display->setText(entered_text);
+    return ui->btn_go;
 }

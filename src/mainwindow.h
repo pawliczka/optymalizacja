@@ -15,9 +15,7 @@ class mainWindow : public QDialog
 public:
     explicit mainWindow(QWidget* parent = 0);
     ~mainWindow();
-
-public slots:
-    void foo();
+    QPushButton * getPushBtn();
 
 private:
     Ui::mainWindow* ui;

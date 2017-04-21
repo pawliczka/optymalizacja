@@ -3,10 +3,11 @@
 #include <iostream>
 #include "Controler.hpp"
 
+
 int main(int argc, char* argv[])
 {
     QApplication a(argc, argv);
-    View view;
+    mainWindow view;
     Controler contr(view);
     return a.exec();
 }

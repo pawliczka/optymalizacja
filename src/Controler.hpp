@@ -1,16 +1,20 @@
 #pragma once
 #include "mainwindow.h"
-#include "View.hpp"
+#include <QObject>
+#include <QPushButton>
 
-class Controler
+class Controler: public QObject
 {
 public:
-    Controler(View& view)
+    Controler(mainWindow& view)
         : m_view(view)
     {
-        m_view.show();
+        connect(m_view.getPushBtn(), &QPushButton::clicked,this,&Controler::foo);
     }
 
+slots public:
+    void foo();
+
 private:
-    View& m_view;
+    mainWindow& m_view;
 };

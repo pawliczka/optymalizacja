@@ -18,8 +18,7 @@ SOURCES += \
     TermConverter.cpp \
     Equation.cpp \
     EquationManager.cpp \
-    Controler.cpp \
-    View.cpp
+    Controler.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -31,8 +30,7 @@ HEADERS += \
     ComparisonOperator.hpp \
     IEquation.hpp \
     EquationManager.hpp \
-    Controler.hpp \
-    View.hpp
+    Controler.hpp
 
 FORMS += \
     mainwindow.ui
