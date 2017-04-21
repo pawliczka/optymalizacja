@@ -2,6 +2,6 @@
 
 void Controler::foo()
 {
-    auto text = m_view.getTextFromTextEdit().toStdString();
+    auto text = m_view.getTextFromTextEdit();
     m_view.setTextInTextDisplay(text);
 }

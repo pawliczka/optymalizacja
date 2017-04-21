@@ -24,7 +24,7 @@ QString mainWindow::getTextFromTextEdit()
     return ui->text_edit->toPlainText();
 }
 
-void mainWindow::setTextInTextDisplay(std::string text)
+void mainWindow::setTextInTextDisplay(QString text)
 {
-    ui->text_display->setPlainText(QString::fromStdString(text));
+    ui->text_display->setPlainText(text);
 }

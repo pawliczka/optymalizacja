@@ -17,7 +17,7 @@ public:
     ~mainWindow();
     QPushButton * getPushBtn();
     QString getTextFromTextEdit();
-    void setTextInTextDisplay(std::string text);
+    void setTextInTextDisplay(QString text);
 
 private:
     Ui::mainWindow * ui;
