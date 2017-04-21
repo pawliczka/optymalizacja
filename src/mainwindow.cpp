@@ -18,3 +18,13 @@ QPushButton *mainWindow::getPushBtn()
 {
     return ui->btn_go;
 }
+
+QString mainWindow::getTextFromTextEdit()
+{
+    return ui->text_edit->toPlainText();
+}
+
+void mainWindow::setTextInTextDisplay(std::string text)
+{
+    ui->text_display->setPlainText(QString::fromStdString(text));
+}
