@@ -3,12 +3,11 @@
 
 SimplexTable::SimplexTable()
 {
-
 }
 
 SimplexTable::SimplexTable(std::vector<Equation> p_equations)
 {
-    int numberOfVariables=howManyVariables(p_equations);
+    int numberOfVariables = howManyVariables(p_equations);
     numberOfLines = p_equations.size();
     numberOfColumns = numberOfVariables + numberOfLines;
 
@@ -17,7 +16,7 @@ SimplexTable::SimplexTable(std::vector<Equation> p_equations)
 
     for (int i = 0; i < numberOfLines; i++)
     {
-        for(int j = 0; j < numberOfColumns; j++)
+        for (int j = 0; j < numberOfColumns; j++)
         {
             simplexTable[i][j] = p_equations[i].getCoefficient(j);
             std::cout << simplexTable[i][j] << " ";
@@ -26,18 +25,14 @@ SimplexTable::SimplexTable(std::vector<Equation> p_equations)
     }
 
 
-
     std::cout << "Kolumn: " << numberOfColumns << std::endl << "Lines: " << numberOfLines << std::endl;
 }
 
 int SimplexTable::howManyVariables(std::vector<Equation> p_equations)
 {
-    int numberOfVariables=0;
-    std::for_each(
-        p_equations.begin(),p_equations.end(), [this, &numberOfVariables](Equation & equation){
-            if(equation.getIndexOfLastCofficient() > numberOfVariables)
-                numberOfVariables = equation.getIndexOfLastCofficient();
-        });
+    int numberOfVariables = 0;
+    std::for_each(p_equations.begin(), p_equations.end(), [&numberOfVariables](Equation& equation) {
+        numberOfVariables = std::max(numberOfVariables, equation.getIndexOfLastCofficient());
+    });
     return numberOfVariables;
 }
-
