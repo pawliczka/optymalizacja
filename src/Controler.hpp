@@ -3,16 +3,16 @@
 #include <QObject>
 #include <QPushButton>
 
-class Controler: public QObject
+class Controler : public QObject
 {
 public:
     Controler(mainWindow& view)
         : m_view(view)
     {
-        connect(m_view.getPushBtn(), &QPushButton::clicked,this,&Controler::foo);
+        connect(m_view.getPushBtn(), &QPushButton::clicked, this, &Controler::foo);
     }
 
-slots public:
+    slots public:
     void foo();
 
 private:
