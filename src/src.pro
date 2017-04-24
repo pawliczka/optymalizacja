@@ -18,7 +18,8 @@ SOURCES += \
     TermConverter.cpp \
     Equation.cpp \
     EquationManager.cpp \
-    Controler.cpp
+    Controler.cpp \
+    SimplexTable.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -30,7 +31,8 @@ HEADERS += \
     ComparisonOperator.hpp \
     IEquation.hpp \
     EquationManager.hpp \
-    Controler.hpp
+    Controler.hpp \
+    SimplexTable.hpp
 
 FORMS += \
     mainwindow.ui
