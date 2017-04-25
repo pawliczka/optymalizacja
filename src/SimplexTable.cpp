@@ -23,20 +23,26 @@ SimplexTable::SimplexTable(std::vector<Equation> p_equations)
             simplexTable[i][numberOfColumns-1] = p_equations[i].getCoefficient(0);
         }
     }
-    PrintSimplexTable();
 }
 
-void SimplexTable::SetCoefficientsOfObjectiveFunction(Equation p_equation)
+void SimplexTable::SetCoefficientsOfObjectiveFunction(Equation p_objectiveFunction)
 {
-    //coefficientsOfObjectiveFunction.resize();
+    coefficientsOfObjectiveFunction.resize(numberOfColumns-1,0);
+    for(int i = 0; i < numberOfColumns-numberOfLines-1; i++)
+        coefficientsOfObjectiveFunction[i]=p_objectiveFunction.getCoefficient(i+1);
 }
 
 void SimplexTable::PrintSimplexTable()
 {
     int setw_param = 5;
 
+    for (auto &elem : coefficientsOfObjectiveFunction)
+        std::cout << std::setw(setw_param) << elem;
+
+    std::cout << std::endl;
+
     for(int i = 1; i < numberOfColumns; i++)
-        std::cout << std::setw(setw_param) << "x" << i;
+        std::cout << std::setw(setw_param-1) << "x" << i;
 
     std::cout << std::setw(setw_param) << "Bj" << std::endl;
 
@@ -44,7 +50,7 @@ void SimplexTable::PrintSimplexTable()
     {
         for (int j = 0; j < numberOfColumns; j++)
         {
-            std::cout << std::setw(setw_param) << simplexTable[i][j] << " ";
+            std::cout << std::setw(setw_param) << simplexTable[i][j];
         }
         std::cout << std::endl;
     }
