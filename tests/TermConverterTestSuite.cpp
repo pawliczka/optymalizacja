@@ -58,6 +58,18 @@ TEST_F(TermConverterTestSuite, shouldReturnMinusThreeTenPairWhenReceiveMinus3x10
     ASSERT_EQ(result, std::make_pair(-3, 10));
 }
 
+TEST_F(TermConverterTestSuite, shouldReturnMinusOneTenPairWhenReceiveMinus1x10String)
+{
+    auto result = sut.convert(" -x10");
+    ASSERT_EQ(result, std::make_pair(-1, 10));
+}
+
+TEST_F(TermConverterTestSuite, shouldReturnPlusOneTenPairWhenReceiveMinus1x10String)
+{
+    auto result = sut.convert(" +x10 ");
+    ASSERT_EQ(result, std::make_pair(1, 10));
+}
+
 TEST_F(TermConverterTestSuite, shouldReturnMinusFiftyThreeTenPairWhenReceiveMinus53x10String)
 {
     auto result = sut.convert(" -53x10 ");

@@ -22,5 +22,5 @@ TEST_F(EquationManagerTestSuite, init)
 {
     EXPECT_CALL(*m_equationConventerMock, convert("x1+1=3x+5"));
     EXPECT_CALL(*m_equationConventerMock, convert("x1+2=3"));
-    sut.convertToEquations("x1+1=3x+5/nx1+2=3");
+    sut.convertToEquations("x1+1=3x+5\nx1+2=3");
 }

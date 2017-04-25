@@ -1,10 +1,10 @@
+#include "Equation.hpp"
 #include "EquationConventer.hpp"
 #include "TermConverterMock.hpp"
-#include "Equation.hpp"
 #include <gmock/gmock.h>
+#include <iostream>
 #include <list>
 #include <memory>
-#include <iostream>
 
 using namespace testing;
 
@@ -14,8 +14,7 @@ class EquationConventerTestSuite : public Test
     using TermList = std::list<Term>;
 
 public:
-    EquationConventerTestSuite()
-        : sut(termConverter)
+    EquationConventerTestSuite() : sut(termConverter)
     {
     }
     std::shared_ptr<TermConverterMock> termConverter = std::make_shared<testing::StrictMock<TermConverterMock>>();
@@ -24,14 +23,14 @@ public:
 
     void expectTermConverterCalls(ExpectCallsList expectCallsList)
     {
-        for (const auto& expectCall : expectCallsList)
+        for (const auto & expectCall : expectCallsList)
         {
             EXPECT_CALL(*termConverter, convert(expectCall.first)).WillOnce(Return(expectCall.second));
         }
     }
     void setCoefficients(TermList termList)
     {
-        for (const auto& term : termList)
+        for (const auto & term : termList)
         {
             equation.setCoefficient(term);
         }
@@ -75,8 +74,14 @@ TEST_F(EquationConventerTestSuite, MinusSevenOnTheRightSide)
 
 TEST_F(EquationConventerTestSuite, WyjebaneWKosmosRownanko)
 {
-    expectTermConverterCalls({{"2x3", Term(2, 3)}, {"-2x2", Term(-2, 2)}, {"x1", Term(1, 1)}, {"1", Term(1, 0)},
-        {"-3x6", Term(-3, 6)}, {"-3x2", Term(-3, 2)}, {"5x1", Term(5, 1)}, {"-4", Term(-4, 0)}});
+    expectTermConverterCalls({{"2x3", Term(2, 3)},
+                              {"-2x2", Term(-2, 2)},
+                              {"x1", Term(1, 1)},
+                              {"1", Term(1, 0)},
+                              {"-3x6", Term(-3, 6)},
+                              {"-3x2", Term(-3, 2)},
+                              {"5x1", Term(5, 1)},
+                              {"-4", Term(-4, 0)}});
     equation.setComparisonOperator(ComparisonOperator::GreaterEqual);
     setCoefficients({{5, 0}, {-4, 1}, {1, 2}, {2, 3}, {3, 6}});
 

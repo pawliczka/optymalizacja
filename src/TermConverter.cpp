@@ -4,17 +4,17 @@
 
 namespace
 {
-std::string& removeWhiteCharacters(std::string& expresion)
+std::string & removeWhiteCharacters(std::string & expresion)
 {
     expresion.erase(std::remove(expresion.begin(), expresion.end(), ' '), expresion.end());
     return expresion;
 }
-bool isExpresionWithoutCoefficient(const std::vector<std::string>& splitedExpresion)
+bool isExpresionWithoutCoefficient(const std::vector<std::string> & splitedExpresion)
 {
     return splitedExpresion.front().empty();
 }
 
-bool isTermWithVariable(const std::vector<std::string>& splitedExpresion)
+bool isTermWithVariable(const std::vector<std::string> & splitedExpresion)
 {
     return splitedExpresion.size() == 2;
 }
@@ -38,15 +38,21 @@ void TermConverter::splitTermByX()
         if (isExpresionWithoutCoefficient(splitedExpresion)) /* handle "x1" */
         {
             m_splitedExpresion = {1, boost::lexical_cast<int>(splitedExpresion[1])};
+            return;
         }
-        else /* handle "3x1" */
+        if (splitedExpresion[0] == "-")
         {
-            m_splitedExpresion = {
-                boost::lexical_cast<int>(splitedExpresion[0]), boost::lexical_cast<int>(splitedExpresion[1])};
+            m_splitedExpresion = {-1, boost::lexical_cast<int>(splitedExpresion[1])};
+            return;
         }
+        if (splitedExpresion[0] == "+")
+        {
+            m_splitedExpresion = {1, boost::lexical_cast<int>(splitedExpresion[1])};
+            return;
+        }
+        m_splitedExpresion = {boost::lexical_cast<int>(splitedExpresion[0]),
+                              boost::lexical_cast<int>(splitedExpresion[1])};
+        return;
     }
-    else /* handle "1" */
-    {
-        m_splitedExpresion = {boost::lexical_cast<int>(splitedExpresion[0]), 0};
-    }
+    m_splitedExpresion = {boost::lexical_cast<int>(splitedExpresion[0]), 0};
 }
