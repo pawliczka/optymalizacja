@@ -8,6 +8,8 @@ class SimplexTable
 public:
     SimplexTable();
     SimplexTable(std::vector<Equation>);
+    void PrintSimplexTable();
+
 private:
     int numberOfColumns = {0};
     int numberOfLines = {0};
