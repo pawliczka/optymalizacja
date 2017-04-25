@@ -11,8 +11,7 @@ SimplexTable::SimplexTable(std::vector<Equation> p_equations)
     numberOfLines = p_equations.size();
     numberOfColumns = numberOfVariables + numberOfLines;
 
-    std::vector<std::vector<float>> simplexTable2(numberOfLines, std::vector<float>(numberOfColumns));
-    simplexTable = simplexTable2;
+    simplexTable.resize(numberOfLines, std::vector<float>(numberOfColumns));
 
     for (int i = 0; i < numberOfLines; i++)
     {
