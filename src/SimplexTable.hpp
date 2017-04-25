@@ -9,6 +9,7 @@ public:
     SimplexTable();
     SimplexTable(std::vector<Equation>);
     void PrintSimplexTable();
+    void SetCoefficientsOfObjectiveFunction(Equation);
 
 private:
     int numberOfColumns = {0};
