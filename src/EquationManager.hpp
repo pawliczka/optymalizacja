@@ -11,6 +11,7 @@ public:
     {
     }
     void convertToEquations(std::string equations);
+    std::string convertEquationsToString() const;
 
 private:
     std::shared_ptr<IEquationConventer> m_eqationConverter;

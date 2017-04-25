@@ -27,13 +27,13 @@ public:
     void setComparisonOperator(std::string comparisonOperator);
     int getIndexOfLastCofficient() const;
     bool operator==(const Equation& equationSecond) const;
-    std::string toString();
+    std::string toString() const;
 
 private:
-    std::string getFirstElementAsString();
-    std::string getNonFirstElementAsString();
-    std::string getComparisonOperatorAndZeroAsString();
-    std::string getTermAsString(int index);
+    std::string getFirstElementAsString() const;
+    std::string getNonFirstElementAsString() const;
+    std::string getComparisonOperatorAndZeroAsString() const;
+    std::string getTermAsString(int index) const;
 
     std::vector<int> m_coefficients;
     ComparisonOperator m_comparisonOperator;

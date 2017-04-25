@@ -11,9 +11,9 @@ namespace
 std::string returnFoundComparisonOperatorAsString(const std::string & expression)
 {
     std::vector<std::string> key = {">=", "<=", ">", "<", "="};
-    for(unsigned index = 0; index < key.size(); index++)
+    for (unsigned index = 0; index < key.size(); index++)
     {
-        if(std::regex_search(expression, std::regex(key[index])))
+        if (std::regex_search(expression, std::regex(key[index])))
             return key[index];
     }
     return "";
@@ -46,7 +46,7 @@ Equation EquationConventer::convert(const std::string expression)
     std::for_each(
         splitedExpresionIntoTermsRightSide.begin(), splitedExpresionIntoTermsRightSide.end(),
         [this, &equation](auto & expression) {
-            if(expression == "")
+            if (expression == "")
                 return;
             Term term = m_termConverter->convert(expression);
             term.first = term.first * (-1);

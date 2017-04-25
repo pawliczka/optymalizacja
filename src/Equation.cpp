@@ -1,11 +1,10 @@
 #include "Equation.hpp"
 #include <algorithm>
 #include <boost/algorithm/string.hpp>
-#include <iostream>
 
 namespace
 {
-ComparisonOperator convertStringToComparasionOperator(const std::string& expression)
+ComparisonOperator convertStringToComparasionOperator(const std::string & expression)
 {
     if (expression == "=")
         return ComparisonOperator::Equal;
@@ -25,18 +24,18 @@ std::string convertComparasionOperatorToString(const ComparisonOperator expressi
     if (expression == ComparisonOperator::Equal)
         return std::string("=");
     if (expression == ComparisonOperator::Greater)
-        return std::string("<");
-    if (expression == ComparisonOperator::GreaterEqual)
-        return std::string("<=");
-    if (expression == ComparisonOperator::Less)
         return std::string(">");
-    if (expression == ComparisonOperator::LessEqual)
+    if (expression == ComparisonOperator::GreaterEqual)
         return std::string(">=");
+    if (expression == ComparisonOperator::Less)
+        return std::string("<");
+    if (expression == ComparisonOperator::LessEqual)
+        return std::string("<=");
     return std::string("");
 }
 }
 
-std::ostream& operator<<(std::ostream& stream, const Equation& equation)
+std::ostream & operator<<(std::ostream & stream, const Equation & equation)
 {
     for (int i = equation.getIndexOfLastCofficient(); i >= 0; i--)
         stream << equation.getCoefficient(i) << "x" << i << " ";
@@ -78,7 +77,7 @@ int Equation::getIndexOfLastCofficient() const
     return m_coefficients.size() - 1;
 }
 
-bool Equation::operator==(const Equation& equationSecond) const
+bool Equation::operator==(const Equation & equationSecond) const
 {
     if (m_comparisonOperator != equationSecond.getComparisonOperator())
         return false;
@@ -89,16 +88,28 @@ bool Equation::operator==(const Equation& equationSecond) const
     return true;
 }
 
-std::string Equation::getTermAsString(int index)
+std::string Equation::getTermAsString(int index) const
 {
-    if (m_coefficients[index] == 0)
+    auto coefficient = getCoefficient(index);
+    if (coefficient == 0)
     {
         return "";
     }
     std::string equation = "+";
     if (index != 0)
     {
-        equation += std::to_string(m_coefficients[index]) + "x" + std::to_string(index);
+        if (coefficient == 1)
+        {
+            equation += "x" + std::to_string(index);
+        }
+        else if (coefficient == -1)
+        {
+            equation += "-x" + std::to_string(index);
+        }
+        else
+        {
+            equation += std::to_string(coefficient) + "x" + std::to_string(index);
+        }
     }
     else
     {
@@ -108,7 +119,7 @@ std::string Equation::getTermAsString(int index)
     return equation;
 }
 
-std::string Equation::getNonFirstElementAsString()
+std::string Equation::getNonFirstElementAsString() const
 {
     std::string equation = "";
     for (int index = m_coefficients.size() - 2; index >= 0; index--)
@@ -118,22 +129,27 @@ std::string Equation::getNonFirstElementAsString()
     return equation;
 }
 
-std::string Equation::getFirstElementAsString()
+std::string Equation::getFirstElementAsString() const
 {
     auto index = getIndexOfLastCofficient();
-    if (getCoefficient(index) == 0)
+    auto coefficient = getCoefficient(index);
+    if (coefficient == 0)
     {
         return "";
+    }
+    if (coefficient == 1)
+    {
+        return "x" + std::to_string(index);
     }
     return std::to_string(m_coefficients[index]) + "x" + std::to_string(index);
 }
 
-std::string Equation::getComparisonOperatorAndZeroAsString()
+std::string Equation::getComparisonOperatorAndZeroAsString() const
 {
     return convertComparasionOperatorToString(m_comparisonOperator) + std::string("0");
 }
 
-std::string Equation::toString()
+std::string Equation::toString() const
 {
     return getFirstElementAsString() + getNonFirstElementAsString() + getComparisonOperatorAndZeroAsString();
 }
