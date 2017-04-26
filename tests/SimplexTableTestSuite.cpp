@@ -16,7 +16,7 @@ TEST_F(SimplexTableTestSuite, shouldReturnTwoVariablesWhenReceivingThreeEquation
     //x1+x2 < 4
 
     std::vector<Equation> equations = {
-        {{-2, 1,}, ComparisonOperator::GreaterEqual},
+        {{-2, 1}, ComparisonOperator::GreaterEqual},
         {{-3, 0, 1}, ComparisonOperator::GreaterEqual},
         {{-2, 1, 1}, ComparisonOperator::GreaterEqual}};
 
@@ -25,4 +25,20 @@ TEST_F(SimplexTableTestSuite, shouldReturnTwoVariablesWhenReceivingThreeEquation
     SimplexTable sut(equations);
     sut.SetCoefficientsOfObjectiveFunction(objectiveFunction);
     sut.PrintSimplexTable();
+    sut.ExecuteSimplexMethod();
+}
+
+TEST_F(SimplexTableTestSuite, ExampleFromYouTube)
+{
+    std::vector<Equation> equations = {
+        {{-5480, 420, 760}, ComparisonOperator::GreaterEqual},
+        {{-61, 9, 5}, ComparisonOperator::GreaterEqual}};
+
+    Equation objectiveFunction = {{0, 340, 404}, ComparisonOperator::Equal};
+    //sstd::cout << equations[0] << std::endl << equations[1] << std::endl << equations[2] << std::endl;
+    SimplexTable sut(equations);
+    sut.SetCoefficientsOfObjectiveFunction(objectiveFunction);
+    sut.PrintSimplexTable();
+    sut.ExecuteSimplexMethod();
+
 }
