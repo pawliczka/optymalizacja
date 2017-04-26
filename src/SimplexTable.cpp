@@ -10,7 +10,7 @@ SimplexTable::SimplexTable(std::vector<Equation> p_equations)
 {
     int numberOfVariables = howManyVariables(p_equations);
     std::cout << numberOfVariables << std::endl;
-    numberOfLines = p_equations.size();
+    numberOfLines = static_cast<int>(p_equations.size());
     numberOfColumns = (numberOfVariables + 1) + numberOfLines;
 
     simplexTable.resize(numberOfLines, std::vector<float>(numberOfColumns,0));
@@ -99,7 +99,7 @@ void SimplexTable::ExecuteIteration()
 
 void SimplexTable::CountZj()
 {
-    for(int i = 0; i < multiplicationZj.size(); i++)
+    for(int i = 0; i < static_cast<int>(multiplicationZj.size()); i++)
     {
         for(int j = 0; j < numberOfLines; j++)
             multiplicationZj[i] += coefficientsOfObjectiveFunction[numberVariablesInBase[j]-1] * simplexTable[j][i];
@@ -113,7 +113,7 @@ void SimplexTable::CountZj()
 
 void SimplexTable::CountDeltaJ()
 {
-    for(int i = 0; i < deltaJ.size(); i++)
+    for(int i = 0; i < static_cast<int>(deltaJ.size()); i++)
         deltaJ[i] = coefficientsOfObjectiveFunction[i] - multiplicationZj[i];
 
     std::cout << "delta J: ";
