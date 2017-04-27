@@ -32,5 +32,8 @@ private:
     void CountDeltaJ();
     void CountValueOfObjectiveFunction();
     bool IsSimplexTableIsOptimal();
+    void RecountAdditionalParameter();
+
+    void PrintVariablesInBase();
 };
 

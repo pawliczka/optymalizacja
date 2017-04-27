@@ -1,6 +1,7 @@
 #include "SimplexTable.hpp"
 #include <iostream>
 #include <iomanip>
+#include <limits>
 
 SimplexTable::SimplexTable()
 {
@@ -38,20 +39,38 @@ void SimplexTable::SetCoefficientsOfObjectiveFunction(Equation p_objectiveFuncti
         coefficientsOfObjectiveFunction[i]=p_objectiveFunction.getCoefficient(i+1);
 }
 
-void SimplexTable::SetNumberVariablesInBase(int numberOfVariables)
+void SimplexTable::PrintVariablesInBase()
 {
-    for(int i = 0; i < numberOfLines; i++)
-        numberVariablesInBase[i] = numberOfVariables + i + 1;
-
     std::cout << "In base actually: ";
     for(auto &elem : numberVariablesInBase)
         std::cout << "x" << elem << " ";
     std::cout << std::endl;
 }
 
+void SimplexTable::SetNumberVariablesInBase(int numberOfVariables)
+{
+    for(int i = 0; i < numberOfLines; i++)
+        numberVariablesInBase[i] = numberOfVariables + i + 1;
+
+    PrintVariablesInBase();
+}
+
+void SimplexTable::RecountAdditionalParameter()
+{
+    CountZj();
+    CountDeltaJ();
+    CountValueOfObjectiveFunction();
+}
+
+
 void SimplexTable::ExecuteSimplexMethod()
 {
-    ExecuteIteration();
+    RecountAdditionalParameter();
+    std::cout << "Is simplex table is optimal: " << std::boolalpha << IsSimplexTableIsOptimal() << std::endl;
+    if(!IsSimplexTableIsOptimal())
+        ExecuteIteration();
+
+
 }
 
 void SimplexTable::PrintSimplexTable()
@@ -95,10 +114,31 @@ void SimplexTable::ExecuteIteration()
     numberOfIteration++;
     std::cout << "Executing iteration number:  " << numberOfIteration << std::endl;
 
-    CountZj();
-    CountDeltaJ();
-    CountValueOfObjectiveFunction();
-    std::cout << "Is simplex table is optimal: " << std::boolalpha << IsSimplexTableIsOptimal() << std::endl;
+    int indexColumnIntoBase = std::distance(deltaJ.begin(),std::max_element(deltaJ.begin(), deltaJ.end()));
+    std::cout <<"Distance: "<< indexColumnIntoBase << std::endl;
+
+    std::vector<float> quotientByColumn;
+    quotientByColumn.resize(numberOfLines);
+    for(int i = 0; i < numberOfLines; i++)
+    {
+        quotientByColumn[i] = simplexTable[i][numberOfColumns-1] / simplexTable[i][indexColumnIntoBase];
+        std::cout << quotientByColumn[i] << " ";
+    }
+    std::cout<<std::endl;
+
+    float minimumToFind = std::numeric_limits<float>::max();
+    for (auto const &elem : quotientByColumn)
+    {
+        if(elem > 0)
+            minimumToFind = std::min(elem,minimumToFind);
+    }
+    std::cout<< "inimum: "<<minimumToFind << std::endl;
+
+    int indexLineOutOfBase = std::distance(quotientByColumn.begin(),std::find(quotientByColumn.begin(),quotientByColumn.end(),minimumToFind));
+    std::cout<< "Out of base: "<<indexLineOutOfBase << std::endl;
+
+    numberVariablesInBase[indexLineOutOfBase] = indexColumnIntoBase;
+    PrintVariablesInBase();
 }
 
 void SimplexTable::CountZj()
