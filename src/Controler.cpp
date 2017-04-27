@@ -6,9 +6,7 @@
 
 void Controler::foo()
 {
-    auto tc = std::make_shared<TermConverter>();
-    auto ec = std::make_shared<EquationConventer>(tc);
-    auto eq = std::make_shared<EquationManager>(ec);
+    auto eq = std::make_shared<EquationManager>();
     auto text = m_view.getTextFromTextEdit();
     eq->convertToEquations(text.toStdString());
     auto text1 = eq->convertEquationsToString();

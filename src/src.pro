@@ -32,7 +32,8 @@ HEADERS += \
     IEquation.hpp \
     EquationManager.hpp \
     Controler.hpp \
-    SimplexTable.hpp
+    SimplexTable.hpp \
+    IEquationManager.hpp
 
 FORMS += \
     mainwindow.ui

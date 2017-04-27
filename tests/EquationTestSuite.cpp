@@ -77,6 +77,18 @@ TEST_F(EquationTestSuite, shouldNotPrintEquationWithZeroCoefficientsIndexLast)
     EXPECT_EQ("-12x1>=0", sut.toString());
 }
 
+TEST_F(EquationTestSuite, giltopedal)
+{
+    sut = Equation({0, -1}, ComparisonOperator::GreaterEqual);
+    EXPECT_EQ("-x1>=0", sut.toString());
+}
+
+TEST_F(EquationTestSuite, giltopedal2)
+{
+    sut = Equation({0, 1}, ComparisonOperator::GreaterEqual);
+    EXPECT_EQ("x1>=0", sut.toString());
+}
+
 TEST_F(EquationTestSuite, shouldNotPrintEquationCoefficientWithCoefficientOne)
 {
     sut = Equation({1, -1, 1, 5}, ComparisonOperator::GreaterEqual);

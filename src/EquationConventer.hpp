@@ -1,12 +1,12 @@
 #pragma once
 #include "IEquationConventer.hpp"
-#include "ITermConverter.hpp"
+#include "TermConverter.hpp"
 #include <memory>
 
 class EquationConventer : public IEquationConventer
 {
 public:
-    EquationConventer(std::shared_ptr<ITermConverter> _termConverter)
+    EquationConventer(std::shared_ptr<ITermConverter> _termConverter = std::make_shared<TermConverter>())
         : m_termConverter(_termConverter)
     {
     }

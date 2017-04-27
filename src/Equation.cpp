@@ -4,7 +4,7 @@
 
 namespace
 {
-ComparisonOperator convertStringToComparasionOperator(const std::string & expression)
+ComparisonOperator convertStringToComparasionOperator(const std::string& expression)
 {
     if (expression == "=")
         return ComparisonOperator::Equal;
@@ -35,7 +35,7 @@ std::string convertComparasionOperatorToString(const ComparisonOperator expressi
 }
 }
 
-std::ostream & operator<<(std::ostream & stream, const Equation & equation)
+std::ostream& operator<<(std::ostream& stream, const Equation& equation)
 {
     for (int i = equation.getIndexOfLastCofficient(); i >= 0; i--)
         stream << equation.getCoefficient(i) << "x" << i << " ";
@@ -77,7 +77,7 @@ int Equation::getIndexOfLastCofficient() const
     return m_coefficients.size() - 1;
 }
 
-bool Equation::operator==(const Equation & equationSecond) const
+bool Equation::operator==(const Equation& equationSecond) const
 {
     if (m_comparisonOperator != equationSecond.getComparisonOperator())
         return false;
@@ -140,6 +140,10 @@ std::string Equation::getFirstElementAsString() const
     if (coefficient == 1)
     {
         return "x" + std::to_string(index);
+    }
+    if (coefficient == -1)
+    {
+        return "-x" + std::to_string(index);
     }
     return std::to_string(m_coefficients[index]) + "x" + std::to_string(index);
 }
