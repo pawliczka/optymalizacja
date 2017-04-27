@@ -28,6 +28,7 @@ SimplexTable::SimplexTable(std::vector<Equation> p_equations)
     numberVariablesInBase.resize(numberOfLines);
     multiplicationZj.resize(numberOfColumns-1);
     deltaJ.resize(numberOfColumns-1);
+    solution.resize(numberOfVariables);
 
     SetNumberVariablesInBase(numberOfVariables);
 }
@@ -67,15 +68,16 @@ void SimplexTable::ExecuteSimplexMethod()
 {
     RecountAdditionalParameter();
     std::cout << "Is simplex table is optimal: " << std::boolalpha << IsSimplexTableIsOptimal() << std::endl;
-    if(!IsSimplexTableIsOptimal())
+    while(!IsSimplexTableIsOptimal())
         ExecuteIteration();
 
-
+    SetSolution();
+    PrintSolution();
 }
 
 void SimplexTable::PrintSimplexTable()
 {
-    int setw_param = 8;
+    int setw_param = 15;
     std::cout << "Columns: " << numberOfColumns << std::endl
               << "Lines: " << numberOfLines << std::endl;
 
@@ -109,11 +111,8 @@ int SimplexTable::howManyVariables(std::vector<Equation> p_equations)
     return numberOfVariables;
 }
 
-void SimplexTable::ExecuteIteration()
+std::pair<int,int> SimplexTable::ReturnPositionOfKeyElement()
 {
-    numberOfIteration++;
-    std::cout << "Executing iteration number:  " << numberOfIteration << std::endl;
-
     int indexColumnIntoBase = std::distance(deltaJ.begin(),std::max_element(deltaJ.begin(), deltaJ.end()));
     std::cout <<"Distance: "<< indexColumnIntoBase << std::endl;
 
@@ -122,9 +121,7 @@ void SimplexTable::ExecuteIteration()
     for(int i = 0; i < numberOfLines; i++)
     {
         quotientByColumn[i] = simplexTable[i][numberOfColumns-1] / simplexTable[i][indexColumnIntoBase];
-        std::cout << quotientByColumn[i] << " ";
     }
-    std::cout<<std::endl;
 
     float minimumToFind = std::numeric_limits<float>::max();
     for (auto const &elem : quotientByColumn)
@@ -132,17 +129,62 @@ void SimplexTable::ExecuteIteration()
         if(elem > 0)
             minimumToFind = std::min(elem,minimumToFind);
     }
-    std::cout<< "inimum: "<<minimumToFind << std::endl;
 
     int indexLineOutOfBase = std::distance(quotientByColumn.begin(),std::find(quotientByColumn.begin(),quotientByColumn.end(),minimumToFind));
-    std::cout<< "Out of base: "<<indexLineOutOfBase << std::endl;
 
-    numberVariablesInBase[indexLineOutOfBase] = indexColumnIntoBase;
+    return std::pair<int,int> (indexLineOutOfBase, indexColumnIntoBase);
+}
+
+void SimplexTable::SetVariableInBase(std::pair<int,int> position)
+{
+    numberVariablesInBase[position.first] = position.second+1;
+}
+
+void SimplexTable::SetSolution()
+{
+    for(int i = 0; i < static_cast<int>(solution.size()); i++)
+        solution[i] = simplexTable[i][numberOfColumns-1];
+}
+
+void SimplexTable::PrintSolution()
+{
+    std::cout << "SOLUTION IS: ";
+    for(auto const &elem : solution)
+        std::cout << elem << " ";
+    std::cout << std::endl;
+}
+
+void SimplexTable::ExecuteIteration()
+{
+    numberOfIteration++;
+    std::cout << "Executing iteration number:  " << numberOfIteration << std::endl;
+
+    std::pair<int,int> positionOfKeyElement = ReturnPositionOfKeyElement();
+    SetVariableInBase(positionOfKeyElement);
     PrintVariablesInBase();
+    //Recount simplexTable
+
+    std::vector<std::vector<float>> simplexTable_new(simplexTable);
+    for (int line = 0; line < numberOfLines; line++)
+    {
+        for (int column = 0; column < numberOfColumns; column++)
+        {
+            if(!(line == positionOfKeyElement.first))
+                simplexTable_new[line][column] = simplexTable[line][column] - ((simplexTable[positionOfKeyElement.first][column]*simplexTable[line][positionOfKeyElement.second])/simplexTable[positionOfKeyElement.first][positionOfKeyElement.second]);
+            else //key line
+                simplexTable_new[line][column] = simplexTable[line][column] / simplexTable[positionOfKeyElement.first][positionOfKeyElement.second];
+        }
+    }
+
+    simplexTable=simplexTable_new;
+    PrintSimplexTable();
+    RecountAdditionalParameter();
+
 }
 
 void SimplexTable::CountZj()
 {
+    std::fill(multiplicationZj.begin(),multiplicationZj.end(),0);
     for(int i = 0; i < static_cast<int>(multiplicationZj.size()); i++)
     {
         for(int j = 0; j < numberOfLines; j++)

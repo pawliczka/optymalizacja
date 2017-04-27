@@ -26,6 +26,8 @@ private:
     std::vector<float> multiplicationZj;
     std::vector<float> deltaJ;
 
+    std::vector<float> solution;
+
     int howManyVariables(std::vector<Equation>); //do wyjebania na zewnatrz
     void ExecuteIteration();
     void CountZj();
@@ -35,5 +37,12 @@ private:
     void RecountAdditionalParameter();
 
     void PrintVariablesInBase();
+    std::pair<int,int> ReturnPositionOfKeyElement();
+    void SetVariableInBase(std::pair<int,int>);
+
+    void SetSolution();
+    void PrintSolution();
+
+
 };
 
