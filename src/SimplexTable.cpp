@@ -146,10 +146,9 @@ void SimplexTable::SetSolution()
     for (int i = 0; i < static_cast<int>(solution.size()); i++)
     {
         indexOfLine = std::distance(
-            numberVariablesInBase.begin(), std::find(numberVariablesInBase.begin(), numberVariablesInBase.end(), i));
+            numberVariablesInBase.begin(), std::find(numberVariablesInBase.begin(), numberVariablesInBase.end(), i+1));
         std::cout << "Index do wziecia: " << indexOfLine << " ";
-        //solution[i] = simplexTable[indexOfLine - 1][numberOfColumns - 1];
-        solution[i] = simplexTable[i][numberOfColumns - 1];
+        solution[i] = simplexTable[indexOfLine][numberOfColumns - 1];
     }
 
 }
