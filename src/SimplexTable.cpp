@@ -92,9 +92,13 @@ int SimplexTable::howManyVariables(std::vector<Equation> p_equations)
 
 void SimplexTable::ExecuteIteration()
 {
+    numberOfIteration++;
+    std::cout << "Executing iteration number:  " << numberOfIteration << std::endl;
+
     CountZj();
     CountDeltaJ();
     CountValueOfObjectiveFunction();
+    std::cout << "Is simplex table is optimal: " << std::boolalpha << IsSimplexTableIsOptimal() << std::endl;
 }
 
 void SimplexTable::CountZj()
@@ -128,4 +132,14 @@ void SimplexTable::CountValueOfObjectiveFunction()
         valueOfObjectiveFunction = coefficientsOfObjectiveFunction[numberVariablesInBase[j]-1] * simplexTable[j][numberOfColumns-1];
 
     std::cout << "Funkcja celu: " << valueOfObjectiveFunction << std::endl;
+}
+
+bool SimplexTable::IsSimplexTableIsOptimal()
+{
+   for (auto const &elem : deltaJ)
+   {
+        if(elem > 0)
+            return false;
+   }
+   return true;
 }

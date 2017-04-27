@@ -18,6 +18,7 @@ private:
     int numberOfLines = {0};
 
     int valueOfObjectiveFunction = {0};
+    int numberOfIteration = {0};
 
     std::vector<std::vector<float>> simplexTable;
     std::vector<float> coefficientsOfObjectiveFunction;
@@ -30,5 +31,6 @@ private:
     void CountZj();
     void CountDeltaJ();
     void CountValueOfObjectiveFunction();
+    bool IsSimplexTableIsOptimal();
 };
 
