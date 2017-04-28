@@ -58,3 +58,18 @@ TEST_F(SimplexTableTestSuite, ExampleFromYouTube1)
     sut.ExecuteSimplexMethod();
 
 }
+
+TEST_F(SimplexTableTestSuite, ExampleFromYouTube2)
+{
+    std::vector<Equation> equations = {
+        {{-24, 3, 4}, ComparisonOperator::GreaterEqual},
+        {{-22, 2, 5}, ComparisonOperator::GreaterEqual}};
+
+    Equation objectiveFunction = {{0, 2, 3}, ComparisonOperator::Equal};
+    //sstd::cout << equations[0] << std::endl << equations[1] << std::endl << equations[2] << std::endl;
+    SimplexTable sut(equations);
+    sut.SetCoefficientsOfObjectiveFunction(objectiveFunction);
+    sut.PrintSimplexTable();
+    sut.ExecuteSimplexMethod();
+
+}
