@@ -221,9 +221,11 @@ void SimplexTable::CountDeltaJ()
 
 void SimplexTable::CountValueOfObjectiveFunction()
 {
+    valueOfObjectiveFunction = 0;
     for (int j = 0; j < numberOfLines; j++)
-        valueOfObjectiveFunction =
+        valueOfObjectiveFunction +=
             coefficientsOfObjectiveFunction[numberVariablesInBase[j] - 1] * simplexTable[j][numberOfColumns - 1];
+
 
     std::cout << "Funkcja celu: " << valueOfObjectiveFunction << std::endl;
 }
