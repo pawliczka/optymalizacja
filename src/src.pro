@@ -29,7 +29,6 @@ HEADERS += \
     TermConverter.hpp \
     Equation.hpp \
     ComparisonOperator.hpp \
-    IEquation.hpp \
     EquationManager.hpp \
     Controler.hpp \
     SimplexTable.hpp \

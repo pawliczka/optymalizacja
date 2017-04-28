@@ -22,3 +22,13 @@ std::string EquationManager::convertEquationsToString() const
     });
     return expresionStr;
 }
+
+const Equation & EquationManager::getObjectiveFunction() const
+{
+    return *m_equationVector[0];
+}
+
+const Equation & EquationManager::getConstraintFunction(const int number) const
+{
+    return *m_equationVector[number+1];
+}

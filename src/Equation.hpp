@@ -1,6 +1,5 @@
 #pragma once
 #include "ComparisonOperator.hpp"
-#include "IEquation.hpp"
 #include <limits>
 #include <vector>
 #include <string>
@@ -10,7 +9,7 @@ using Coefficient = int;
 using Index = int;
 using Term = std::pair<Coefficient, Index>;
 
-class Equation: public IEquation
+class Equation
 {
 public:
     Equation() {}

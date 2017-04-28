@@ -1,3 +1,4 @@
+#pragma once
 #include "IEquationConventer.hpp"
 #include <gmock/gmock.h>
 

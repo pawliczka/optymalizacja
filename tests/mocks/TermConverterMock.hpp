@@ -1,3 +1,4 @@
+#pragma once
 #include "ITermConverter.hpp"
 #include <gmock/gmock.h>
 
