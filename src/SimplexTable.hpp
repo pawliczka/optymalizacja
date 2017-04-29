@@ -13,6 +13,7 @@ public:
     void SetNumberVariablesInBase(int numberOfVariables);
     void ExecuteSimplexMethod();
 
+
 private:
     int numberOfColumns = {0};
     int numberOfLines = {0};

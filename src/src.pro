@@ -19,7 +19,8 @@ SOURCES += \
     Equation.cpp \
     EquationManager.cpp \
     Controler.cpp \
-    SimplexTable.cpp
+    SimplexTable.cpp \
+    SimplexSolver.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -32,7 +33,8 @@ HEADERS += \
     EquationManager.hpp \
     Controler.hpp \
     SimplexTable.hpp \
-    IEquationManager.hpp
+    IEquationManager.hpp \
+    SimplexSolver.hpp
 
 FORMS += \
     mainwindow.ui
