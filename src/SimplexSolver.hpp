@@ -6,8 +6,8 @@
 class SimplexSolver
 {
 public:
-    SimplexSolver(const std::vector<Equation> &);
-    void setCoefficientsOfObjectiveFunction(const Equation &);
+    SimplexSolver(const std::vector<Equation>&);
+    void setCoefficientsOfObjectiveFunction(const Equation&);
     void executePrimalSimplexMethod();
     void printSimplexTableWithCalculations() const;
 
@@ -21,7 +21,7 @@ private:
     void setNumberVariablesInBase(int);
     void printVariablesInBase() const;
     std::pair<int, int> getPositionOfKeyElement() const;
-    void setVariableInBase(const std::pair<int, int> &);
+    void setVariableInBase(const std::pair<int, int>&);
     void setSolution();
     void printSolution() const;
 
