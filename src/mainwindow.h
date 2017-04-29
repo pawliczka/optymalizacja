@@ -24,6 +24,11 @@ public:
 
 private:
     Ui::MainWindow* ui;
+    QString fileName;
+
+public slots:
+    void closeAplication();
+    void openFile();
 };
 
 #endif // MAINWINDOW_H
