@@ -28,7 +28,7 @@ SimplexTable::SimplexTable(std::vector<Equation> p_equations)
 }
 
 
-void SimplexTable::PrintSimplexTable(int setw_param)
+void SimplexTable::PrintSimplexTable(int setw_param) const
 {
     for (int i = 0; i < numberOfLines; i++)
     {
@@ -50,17 +50,17 @@ int SimplexTable::howManyVariables(std::vector<Equation> p_equations)
     return numberOfVariables;
 }
 
-int SimplexTable::ReturnNumberOfColumns()
+int SimplexTable::ReturnNumberOfColumns() const
 {
     return numberOfColumns;
 }
 
-int SimplexTable::ReturnNumberOfLines()
+int SimplexTable::ReturnNumberOfLines() const
 {
     return numberOfLines;
 }
 
-int SimplexTable::ReturnNumberOfVariables()
+int SimplexTable::ReturnNumberOfVariables() const
 {
     return numberOfVariables;
 }

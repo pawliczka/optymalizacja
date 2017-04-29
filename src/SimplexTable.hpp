@@ -9,11 +9,11 @@ class SimplexTable
 public:
     SimplexTable();
     SimplexTable(std::vector<Equation>);
-    void PrintSimplexTable(int);
+    void PrintSimplexTable(int) const;
 
-    int ReturnNumberOfColumns();
-    int ReturnNumberOfLines();
-    int ReturnNumberOfVariables();
+    int ReturnNumberOfColumns() const;
+    int ReturnNumberOfLines() const;
+    int ReturnNumberOfVariables() const;
 
     float ReturnElement(int, int) const;
     float SetElement(int, int, float);
