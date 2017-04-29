@@ -1,35 +1,33 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-mainWindow::mainWindow(QWidget* parent)
-    : QDialog(parent)
-    , ui(new Ui::mainWindow)
+MainWindow::MainWindow(QWidget* parent)
+    : QMainWindow(parent)
+    , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    show();
 }
 
-mainWindow::~mainWindow()
+MainWindow::~MainWindow()
 {
     delete ui;
 }
 
-QPushButton *mainWindow::getPushBtn()
+QPushButton* MainWindow::getCalcBtn() const
 {
-    return ui->btn_go;
+    return ui->btn_calc;
 }
 
-QString mainWindow::getTextFromTextEdit()
-{
-    return ui->text_edit->toPlainText();
-}
-
-QString mainWindow::getTextFromTextObjFun()
+QString MainWindow::getTextFromTextObjFun() const
 {
     return ui->text_objFun->toPlainText();
 }
 
-void mainWindow::setTextInTextDisplay(QString text)
+QString MainWindow::getTextFromTextConFun() const
 {
-    ui->text_display->setPlainText(text);
+    return ui->text_conFun->toPlainText();
+}
+void MainWindow::setTextToDispLogger(QString text)
+{
+    ui->disp_logger->setPlainText(text);
 }

@@ -6,15 +6,15 @@
 class Controler : public QObject
 {
 public:
-    Controler(mainWindow& view)
+    Controler(MainWindow& view)
         : m_view(view)
     {
-        connect(m_view.getPushBtn(), &QPushButton::clicked, this, &Controler::foo);
+        connect(m_view.getCalcBtn(), &QPushButton::clicked, this, &Controler::foo);
     }
 
     slots public:
     void foo();
 
 private:
-    mainWindow& m_view;
+    MainWindow& m_view;
 };

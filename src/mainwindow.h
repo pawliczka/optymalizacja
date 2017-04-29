@@ -1,27 +1,29 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QDialog>
+#include <QMainWindow>
+#include <QPushButton>
+#include <QString>
 
 namespace Ui
 {
-class mainWindow;
+class MainWindow;
 }
 
-class mainWindow : public QDialog
+class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit mainWindow(QWidget * parent = 0);
-    ~mainWindow();
-    QPushButton * getPushBtn();
-    QString getTextFromTextEdit();
-    QString getTextFromTextObjFun();
-    void setTextInTextDisplay(QString text);
+    explicit MainWindow(QWidget* parent = 0);
+    ~MainWindow();
+    QPushButton* getCalcBtn() const;
+    QString getTextFromTextObjFun() const;
+    QString getTextFromTextConFun() const;
+    void setTextToDispLogger(QString text);
 
 private:
-    Ui::mainWindow * ui;
+    Ui::MainWindow* ui;
 };
 
 #endif // MAINWINDOW_H
