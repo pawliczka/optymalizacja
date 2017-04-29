@@ -12,17 +12,12 @@ class SimplexSolverTestSuite : public testing::Test
 
 TEST_F(SimplexSolverTestSuite, shouldReturnTwoVariablesWhenReceivingThreeEquationsWithTwoVariables)
 {
-    //x1 < 2
-    //x2 < 3
-    //x1+x2 < 4
-
     std::vector<Equation> equations = {
         {{-2, 1}, ComparisonOperator::GreaterEqual},
         {{-3, 0, 1}, ComparisonOperator::GreaterEqual},
         {{-2, 1, 1}, ComparisonOperator::GreaterEqual}};
 
     Equation objectiveFunction = {{0, 32, 21}, ComparisonOperator::Equal};
-    //sstd::cout << equations[0] << std::endl << equations[1] << std::endl << equations[2] << std::endl;
     SimplexSolver sut(equations);
     sut.setCoefficientsOfObjectiveFunction(objectiveFunction);
     sut.printSimplexTableWithCalculations();
@@ -36,7 +31,6 @@ TEST_F(SimplexSolverTestSuite, ExampleFromYouTube)
         {{-61, 9, 5}, ComparisonOperator::GreaterEqual}};
 
     Equation objectiveFunction = {{0, 340, 404}, ComparisonOperator::Equal};
-    //sstd::cout << equations[0] << std::endl << equations[1] << std::endl << equations[2] << std::endl;
     SimplexSolver sut(equations);
     sut.setCoefficientsOfObjectiveFunction(objectiveFunction);
     sut.printSimplexTableWithCalculations();
@@ -52,7 +46,6 @@ TEST_F(SimplexSolverTestSuite, ExampleFromSzlachcicLecture)
         {{-21, 6, 2}, ComparisonOperator::GreaterEqual}};
 
     Equation objectiveFunction = {{0, 2, 1}, ComparisonOperator::Equal};
-    //sstd::cout << equations[0] << std::endl << equations[1] << std::endl << equations[2] << std::endl;
     SimplexSolver sut(equations);
     sut.setCoefficientsOfObjectiveFunction(objectiveFunction);
     sut.printSimplexTableWithCalculations();
@@ -67,10 +60,22 @@ TEST_F(SimplexSolverTestSuite, ExampleFromYouTube2)
         {{-22, 2, 5}, ComparisonOperator::GreaterEqual}};
 
     Equation objectiveFunction = {{0, 2, 3}, ComparisonOperator::Equal};
-    //sstd::cout << equations[0] << std::endl << equations[1] << std::endl << equations[2] << std::endl;
     SimplexSolver sut(equations);
     sut.setCoefficientsOfObjectiveFunction(objectiveFunction);
     sut.printSimplexTableWithCalculations();
     sut.executePrimalSimplexMethod();
+}
 
+TEST_F(SimplexSolverTestSuite, sz1)
+{
+    std::vector<Equation> equations = {
+        {{-3, -2, 1}, ComparisonOperator::GreaterEqual},
+        {{-6, 1, 1}, ComparisonOperator::GreaterEqual},
+        {{-20, 5, 2}, ComparisonOperator::GreaterEqual}};
+
+    Equation objectiveFunction = {{0, 1, -1}, ComparisonOperator::Equal};
+    SimplexSolver sut(equations);
+    sut.setCoefficientsOfObjectiveFunction(objectiveFunction);
+    sut.printSimplexTableWithCalculations();
+    sut.executePrimalSimplexMethod();
 }
