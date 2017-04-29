@@ -7,23 +7,23 @@ class SimplexSolver
 {
 public:
     SimplexSolver(const std::vector<Equation> &);
-    void SetCoefficientsOfObjectiveFunction(const Equation &);
-    void ExecutePrimalSimplexMethod();
-    void PrintSimplexTableWithCalculations();
+    void setCoefficientsOfObjectiveFunction(const Equation &);
+    void executePrimalSimplexMethod();
+    void printSimplexTableWithCalculations() const;
 
 private:
-    void ExecutePrimalIteration();
-    bool IsSimplexTableIsOptimal();
-    void CountZj();
-    void CountDeltaJ();
-    void CountValueOfObjectiveFunction();
-    void RecountAdditionalParameter();
-    void SetNumberVariablesInBase(int);
-    void PrintVariablesInBase();
-    std::pair<int, int> ReturnPositionOfKeyElement();
-    void SetVariableInBase(const std::pair<int, int> &);
-    void SetSolution();
-    void PrintSolution();
+    void executePrimalIteration();
+    bool isSimplexTableIsOptimal() const;
+    void countZj();
+    void countDeltaJ();
+    void countValueOfObjectiveFunction();
+    void recountAdditionalParameter();
+    void setNumberVariablesInBase(int);
+    void printVariablesInBase() const;
+    std::pair<int, int> getPositionOfKeyElement() const;
+    void setVariableInBase(const std::pair<int, int> &);
+    void setSolution();
+    void printSolution() const;
 
     int numberOfIteration = 0;
     float valueOfObjectiveFunction = 0;

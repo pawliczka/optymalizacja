@@ -24,9 +24,9 @@ TEST_F(SimplexSolverTestSuite, shouldReturnTwoVariablesWhenReceivingThreeEquatio
     Equation objectiveFunction = {{0, 32, 21}, ComparisonOperator::Equal};
     //sstd::cout << equations[0] << std::endl << equations[1] << std::endl << equations[2] << std::endl;
     SimplexSolver sut(equations);
-    sut.SetCoefficientsOfObjectiveFunction(objectiveFunction);
-    sut.PrintSimplexTableWithCalculations();
-    sut.ExecutePrimalSimplexMethod();
+    sut.setCoefficientsOfObjectiveFunction(objectiveFunction);
+    sut.printSimplexTableWithCalculations();
+    sut.executePrimalSimplexMethod();
 }
 
 TEST_F(SimplexSolverTestSuite, ExampleFromYouTube)
@@ -38,9 +38,9 @@ TEST_F(SimplexSolverTestSuite, ExampleFromYouTube)
     Equation objectiveFunction = {{0, 340, 404}, ComparisonOperator::Equal};
     //sstd::cout << equations[0] << std::endl << equations[1] << std::endl << equations[2] << std::endl;
     SimplexSolver sut(equations);
-    sut.SetCoefficientsOfObjectiveFunction(objectiveFunction);
-    sut.PrintSimplexTableWithCalculations();
-    sut.ExecutePrimalSimplexMethod();
+    sut.setCoefficientsOfObjectiveFunction(objectiveFunction);
+    sut.printSimplexTableWithCalculations();
+    sut.executePrimalSimplexMethod();
 }
 
 
@@ -54,9 +54,9 @@ TEST_F(SimplexSolverTestSuite, ExampleFromSzlachcicLecture)
     Equation objectiveFunction = {{0, 2, 1}, ComparisonOperator::Equal};
     //sstd::cout << equations[0] << std::endl << equations[1] << std::endl << equations[2] << std::endl;
     SimplexSolver sut(equations);
-    sut.SetCoefficientsOfObjectiveFunction(objectiveFunction);
-    sut.PrintSimplexTableWithCalculations();
-    sut.ExecutePrimalSimplexMethod();
+    sut.setCoefficientsOfObjectiveFunction(objectiveFunction);
+    sut.printSimplexTableWithCalculations();
+    sut.executePrimalSimplexMethod();
 
 }
 
@@ -69,8 +69,8 @@ TEST_F(SimplexSolverTestSuite, ExampleFromYouTube2)
     Equation objectiveFunction = {{0, 2, 3}, ComparisonOperator::Equal};
     //sstd::cout << equations[0] << std::endl << equations[1] << std::endl << equations[2] << std::endl;
     SimplexSolver sut(equations);
-    sut.SetCoefficientsOfObjectiveFunction(objectiveFunction);
-    sut.PrintSimplexTableWithCalculations();
-    sut.ExecutePrimalSimplexMethod();
+    sut.setCoefficientsOfObjectiveFunction(objectiveFunction);
+    sut.printSimplexTableWithCalculations();
+    sut.executePrimalSimplexMethod();
 
 }

@@ -9,10 +9,10 @@ SimplexSolver::SimplexSolver(const std::vector<Equation>& p_equations)
     multiplicationZj.resize(simplexTable.getNumberOfColumns() - 1);
     numberVariablesInBase.resize(simplexTable.getNumberOfLines());
     solution.resize(simplexTable.getNumberOfVariables());
-    SetNumberVariablesInBase(simplexTable.getNumberOfVariables());
+    setNumberVariablesInBase(simplexTable.getNumberOfVariables());
 }
 
-void SimplexSolver::SetCoefficientsOfObjectiveFunction(const Equation& p_objectiveFunction)
+void SimplexSolver::setCoefficientsOfObjectiveFunction(const Equation& p_objectiveFunction)
 {
     coefficientsOfObjectiveFunction.resize(simplexTable.getNumberOfColumns() - 1, 0);
     for (int i = 0; i < simplexTable.getNumberOfColumns() - simplexTable.getNumberOfLines() - 1; i++)
@@ -23,18 +23,18 @@ void SimplexSolver::SetCoefficientsOfObjectiveFunction(const Equation& p_objecti
     std::cout << std::endl;
 }
 
-void SimplexSolver::ExecutePrimalSimplexMethod()
+void SimplexSolver::executePrimalSimplexMethod()
 {
-    RecountAdditionalParameter();
-    std::cout << "Is simplex table is optimal: " << std::boolalpha << IsSimplexTableIsOptimal() << std::endl;
-    while (!IsSimplexTableIsOptimal())
-        ExecutePrimalIteration();
+    recountAdditionalParameter();
+    std::cout << "Is simplex table is optimal: " << std::boolalpha << isSimplexTableIsOptimal() << std::endl;
+    while (!isSimplexTableIsOptimal())
+        executePrimalIteration();
 
-    SetSolution();
-    PrintSolution();
+    setSolution();
+    printSolution();
 }
 
-void SimplexSolver::PrintSimplexTableWithCalculations()
+void SimplexSolver::printSimplexTableWithCalculations() const
 {
     int setw_param = 15;
 
@@ -54,14 +54,14 @@ void SimplexSolver::PrintSimplexTableWithCalculations()
     simplexTable.PrintSimplexTable(setw_param);
 }
 
-void SimplexSolver::ExecutePrimalIteration()
+void SimplexSolver::executePrimalIteration()
 {
     numberOfIteration++;
     std::cout << "Executing iteration number:  " << numberOfIteration << std::endl;
 
-    std::pair<int, int> positionOfKeyElement = ReturnPositionOfKeyElement();
-    SetVariableInBase(positionOfKeyElement);
-    PrintVariablesInBase();
+    std::pair<int, int> positionOfKeyElement = getPositionOfKeyElement();
+    setVariableInBase(positionOfKeyElement);
+    printVariablesInBase();
     // Recount simplexTable
 
     SimplexTable simplexTable_new(simplexTable);
@@ -83,11 +83,11 @@ void SimplexSolver::ExecutePrimalIteration()
     }
 
     simplexTable = simplexTable_new;
-    PrintSimplexTableWithCalculations();
-    RecountAdditionalParameter();
+    printSimplexTableWithCalculations();
+    recountAdditionalParameter();
 }
 
-bool SimplexSolver::IsSimplexTableIsOptimal()
+bool SimplexSolver::isSimplexTableIsOptimal() const
 {
     for (auto const& elem : deltaJ)
     {
@@ -97,7 +97,7 @@ bool SimplexSolver::IsSimplexTableIsOptimal()
     return true;
 }
 
-void SimplexSolver::CountZj()
+void SimplexSolver::countZj()
 {
     std::fill(multiplicationZj.begin(), multiplicationZj.end(), 0);
     for (int i = 0; i < static_cast<int>(multiplicationZj.size()); i++)
@@ -113,7 +113,7 @@ void SimplexSolver::CountZj()
     std::cout << std::endl;
 }
 
-void SimplexSolver::CountDeltaJ()
+void SimplexSolver::countDeltaJ()
 {
     for (int i = 0; i < static_cast<int>(deltaJ.size()); i++)
         deltaJ[i] = coefficientsOfObjectiveFunction[i] - multiplicationZj[i];
@@ -124,7 +124,7 @@ void SimplexSolver::CountDeltaJ()
     std::cout << std::endl;
 }
 
-void SimplexSolver::CountValueOfObjectiveFunction()
+void SimplexSolver::countValueOfObjectiveFunction()
 {
     valueOfObjectiveFunction = 0;
     for (int j = 0; j < simplexTable.getNumberOfLines(); j++)
@@ -134,22 +134,22 @@ void SimplexSolver::CountValueOfObjectiveFunction()
     std::cout << "Funkcja celu: " << valueOfObjectiveFunction << std::endl;
 }
 
-void SimplexSolver::RecountAdditionalParameter()
+void SimplexSolver::recountAdditionalParameter()
 {
-    CountZj();
-    CountDeltaJ();
-    CountValueOfObjectiveFunction();
+    countZj();
+    countDeltaJ();
+    countValueOfObjectiveFunction();
 }
 
-void SimplexSolver::SetNumberVariablesInBase(int numberOfVariables)
+void SimplexSolver::setNumberVariablesInBase(int numberOfVariables)
 {
     for (int i = 0; i < simplexTable.getNumberOfLines(); i++)
         numberVariablesInBase[i] = numberOfVariables + i + 1;
 
-    PrintVariablesInBase();
+    printVariablesInBase();
 }
 
-void SimplexSolver::PrintVariablesInBase()
+void SimplexSolver::printVariablesInBase() const
 {
     std::cout << "In base actually: ";
     for (auto& elem : numberVariablesInBase)
@@ -157,7 +157,7 @@ void SimplexSolver::PrintVariablesInBase()
     std::cout << std::endl;
 }
 
-std::pair<int, int> SimplexSolver::ReturnPositionOfKeyElement()
+std::pair<int, int> SimplexSolver::getPositionOfKeyElement() const
 {
     int indexColumnIntoBase = std::distance(deltaJ.begin(), std::max_element(deltaJ.begin(), deltaJ.end()));
     std::cout << "Distance: " << indexColumnIntoBase << std::endl;
@@ -183,12 +183,12 @@ std::pair<int, int> SimplexSolver::ReturnPositionOfKeyElement()
     return std::pair<int, int>(indexLineOutOfBase, indexColumnIntoBase);
 }
 
-void SimplexSolver::SetVariableInBase(const std::pair<int, int>& position)
+void SimplexSolver::setVariableInBase(const std::pair<int, int>& position)
 {
     numberVariablesInBase[position.first] = position.second + 1;
 }
 
-void SimplexSolver::SetSolution()
+void SimplexSolver::setSolution()
 {
     int indexOfLine = 0;
     for (int i = 0; i < static_cast<int>(solution.size()); i++)
@@ -200,7 +200,7 @@ void SimplexSolver::SetSolution()
     }
 }
 
-void SimplexSolver::PrintSolution()
+void SimplexSolver::printSolution() const
 {
     std::cout << "SOLUTION IS: ";
     for (auto const& elem : solution)
