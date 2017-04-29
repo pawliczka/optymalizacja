@@ -8,28 +8,21 @@ class SimplexTable
 {
 public:
     SimplexTable();
-    SimplexTable(std::vector<Equation>);
+    SimplexTable(const std::vector<Equation> &);
     void PrintSimplexTable(int) const;
-
-    int ReturnNumberOfColumns() const;
-    int ReturnNumberOfLines() const;
-    int ReturnNumberOfVariables() const;
-
-    float ReturnElement(int, int) const;
-    float SetElement(int, int, float);
+    int getNumberOfColumns() const;
+    int getNumberOfLines() const;
+    int getNumberOfVariables() const;
+    float getElement(int, int) const;
+    void setElement(int, int, float);
 
 private:
-    int numberOfColumns = {0};
-    int numberOfLines = {0};
-    int numberOfVariables = {0};
     std::vector<std::vector<float>> simplexTable;
+    int howManyVariables(const std::vector<Equation> &); //do wyjebania na zewnatrz
+    void fillSimplexTable(const std::vector<Equation> &p_equations);
 
-    int howManyVariables(std::vector<Equation>); //do wyjebania na zewnatrz
-
-
-
-
-
-
+    int numberOfColumns = 0;
+    int numberOfLines = 0;
+    int numberOfVariables = 0;
 };
 

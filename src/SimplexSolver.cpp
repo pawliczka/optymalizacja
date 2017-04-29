@@ -2,20 +2,20 @@
 #include <iostream>
 #include <iomanip>
 
-SimplexSolver::SimplexSolver(std::vector<Equation> p_equations)
+SimplexSolver::SimplexSolver(const std::vector<Equation>& p_equations)
 {
     simplexTable = SimplexTable(p_equations);
-    deltaJ.resize(simplexTable.ReturnNumberOfColumns() - 1);
-    multiplicationZj.resize(simplexTable.ReturnNumberOfColumns() - 1);
-    numberVariablesInBase.resize(simplexTable.ReturnNumberOfLines());
-    solution.resize(simplexTable.ReturnNumberOfVariables());
-    SetNumberVariablesInBase(simplexTable.ReturnNumberOfVariables());
+    deltaJ.resize(simplexTable.getNumberOfColumns() - 1);
+    multiplicationZj.resize(simplexTable.getNumberOfColumns() - 1);
+    numberVariablesInBase.resize(simplexTable.getNumberOfLines());
+    solution.resize(simplexTable.getNumberOfVariables());
+    SetNumberVariablesInBase(simplexTable.getNumberOfVariables());
 }
 
-void SimplexSolver::SetCoefficientsOfObjectiveFunction(Equation p_objectiveFunction)
+void SimplexSolver::SetCoefficientsOfObjectiveFunction(const Equation& p_objectiveFunction)
 {
-    coefficientsOfObjectiveFunction.resize(simplexTable.ReturnNumberOfColumns() - 1, 0);
-    for (int i = 0; i < simplexTable.ReturnNumberOfColumns() - simplexTable.ReturnNumberOfLines() - 1; i++)
+    coefficientsOfObjectiveFunction.resize(simplexTable.getNumberOfColumns() - 1, 0);
+    for (int i = 0; i < simplexTable.getNumberOfColumns() - simplexTable.getNumberOfLines() - 1; i++)
     {
         coefficientsOfObjectiveFunction[i] = p_objectiveFunction.getCoefficient(i + 1);
         std::cout << coefficientsOfObjectiveFunction[i] << " ";
@@ -38,20 +38,20 @@ void SimplexSolver::PrintSimplexTableWithCalculations()
 {
     int setw_param = 15;
 
-    std::cout << "Columns: " << simplexTable.ReturnNumberOfColumns() << std::endl << "Lines: " << simplexTable.ReturnNumberOfLines() << std::endl;
+    std::cout << "Columns: " << simplexTable.getNumberOfColumns() << std::endl
+              << "Lines: " << simplexTable.getNumberOfLines() << std::endl;
 
     for (auto& elem : coefficientsOfObjectiveFunction)
         std::cout << std::setw(setw_param) << elem;
 
     std::cout << std::endl;
 
-    for (int i = 1; i < simplexTable.ReturnNumberOfColumns(); i++)
+    for (int i = 1; i < simplexTable.getNumberOfColumns(); i++)
         std::cout << std::setw(setw_param - 1) << "x" << i;
 
     std::cout << std::setw(setw_param) << "Bj" << std::endl;
 
     simplexTable.PrintSimplexTable(setw_param);
-
 }
 
 void SimplexSolver::ExecutePrimalIteration()
@@ -65,18 +65,20 @@ void SimplexSolver::ExecutePrimalIteration()
     // Recount simplexTable
 
     SimplexTable simplexTable_new(simplexTable);
-    for (int line = 0; line < simplexTable.ReturnNumberOfLines(); line++)
+    for (int line = 0; line < simplexTable.getNumberOfLines(); line++)
     {
-        for (int column = 0; column < simplexTable.ReturnNumberOfColumns(); column++)
+        for (int column = 0; column < simplexTable.getNumberOfColumns(); column++)
         {
             if (!(line == positionOfKeyElement.first))
-                simplexTable_new.SetElement(line,column,
-                    simplexTable.ReturnElement(line,column) -
-                    ((simplexTable.ReturnElement(positionOfKeyElement.first, column) *
-                         simplexTable.ReturnElement(line, positionOfKeyElement.second)) /
-                        simplexTable.ReturnElement(positionOfKeyElement.first, positionOfKeyElement.second)));
+                simplexTable_new.setElement(line, column,
+                    simplexTable.getElement(line, column) -
+                        ((simplexTable.getElement(positionOfKeyElement.first, column) *
+                             simplexTable.getElement(line, positionOfKeyElement.second)) /
+                            simplexTable.getElement(positionOfKeyElement.first, positionOfKeyElement.second)));
             else // key line
-                simplexTable_new.SetElement(line,column, simplexTable.ReturnElement(line,column) / simplexTable.ReturnElement(positionOfKeyElement.first, positionOfKeyElement.second));
+                simplexTable_new.setElement(
+                    line, column, simplexTable.getElement(line, column) /
+                                      simplexTable.getElement(positionOfKeyElement.first, positionOfKeyElement.second));
         }
     }
 
@@ -100,8 +102,9 @@ void SimplexSolver::CountZj()
     std::fill(multiplicationZj.begin(), multiplicationZj.end(), 0);
     for (int i = 0; i < static_cast<int>(multiplicationZj.size()); i++)
     {
-        for (int j = 0; j < simplexTable.ReturnNumberOfLines(); j++)
-            multiplicationZj[i] += coefficientsOfObjectiveFunction[numberVariablesInBase[j] - 1] * simplexTable.ReturnElement(j, i);
+        for (int j = 0; j < simplexTable.getNumberOfLines(); j++)
+            multiplicationZj[i] +=
+                coefficientsOfObjectiveFunction[numberVariablesInBase[j] - 1] * simplexTable.getElement(j, i);
     }
 
     std::cout << "Zj: ";
@@ -124,9 +127,9 @@ void SimplexSolver::CountDeltaJ()
 void SimplexSolver::CountValueOfObjectiveFunction()
 {
     valueOfObjectiveFunction = 0;
-    for (int j = 0; j < simplexTable.ReturnNumberOfLines(); j++)
-        valueOfObjectiveFunction +=
-            coefficientsOfObjectiveFunction[numberVariablesInBase[j] - 1] * simplexTable.ReturnElement(j, simplexTable.ReturnNumberOfColumns() - 1);
+    for (int j = 0; j < simplexTable.getNumberOfLines(); j++)
+        valueOfObjectiveFunction += coefficientsOfObjectiveFunction[numberVariablesInBase[j] - 1] *
+                                    simplexTable.getElement(j, simplexTable.getNumberOfColumns() - 1);
 
     std::cout << "Funkcja celu: " << valueOfObjectiveFunction << std::endl;
 }
@@ -140,7 +143,7 @@ void SimplexSolver::RecountAdditionalParameter()
 
 void SimplexSolver::SetNumberVariablesInBase(int numberOfVariables)
 {
-    for (int i = 0; i < simplexTable.ReturnNumberOfLines(); i++)
+    for (int i = 0; i < simplexTable.getNumberOfLines(); i++)
         numberVariablesInBase[i] = numberOfVariables + i + 1;
 
     PrintVariablesInBase();
@@ -160,10 +163,11 @@ std::pair<int, int> SimplexSolver::ReturnPositionOfKeyElement()
     std::cout << "Distance: " << indexColumnIntoBase << std::endl;
 
     std::vector<float> quotientByColumn;
-    quotientByColumn.resize(simplexTable.ReturnNumberOfLines());
-    for (int i = 0; i < simplexTable.ReturnNumberOfLines(); i++)
+    quotientByColumn.resize(simplexTable.getNumberOfLines());
+    for (int i = 0; i < simplexTable.getNumberOfLines(); i++)
     {
-        quotientByColumn[i] = simplexTable.ReturnElement(i, simplexTable.ReturnNumberOfColumns() - 1) / simplexTable.ReturnElement(i, indexColumnIntoBase);
+        quotientByColumn[i] = simplexTable.getElement(i, simplexTable.getNumberOfColumns() - 1) /
+                              simplexTable.getElement(i, indexColumnIntoBase);
     }
 
     float minimumToFind = std::numeric_limits<float>::max();
@@ -179,7 +183,7 @@ std::pair<int, int> SimplexSolver::ReturnPositionOfKeyElement()
     return std::pair<int, int>(indexLineOutOfBase, indexColumnIntoBase);
 }
 
-void SimplexSolver::SetVariableInBase(std::pair<int, int> position)
+void SimplexSolver::SetVariableInBase(const std::pair<int, int>& position)
 {
     numberVariablesInBase[position.first] = position.second + 1;
 }
@@ -189,10 +193,10 @@ void SimplexSolver::SetSolution()
     int indexOfLine = 0;
     for (int i = 0; i < static_cast<int>(solution.size()); i++)
     {
-        indexOfLine = std::distance(
-            numberVariablesInBase.begin(), std::find(numberVariablesInBase.begin(), numberVariablesInBase.end(), i+1));
+        indexOfLine = std::distance(numberVariablesInBase.begin(),
+            std::find(numberVariablesInBase.begin(), numberVariablesInBase.end(), i + 1));
         std::cout << "Index do wziecia: " << indexOfLine << " ";
-        solution[i] = simplexTable.ReturnElement(indexOfLine, simplexTable.ReturnNumberOfColumns() - 1);
+        solution[i] = simplexTable.getElement(indexOfLine, simplexTable.getNumberOfColumns() - 1);
     }
 }
 
@@ -203,4 +207,3 @@ void SimplexSolver::PrintSolution()
         std::cout << elem << " ";
     std::cout << std::endl;
 }
-

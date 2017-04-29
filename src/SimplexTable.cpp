@@ -7,13 +7,8 @@ SimplexTable::SimplexTable()
 {
 }
 
-SimplexTable::SimplexTable(std::vector<Equation> p_equations)
+void SimplexTable::fillSimplexTable(const std::vector<Equation>& p_equations)
 {
-    numberOfVariables = howManyVariables(p_equations);
-    std::cout << numberOfVariables << std::endl;
-    numberOfLines = static_cast<int>(p_equations.size());
-    numberOfColumns = (numberOfVariables + 1) + numberOfLines;
-
     simplexTable.resize(numberOfLines, std::vector<float>(numberOfColumns, 0));
 
     for (int i = 0; i < numberOfLines; i++)
@@ -27,6 +22,14 @@ SimplexTable::SimplexTable(std::vector<Equation> p_equations)
     }
 }
 
+SimplexTable::SimplexTable(const std::vector<Equation>& p_equations)
+{
+    numberOfVariables = howManyVariables(p_equations);
+    std::cout << numberOfVariables << std::endl;
+    numberOfLines = static_cast<int>(p_equations.size());
+    numberOfColumns = (numberOfVariables + 1) + numberOfLines;
+    fillSimplexTable(p_equations);
+}
 
 void SimplexTable::PrintSimplexTable(int setw_param) const
 {
@@ -40,39 +43,36 @@ void SimplexTable::PrintSimplexTable(int setw_param) const
     }
 }
 
-
-int SimplexTable::howManyVariables(std::vector<Equation> p_equations)
+int SimplexTable::howManyVariables(const std::vector<Equation>& p_equations)
 {
     int numberOfVariables = 0;
-    std::for_each(p_equations.begin(), p_equations.end(), [&numberOfVariables](Equation& equation) {
+    std::for_each(p_equations.begin(), p_equations.end(), [&numberOfVariables](const Equation& equation) {
         numberOfVariables = std::max(numberOfVariables, equation.getIndexOfLastCofficient());
     });
     return numberOfVariables;
 }
 
-int SimplexTable::ReturnNumberOfColumns() const
+int SimplexTable::getNumberOfColumns() const
 {
     return numberOfColumns;
 }
 
-int SimplexTable::ReturnNumberOfLines() const
+int SimplexTable::getNumberOfLines() const
 {
     return numberOfLines;
 }
 
-int SimplexTable::ReturnNumberOfVariables() const
+int SimplexTable::getNumberOfVariables() const
 {
     return numberOfVariables;
 }
 
-float SimplexTable::ReturnElement(int line, int column) const
+float SimplexTable::getElement(int line, int column) const
 {
     return simplexTable[line][column];
 }
 
-float SimplexTable::SetElement(int line, int column, float value)
+void SimplexTable::setElement(int line, int column, float value)
 {
     simplexTable[line][column] = value;
 }
-
-
