@@ -2,6 +2,8 @@
 #include "mainwindow.h"
 #include <QObject>
 #include <QPushButton>
+#include <memory>
+#include "EquationManager.hpp"
 
 class Controler : public QObject
 {
@@ -17,4 +19,5 @@ public:
 
 private:
     MainWindow& m_view;
+    std::shared_ptr<EquationManager> m_eqManager = std::make_shared<EquationManager>();
 };

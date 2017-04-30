@@ -1,5 +1,7 @@
 <RCC>
     <qresource prefix="/new/images">
         <file>hammer.png</file>
+        <file>calculator.png</file>
+        <file>new-file.png</file>
     </qresource>
 </RCC>

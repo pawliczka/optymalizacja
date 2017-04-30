@@ -15,6 +15,7 @@ MainWindow::MainWindow(QWidget* parent)
     connect(ui->actionTw_rcy, &QAction::triggered, this, &MainWindow::aboutApplication);
     connect(ui->actionZapisz_jako, &QAction::triggered, this, &MainWindow::saveFileAs);
     connect(ui->actionZapisz, &QAction::triggered, this, &MainWindow::saveFile);
+    connect(ui->actionNowy, &QAction::triggered, this, &MainWindow::newFile);
 }
 
 MainWindow::~MainWindow()
@@ -80,6 +81,14 @@ void MainWindow::saveFileAs()
     m_fileName = fileName;
     setWindowTitle(QString("Plc Kalkulator - ") + m_fileName);
     saveFile();
+}
+
+void MainWindow::newFile()
+{
+    ui->text_conFun->clear();
+    ui->text_objFun->clear();
+    m_fileName = QString("");
+    setWindowTitle(QString("Plc Kalkulator"));
 }
 
 void MainWindow::saveFile()
