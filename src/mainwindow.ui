@@ -116,11 +116,17 @@
    </property>
   </action>
   <action name="actionTw_rcy">
+   <property name="icon">
+    <iconset resource="../res/res.qrc">
+     <normaloff>:/new/images/hammer.png</normaloff>:/new/images/hammer.png</iconset>
+   </property>
    <property name="text">
     <string>&amp;Twórcy</string>
    </property>
   </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="../res/res.qrc"/>
+ </resources>
  <connections/>
 </ui>

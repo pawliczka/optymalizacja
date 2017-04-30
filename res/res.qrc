@@ -1,1 +1,5 @@
-<RCC/>
+<RCC>
+    <qresource prefix="/new/images">
+        <file>hammer.png</file>
+    </qresource>
+</RCC>
