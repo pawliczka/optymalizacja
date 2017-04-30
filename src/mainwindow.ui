@@ -97,27 +97,27 @@
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionWczytaj">
    <property name="text">
-    <string>Wczytaj</string>
+    <string>&amp;Wczytaj</string>
    </property>
   </action>
   <action name="actionZapisz">
    <property name="text">
-    <string>Zapisz</string>
+    <string>&amp;Zapisz</string>
    </property>
   </action>
   <action name="actionZapisz_jako">
    <property name="text">
-    <string>Zapisz jako</string>
+    <string>Zapisz &amp;jako</string>
    </property>
   </action>
   <action name="actionZamknij">
    <property name="text">
-    <string>Zamknij</string>
+    <string>Z&amp;amknij</string>
    </property>
   </action>
   <action name="actionTw_rcy">
    <property name="text">
-    <string>Twórcy</string>
+    <string>&amp;Twórcy</string>
    </property>
   </action>
  </widget>

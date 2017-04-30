@@ -9,6 +9,7 @@ MainWindow::MainWindow(QWidget* parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    setWindowTitle(QString("Plc Kalkulator"));
     connect(ui->actionZamknij, &QAction::triggered, this, &MainWindow::closeAplication);
     connect(ui->actionWczytaj, &QAction::triggered, this, &MainWindow::openFile);
     connect(ui->actionTw_rcy, &QAction::triggered, this, &MainWindow::aboutApplication);
@@ -48,30 +49,53 @@ void MainWindow::closeAplication()
 void MainWindow::openFile()
 {
     QString fileName = QFileDialog::getOpenFileName(this, "Wczytaj plik", "", "Pliki danych (*.data)");
-    qDebug() << fileName;
+    if (fileName.isEmpty())
+        return;
+    m_fileName = fileName;
+    QFile file(m_fileName);
+    if (!file.open(QFile::ReadOnly | QFile::Text))
+        return;
+    QTextStream sFile(&file);
+
+    if (!sFile.atEnd())
+    {
+        QString objFun = sFile.readLine();
+        ui->text_objFun->setPlainText(objFun);
+    }
+    QString consFun;
+    while (!sFile.atEnd())
+    {
+        consFun += (sFile.readLine() + "\n");
+    }
+    ui->text_conFun->setPlainText(consFun);
+    setWindowTitle(QString("Plc Kalkulator - ") + m_fileName);
+    file.close();
 }
 
 void MainWindow::saveFileAs()
 {
     QString fileName = QFileDialog::getSaveFileName(this, "Zapisz plik", "", "Pliki danych (*.data)");
-    if(fileName.isEmpty())
+    if (fileName.isEmpty())
         return;
     m_fileName = fileName;
+    setWindowTitle(QString("Plc Kalkulator - ") + m_fileName);
     saveFile();
 }
 
 void MainWindow::saveFile()
 {
-    if(m_fileName.isEmpty())
+    if (m_fileName.isEmpty())
         return;
     QFile file(m_fileName);
-    if(!file.open(QFile::WriteOnly | QFile::Text))
+    if (!file.open(QFile::WriteOnly | QFile::Text))
     {
         qDebug() << "Can not open file to write" << m_fileName;
         return;
     }
     QTextStream sFile(&file);
-    sFile << "chuj";
+    sFile << getTextFromTextObjFun() << "\n";
+    sFile << getTextFromTextConFun();
+    file.close();
 }
 
 void MainWindow::aboutApplication()

@@ -18,7 +18,7 @@ std::string EquationManager::convertEquationsToString() const
 {
     std::string expresionStr = "";
     std::for_each(m_equationVector.begin(), m_equationVector.end(), [&expresionStr](const auto & expresion) {
-        expresionStr += (expresion->toString() + " ");
+        expresionStr += (expresion->toString() + "\n");
     });
     return expresionStr;
 }
