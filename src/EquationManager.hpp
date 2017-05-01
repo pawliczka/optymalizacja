@@ -17,6 +17,8 @@ public:
     const std::vector<Equation> &getConstraintFunctions() const;
 
 private:
+    int getMaxIndex() const;
+    void resizeEquationsToMaxIndex();
     std::shared_ptr<IEquationConventer> m_eqationConverter;
     Equation m_objFun;
     std::vector<Equation> m_constraintsVector;

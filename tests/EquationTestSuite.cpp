@@ -91,8 +91,8 @@ TEST_F(EquationTestSuite, pronto2)
 
 TEST_F(EquationTestSuite, shouldNotPrintEquationCoefficientWithCoefficientOne)
 {
-    sut = Equation({1, -1, 1, 5}, ComparisonOperator::GreaterEqual);
-    EXPECT_EQ("5x3+x2-x1+1>=0", sut.toString());
+    sut = Equation({1, -1, 1, 5,0,0,0,0,0,0,1}, ComparisonOperator::GreaterEqual);
+    EXPECT_EQ("x10+5x3+x2-x1+1>=0", sut.toString());
 }
 
 TEST_F(EquationTestSuite, shouldCorrectlyConvertFloatCoefficionts)
@@ -100,4 +100,22 @@ TEST_F(EquationTestSuite, shouldCorrectlyConvertFloatCoefficionts)
     sut = Equation({0.1, -1.1, 1.32, 0.1123}, ComparisonOperator::GreaterEqual);
     auto result = sut.toString();
     EXPECT_EQ("0.1123x3+1.32x2-1.1x1+0.1>=0", result);
+}
+
+TEST_F(EquationTestSuite, shouldCorrectlyConvertFloatCoefficiontsToStringWithResize)
+{
+    sut = Equation({0.1, -1.1, 1.32, 0.1123}, ComparisonOperator::GreaterEqual);
+    sut.resizeEquation(10);
+    auto result = sut.toString();
+    EXPECT_EQ("+0.1123x3+1.32x2-1.1x1+0.1>=0", result);
+}
+
+TEST_F(EquationTestSuite, shouldCorrectlyResizeEquation)
+{
+    sut = Equation({0.1, -1.1, 1.32}, ComparisonOperator::GreaterEqual);
+    auto sut2 = Equation({0.1, -1.1, 1.32, 0, 0, 0}, ComparisonOperator::GreaterEqual);
+    EXPECT_EQ(2, sut.getIndexOfLastCofficient());
+    sut.resizeEquation(5);
+    EXPECT_EQ(5, sut.getIndexOfLastCofficient());
+    EXPECT_EQ(sut, sut2);
 }

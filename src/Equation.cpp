@@ -34,7 +34,7 @@ std::string convertComparasionOperatorToString(const ComparisonOperator expressi
         return std::string("<=");
     return std::string("");
 }
-template <typename T> std::string getCoefficientAsStringWithoutZeros(T number)
+std::string getCoefficientAsStringWithoutZeros(Coefficient number)
 {
     std::string str = std::to_string(number);
     boost::trim_right_if(str, boost::is_any_of("0"));
@@ -64,6 +64,11 @@ ComparisonOperator Equation::getComparisonOperator() const
     return m_comparisonOperator;
 }
 
+void Equation::resizeEquation(int indexOfNewMaxCoefficient)
+{
+    m_coefficients.resize(indexOfNewMaxCoefficient+1);
+}
+
 void Equation::setCoefficient(Term term)
 {
     if (term.second >= static_cast<int>(m_coefficients.size()))
@@ -76,7 +81,7 @@ void Equation::setComparisonOperator(ComparisonOperator comparisonOperator)
     m_comparisonOperator = comparisonOperator;
 }
 
-void Equation::setComparisonOperator(std::string comparisonOperator)
+void Equation::setComparisonOperator(const std::__cxx11::string &comparisonOperator)
 {
     m_comparisonOperator = convertStringToComparasionOperator(comparisonOperator);
 }
@@ -98,6 +103,9 @@ int Equation::getIndexOfLastCofficient() const
 bool Equation::operator==(const Equation& equationSecond) const
 {
     if (m_comparisonOperator != equationSecond.getComparisonOperator())
+        return false;
+
+    if (m_coefficients.size() != equationSecond.m_coefficients.size())
         return false;
 
     if (!std::equal(m_coefficients.begin(), m_coefficients.end(), equationSecond.m_coefficients.begin()))

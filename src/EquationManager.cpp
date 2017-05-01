@@ -20,6 +20,7 @@ void EquationManager::convertToEquations(std::string equations)
         }
         m_constraintsVector.push_back(conv);
     }
+    resizeEquationsToMaxIndex();
 }
 
 std::string EquationManager::convertEquationsToString() const
@@ -38,4 +39,25 @@ const Equation& EquationManager::getObjectiveFunction() const
 const std::vector<Equation>& EquationManager::getConstraintFunctions() const
 {
     return m_constraintsVector;
+}
+
+int EquationManager::getMaxIndex() const
+{
+    int max = 0;
+    max = std::max(max,m_objFun.getIndexOfLastCofficient());
+    std::for_each(m_constraintsVector.begin(),m_constraintsVector.end(),[&max](const auto& eq)
+    {
+        max = std::max(max,eq.getIndexOfLastCofficient());
+    });
+    return max;
+}
+
+void EquationManager::resizeEquationsToMaxIndex()
+{
+    int maxIndex = getMaxIndex();
+    m_objFun.resizeEquation(maxIndex);
+    std::for_each(m_constraintsVector.begin(),m_constraintsVector.end(),[maxIndex](Equation& eq)
+    {
+        eq.resizeEquation(maxIndex);
+    });
 }

@@ -21,9 +21,10 @@ public:
     friend std::ostream& operator<<(std::ostream& stream, Equation const& equation);
     Coefficient getCoefficient(unsigned int index) const;
     ComparisonOperator getComparisonOperator() const;
+    void resizeEquation(int indexOfNewMaxCoefficient);
     void setCoefficient(Term term);
     void setComparisonOperator(ComparisonOperator comparisonOperator);
-    void setComparisonOperator(std::string comparisonOperator);
+    void setComparisonOperator(const std::string& comparisonOperator);
     Equation getWithNegativeSign() const;
     int getIndexOfLastCofficient() const;
     bool operator==(const Equation& equationSecond) const;
@@ -37,4 +38,5 @@ private:
 
     std::vector<Coefficient> m_coefficients;
     ComparisonOperator m_comparisonOperator;
+    bool m_isFirstElementPrinted = false;
 };
