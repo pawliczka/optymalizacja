@@ -86,7 +86,7 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicLecture2)
 
     auto result = simplex.Solve();
 
-    EXPECT_DOUBLE_EQ(31./4., result->ObjFuncValue);
+    EXPECT_DOUBLE_EQ(28.5, result->ObjFuncValue);
 }
 
 TEST_F(SimplexTestSuite, sz1)
