@@ -8,5 +8,5 @@ public:
     MOCK_METHOD1(convertToEquations, void(std::string));
     MOCK_CONST_METHOD0(convertEquationsToString, std::string());
     MOCK_CONST_METHOD1(getObjectiveFunction, const Equation &());
-    MOCK_CONST_METHOD1(getConstraintFunction, const Equation &(const int));
+    MOCK_CONST_METHOD1(getConstraintFunction, const std::vector<std::shared_ptr<Equation>>&());
 };

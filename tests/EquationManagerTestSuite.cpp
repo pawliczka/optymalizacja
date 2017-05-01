@@ -49,7 +49,8 @@ TEST_F(EquationManagerTestSuite, shouldReturnCorrectlyConstraintFunctions)
     EXPECT_CALL(*m_equationConventerMock, convert("x1+3<=0")).WillOnce(Return(conFun2));
     sut.convertToEquations("x1+1=3x1+5\nx1+1<=0\nx1+2<=0\nx1+3<=0");
 
-    ASSERT_EQ(conFun0, sut.getConstraintFunction(0));
-    ASSERT_EQ(conFun1, sut.getConstraintFunction(1));
-    ASSERT_EQ(conFun2, sut.getConstraintFunction(2));
+    auto conFuns = sut.getConstraintFunctions();
+    ASSERT_EQ(conFun0, *conFuns[0]);
+    ASSERT_EQ(conFun1, *conFuns[1]);
+    ASSERT_EQ(conFun2, *conFuns[2]);
 }

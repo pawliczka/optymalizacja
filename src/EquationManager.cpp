@@ -5,29 +5,36 @@ void EquationManager::convertToEquations(std::string equations)
 {
     std::vector<std::string> result;
     boost::split(result, equations, boost::is_any_of("\n"));
+    bool isObjFunConv = false;
     for (const auto& equation : result)
     {
         if (equation == "")
             continue;
         auto conv = m_eqationConverter->convert(equation);
-        m_equationVector.push_back(std::make_shared<Equation>(conv));
+        if (!isObjFunConv)
+        {
+            m_objFun = std::make_shared<Equation>(conv);
+            isObjFunConv = true;
+            continue;
+        }
+        m_constraintsVector.push_back(std::make_shared<Equation>(conv));
     }
 }
 
 std::string EquationManager::convertEquationsToString() const
 {
-    std::string expresionStr = "";
-    std::for_each(m_equationVector.begin(), m_equationVector.end(),
+    std::string expresionStr = (m_objFun->toString() + "\n");
+    std::for_each(m_constraintsVector.begin(), m_constraintsVector.end(),
         [&expresionStr](const auto& expresion) { expresionStr += (expresion->toString() + "\n"); });
     return expresionStr;
 }
 
 const Equation& EquationManager::getObjectiveFunction() const
 {
-    return *m_equationVector[0];
+    return *m_objFun;
 }
 
-const Equation& EquationManager::getConstraintFunction(const int number) const
+const std::vector<std::shared_ptr<Equation>>& EquationManager::getConstraintFunctions() const
 {
-    return *m_equationVector[number + 1];
+    return m_constraintsVector;
 }
