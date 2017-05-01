@@ -22,9 +22,10 @@ TEST_F(SimplexTestSuite, ExampleFromYouTube)
     linproblem.setConstrains(constrains);
 
     Simplex simplex(linproblem);
-
     auto result = simplex.Solve();
 
+    EXPECT_DOUBLE_EQ(4,result->VariableValues[0]);
+    EXPECT_DOUBLE_EQ(5,result->VariableValues[1]);
     EXPECT_DOUBLE_EQ(3380, result->ObjFuncValue);
 }
 
@@ -42,9 +43,11 @@ TEST_F(SimplexTestSuite, ExampleFromYouTube2)
     linproblem.setConstrains(constrains);
 
     Simplex simplex(linproblem);
+    std::shared_ptr<LinearProblemSolution> result = simplex.Solve();
 
-    auto result = simplex.Solve();
-    EXPECT_DOUBLE_EQ(16.85, result->ObjFuncValue);
+    EXPECT_DOUBLE_EQ(32./7.,result->VariableValues[0]);
+    EXPECT_DOUBLE_EQ(18./7.,result->VariableValues[1]);
+    EXPECT_DOUBLE_EQ(118./7., result->ObjFuncValue);
 }
 
 TEST_F(SimplexTestSuite, ExampleFromSzlachcicLecture)
@@ -62,9 +65,10 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicLecture)
     linproblem.setConstrains(constrains);
 
     Simplex simplex(linproblem);
+    std::shared_ptr<LinearProblemSolution> result = simplex.Solve();
 
-    auto result = simplex.Solve();
-
+    EXPECT_DOUBLE_EQ(11./4.,result->VariableValues[0]);
+    EXPECT_DOUBLE_EQ(9./4.,result->VariableValues[1]);
     EXPECT_DOUBLE_EQ(31./4., result->ObjFuncValue);
 }
 
@@ -73,9 +77,9 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicLecture2)
     LinearProblem  linproblem(OptimizeType::MAX);
 
     std::vector<Equation> constrains = {
-        {{-2, 2, 1}, ComparisonOperator::GreaterEqual},
-        {{-3, -1, 1}, ComparisonOperator::LessEqual},
-        {{-6, 1, 1}, ComparisonOperator::LessEqual}};
+        {{2, 2, 1}, ComparisonOperator::GreaterEqual},
+        {{3, -1, 1}, ComparisonOperator::LessEqual},
+        {{6, 1, 1}, ComparisonOperator::LessEqual}};
 
     Equation objectiveFunction = {{0, 1, 6}, ComparisonOperator::Equal};
 
@@ -83,9 +87,10 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicLecture2)
     linproblem.setConstrains(constrains);
 
     Simplex simplex(linproblem);
+    std::shared_ptr<LinearProblemSolution> result = simplex.Solve();
 
-    auto result = simplex.Solve();
-
+    EXPECT_DOUBLE_EQ(1.5, result->VariableValues[0]);
+    EXPECT_DOUBLE_EQ(4.5, result->VariableValues[1]);
     EXPECT_DOUBLE_EQ(28.5, result->ObjFuncValue);
 }
 
@@ -105,7 +110,11 @@ TEST_F(SimplexTestSuite, sz1)
 
     Simplex simplex(linproblem);
 
-    auto result = simplex.Solve();
+    std::shared_ptr<LinearProblemSolution> result = simplex.Solve();
+
+    EXPECT_DOUBLE_EQ(4, result->VariableValues[0]);
+    EXPECT_DOUBLE_EQ(0, result->VariableValues[1]);
+    EXPECT_DOUBLE_EQ(4, result->ObjFuncValue);
 }
 
 //For original "RAK" implementation:
