@@ -235,3 +235,22 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicLecture7)
     EXPECT_DOUBLE_EQ(4, result->VariableValues[1]);
     EXPECT_DOUBLE_EQ(5, result->ObjFuncValue);
 }
+
+TEST_F(SimplexTestSuite, ExampleFromSzlachcicLecture8)
+{
+    LinearProblem  linproblem(OptimizeType::MIN);
+
+    std::vector<Equation> constrains = {
+        {{2, -1, -1}, ComparisonOperator::GreaterEqual},
+        {{1, -1, 1}, ComparisonOperator::GreaterEqual}};
+
+    Equation objectiveFunction = {{0, -1, -1}, ComparisonOperator::Equal};
+
+    linproblem.SetObjFunc(objectiveFunction);
+    linproblem.setConstrains(constrains);
+
+    Simplex simplex(linproblem);
+    std::shared_ptr<LinearProblemSolution> result = simplex.Solve();
+    EXPECT_EQ(SimplexStatus::STATUS_WRONG_TABLE, simplex.State.Status);
+    EXPECT_EQ(LinProblemCase::INCONSISTENT, simplex.State.Case);
+}
