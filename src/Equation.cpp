@@ -33,6 +33,13 @@ std::string convertComparasionOperatorToString(const ComparisonOperator expressi
         return std::string("<=");
     return std::string("");
 }
+template <typename T> std::string getCoefficientAsStringWithoutZeros(T number)
+{
+    std::string str = std::to_string(number);
+    boost::trim_right_if(str, boost::is_any_of("0"));
+    boost::trim_right_if(str, boost::is_any_of("."));
+    return str;
+}
 }
 
 std::ostream& operator<<(std::ostream& stream, const Equation& equation)
@@ -42,7 +49,7 @@ std::ostream& operator<<(std::ostream& stream, const Equation& equation)
     return stream;
 }
 
-int Equation::getCoefficient(unsigned int index) const
+Coefficient Equation::getCoefficient(unsigned int index) const
 {
     if (index < m_coefficients.size())
         return m_coefficients[index];
@@ -91,29 +98,30 @@ bool Equation::operator==(const Equation& equationSecond) const
 std::string Equation::getTermAsString(int index) const
 {
     auto coefficient = getCoefficient(index);
-    if (coefficient == 0)
+    if (coefficient == Coefficient(0))
     {
         return "";
     }
     std::string equation = "+";
     if (index != 0)
     {
-        if (coefficient == 1)
+        if (coefficient == Coefficient(1))
         {
-            equation += "x" + std::to_string(index);
+            equation += "x" + getCoefficientAsStringWithoutZeros(index);
         }
-        else if (coefficient == -1)
+        else if (coefficient == Coefficient(-1))
         {
-            equation += "-x" + std::to_string(index);
+            equation += "-x" + getCoefficientAsStringWithoutZeros(index);
         }
         else
         {
-            equation += std::to_string(coefficient) + "x" + std::to_string(index);
+            equation +=
+                getCoefficientAsStringWithoutZeros(coefficient) + "x" + getCoefficientAsStringWithoutZeros(index);
         }
     }
     else
     {
-        equation += std::to_string(m_coefficients[0]);
+        equation += getCoefficientAsStringWithoutZeros(m_coefficients[0]);
     }
     boost::replace_all(equation, "+-", "-");
     return equation;
@@ -133,19 +141,19 @@ std::string Equation::getFirstElementAsString() const
 {
     auto index = getIndexOfLastCofficient();
     auto coefficient = getCoefficient(index);
-    if (coefficient == 0)
+    if (coefficient == Coefficient(0))
     {
         return "";
     }
-    if (coefficient == 1)
+    if (coefficient == Coefficient(1))
     {
-        return "x" + std::to_string(index);
+        return "x" + getCoefficientAsStringWithoutZeros(index);
     }
-    if (coefficient == -1)
+    if (coefficient == Coefficient(-1))
     {
-        return "-x" + std::to_string(index);
+        return "-x" + getCoefficientAsStringWithoutZeros(index);
     }
-    return std::to_string(m_coefficients[index]) + "x" + std::to_string(index);
+    return getCoefficientAsStringWithoutZeros(m_coefficients[index]) + "x" + getCoefficientAsStringWithoutZeros(index);
 }
 
 std::string Equation::getComparisonOperatorAndZeroAsString() const

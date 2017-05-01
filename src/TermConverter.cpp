@@ -51,8 +51,8 @@ void TermConverter::splitTermByX()
             return;
         }
         m_splitedExpresion = {
-            boost::lexical_cast<int>(splitedExpresion[0]), boost::lexical_cast<int>(splitedExpresion[1])};
+            boost::lexical_cast<float>(splitedExpresion[0]), boost::lexical_cast<int>(splitedExpresion[1])};
         return;
     }
-    m_splitedExpresion = {boost::lexical_cast<int>(splitedExpresion[0]), 0};
+    m_splitedExpresion = {boost::lexical_cast<float>(splitedExpresion[0]), 0};
 }

@@ -74,7 +74,7 @@ TEST_F(EquationConventerTestSuite, MinusSevenOnTheRightSide)
 
 TEST_F(EquationConventerTestSuite, WyjebaneWKosmosRownanko)
 {
-    expectTermConverterCalls({{"2x3", Term(2, 3)},
+    expectTermConverterCalls({{"2.3x3", Term(2, 3)},
                               {"-2x2", Term(-2, 2)},
                               {"x1", Term(1, 1)},
                               {"1", Term(1, 0)},
@@ -83,7 +83,7 @@ TEST_F(EquationConventerTestSuite, WyjebaneWKosmosRownanko)
                               {"5x1", Term(5, 1)},
                               {"-4", Term(-4, 0)}});
     equation.setComparisonOperator(ComparisonOperator::GreaterEqual);
-    setCoefficients({{5, 0}, {-4, 1}, {1, 2}, {2, 3}, {3, 6}});
+    setCoefficients({{5, 0}, {-4, 1}, {1, 2.3}, {2, 3}, {3, 6}});
 
-    ASSERT_EQ(equation, sut.convert("2x3-2x2+x1+1>=-3x6-3x2+5x1-4"));
+    ASSERT_EQ(equation, sut.convert("2.3x3-2x2+x1+1>=-3x6-3x2+5x1-4"));
 }

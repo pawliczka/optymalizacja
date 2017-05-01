@@ -5,7 +5,7 @@
 #include <string>
 #include <ostream>
 
-using Coefficient = int;
+using Coefficient = float;
 using Index = int;
 using Term = std::pair<Coefficient, Index>;
 
@@ -13,13 +13,13 @@ class Equation
 {
 public:
     Equation() {}
-    Equation(std::vector<int> coefficients, ComparisonOperator compOperator)
+    Equation(std::vector<Coefficient> coefficients, ComparisonOperator compOperator)
         : m_coefficients(coefficients)
         , m_comparisonOperator(compOperator)
     {
     }
     friend std::ostream& operator<<(std::ostream& stream, Equation const& equation);
-    int getCoefficient(unsigned int index) const;
+    Coefficient getCoefficient(unsigned int index) const;
     ComparisonOperator getComparisonOperator() const;
     void setCoefficient(Term term);
     void setComparisonOperator(ComparisonOperator comparisonOperator);
@@ -34,6 +34,6 @@ private:
     std::string getComparisonOperatorAndZeroAsString() const;
     std::string getTermAsString(int index) const;
 
-    std::vector<int> m_coefficients;
+    std::vector<Coefficient> m_coefficients;
     ComparisonOperator m_comparisonOperator;
 };

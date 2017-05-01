@@ -77,13 +77,13 @@ TEST_F(EquationTestSuite, shouldNotPrintEquationWithZeroCoefficientsIndexLast)
     EXPECT_EQ("-12x1>=0", sut.toString());
 }
 
-TEST_F(EquationTestSuite, giltopedal)
+TEST_F(EquationTestSuite, pronto1)
 {
     sut = Equation({0, -1}, ComparisonOperator::GreaterEqual);
     EXPECT_EQ("-x1>=0", sut.toString());
 }
 
-TEST_F(EquationTestSuite, giltopedal2)
+TEST_F(EquationTestSuite, pronto2)
 {
     sut = Equation({0, 1}, ComparisonOperator::GreaterEqual);
     EXPECT_EQ("x1>=0", sut.toString());
@@ -93,4 +93,11 @@ TEST_F(EquationTestSuite, shouldNotPrintEquationCoefficientWithCoefficientOne)
 {
     sut = Equation({1, -1, 1, 5}, ComparisonOperator::GreaterEqual);
     EXPECT_EQ("5x3+x2-x1+1>=0", sut.toString());
+}
+
+TEST_F(EquationTestSuite, shouldCorrectlyConvertFloatCoefficionts)
+{
+    sut = Equation({0.1, -1.1, 1.32, 0.1123}, ComparisonOperator::GreaterEqual);
+    auto result = sut.toString();
+    EXPECT_EQ("0.1123x3+1.32x2-1.1x1+0.1>=0", result);
 }

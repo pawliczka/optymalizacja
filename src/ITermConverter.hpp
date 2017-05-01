@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 
-using Coefficient = int;
+using Coefficient = float;
 using Index = int;
 using Term = std::pair<Coefficient, Index>;
 
