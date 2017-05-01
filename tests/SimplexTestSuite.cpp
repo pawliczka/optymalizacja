@@ -1,5 +1,5 @@
 #include "Simplex.hpp"
-#include "LinProg.hpp"
+#include "LinearProblem.hpp"
 #include <gmock/gmock.h>
 #include <vector>
 #include <iostream>
@@ -10,7 +10,7 @@ class SimplexTestSuite : public testing::Test
 
 TEST_F(SimplexTestSuite, ExampleFromYouTube)
 {
-    LinProblem linproblem(2, OptimizeType::MAX);
+    LinearProblem linproblem(OptimizeType::MAX);
 
     std::vector<Equation> constrains = {
         {{5480, 420, 760}, ComparisonOperator::LessEqual},
@@ -30,7 +30,7 @@ TEST_F(SimplexTestSuite, ExampleFromYouTube)
 
 TEST_F(SimplexTestSuite, ExampleFromYouTube2)
 {
-    LinProblem  linproblem(2, OptimizeType::MAX);
+    LinearProblem linproblem(OptimizeType::MAX);
 
     std::vector<Equation> constrains = {
         {{24, 3, 4}, ComparisonOperator::LessEqual},
@@ -49,7 +49,7 @@ TEST_F(SimplexTestSuite, ExampleFromYouTube2)
 
 TEST_F(SimplexTestSuite, ExampleFromSzlachcicLecture)
 {
-    LinProblem  linproblem(2, OptimizeType::MAX);
+    LinearProblem  linproblem(OptimizeType::MAX);
 
     std::vector<Equation> constrains = {
         {{5, 1, 1}, ComparisonOperator::LessEqual},
@@ -68,9 +68,30 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicLecture)
     EXPECT_DOUBLE_EQ(31./4., result->ObjFuncValue);
 }
 
+TEST_F(SimplexTestSuite, ExampleFromSzlachcicLecture2)
+{
+    LinearProblem  linproblem(OptimizeType::MAX);
+
+    std::vector<Equation> constrains = {
+        {{-2, 2, 1}, ComparisonOperator::GreaterEqual},
+        {{-3, -1, 1}, ComparisonOperator::LessEqual},
+        {{-6, 1, 1}, ComparisonOperator::LessEqual}};
+
+    Equation objectiveFunction = {{0, 1, 6}, ComparisonOperator::Equal};
+
+    linproblem.SetObjFunc(objectiveFunction);
+    linproblem.setConstrains(constrains);
+
+    Simplex simplex(linproblem);
+
+    auto result = simplex.Solve();
+
+    EXPECT_DOUBLE_EQ(31./4., result->ObjFuncValue);
+}
+
 TEST_F(SimplexTestSuite, sz1)
 {
-    LinProblem  linproblem(2, OptimizeType::MAX);
+    LinearProblem  linproblem(OptimizeType::MAX);
 
     std::vector<Equation> constrains = {
         {{3, -2, 1}, ComparisonOperator::LessEqual},

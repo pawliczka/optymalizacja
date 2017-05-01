@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include "SimplexTable.hpp"
-#include "LinProg.hpp"
+#include "LinearProblem.hpp"
 #include <memory>
 
 /*
@@ -38,14 +38,14 @@ class Simplex
 {
 public:
     SimplexState State;
-    Simplex(const LinProblem& Problem);
-    std::shared_ptr<LinProblemSolution> Solve();
-    std::shared_ptr<LinProblemSolution> Solve1Phase();
-    std::shared_ptr<LinProblemSolution> Solve2Phase();
+    Simplex(const LinearProblem& Problem);
+    std::shared_ptr<LinearProblemSolution> Solve();
+    std::shared_ptr<LinearProblemSolution> Solve1Phase();
+    std::shared_ptr<LinearProblemSolution> Solve2Phase();
 
 private:
     SimplexTable Table;
-    std::shared_ptr<LinProblemSolution> Solution;
+    std::shared_ptr<LinearProblemSolution> Solution;
     OptimizeType Type;
 
     /*! \brief Sprawdza czy istnieja rozwiazania

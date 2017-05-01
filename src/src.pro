@@ -21,7 +21,7 @@ SOURCES += \
     Controler.cpp \
     Simplex.cpp \
     SimplexTable.cpp \
-    LinProg.cpp
+    LinearProblem.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -36,8 +36,8 @@ HEADERS += \
     IEquationManager.hpp \
     SimplexTable.hpp \
     Simplex.hpp \
-    LinProg.hpp \
-    LinearProblemCase.hpp
+    LinearProblemCase.hpp \
+    LinearProblem.hpp
 
 FORMS += \
     mainwindow.ui

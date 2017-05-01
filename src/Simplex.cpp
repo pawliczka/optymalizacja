@@ -3,11 +3,11 @@
 #include <iostream>
 #include <QDebug>
 
-Simplex::Simplex(const LinProblem& Problem)
+Simplex::Simplex(const LinearProblem& Problem)
     : Table(Problem)
 {
     Type = Problem.gettype();
-    Solution = std::make_shared<LinProblemSolution>(Problem.getn());
+    Solution = std::make_shared<LinearProblemSolution>(Problem.getn());
 }
 
 void Simplex::CheckNoSolutions()
@@ -243,9 +243,9 @@ void Simplex::DisturbTable()
         State.Case = LinProblemCase::INCONSISTENT;
 }
 
-std::shared_ptr<LinProblemSolution> Simplex::Solve()
+std::shared_ptr<LinearProblemSolution> Simplex::Solve()
 {
-  //  Table.print();
+    //  Table.print();
     State.Status = STATUS_BUSY;
     State.Case = LinProblemCase::ONE_SOLUTION;
     Solve1Phase();
@@ -270,7 +270,7 @@ std::shared_ptr<LinProblemSolution> Simplex::Solve()
     return Solution;
 }
 
-std::shared_ptr<LinProblemSolution> Simplex::Solve1Phase()
+std::shared_ptr<LinearProblemSolution> Simplex::Solve1Phase()
 {
     int Step = 0;
     double Last2Values[2] = {0, 0}; // L2V[0] - wartość w poprzednim kroku
@@ -294,7 +294,7 @@ std::shared_ptr<LinProblemSolution> Simplex::Solve1Phase()
 
         Table.swapRowColIndexes(InputToBase, DeletedFromBase);
         UpdateTable(InputToBase, DeletedFromBase);
-      //  Table.print();
+        //  Table.print();
 
         if (Table.getTabElem(0, 0) == Last2Values[1])
             DisturbTable();
@@ -308,7 +308,7 @@ std::shared_ptr<LinProblemSolution> Simplex::Solve1Phase()
     return Solution;
 }
 
-std::shared_ptr<LinProblemSolution> Simplex::Solve2Phase()
+std::shared_ptr<LinearProblemSolution> Simplex::Solve2Phase()
 {
     int Step = 0;
     while (!IsOptimal())
@@ -324,7 +324,7 @@ std::shared_ptr<LinProblemSolution> Simplex::Solve2Phase()
 
         Table.swapRowColIndexes(InputToBase, DeletedFromBase);
         UpdateTable(InputToBase, DeletedFromBase);
-      //  Table.print();
+        //  Table.print();
         qDebug() << "Krok " << Step++ << " II fazy | x0 =" << Table.getTabElem(0, 0) << endl;
     }
 

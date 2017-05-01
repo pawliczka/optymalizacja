@@ -13,6 +13,12 @@
  *					  nieograniczonym obszarze
  *  6. UNKNOWN -	  domyslnie: nieznany stan
  */
-enum class LinProblemCase { ONE_SOLUTION , NO_SOLUTIONS , INCONSISTENT ,
-                      INF_SOLUTIONS_BOUND , INF_SOLUTIONS_UNBOUND ,
-                      UNKNOWN };
+enum class LinProblemCase
+{
+    ONE_SOLUTION,
+    NO_SOLUTIONS,
+    INCONSISTENT,
+    INF_SOLUTIONS_BOUND,
+    INF_SOLUTIONS_UNBOUND,
+    UNKNOWN
+};

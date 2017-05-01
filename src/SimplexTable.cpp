@@ -51,7 +51,7 @@ void SimplexTable::SetupRowIndexes()
         RowIndex[i] = numBaseVars + i;
 }
 
-SimplexTable::SimplexTable(const LinProblem& problem)
+SimplexTable::SimplexTable(const LinearProblem& problem)
 {
     numBaseVars = problem.getn();
     numAdditionalVars = problem.numLessEqualConstr() + problem.numGreaterEqualConstr();

@@ -1,5 +1,5 @@
 ﻿#pragma once
-#include "LinProg.hpp"
+#include "LinearProblem.hpp"
 #include <string>
 #include <vector>
 
@@ -7,7 +7,7 @@ class SimplexTable
 {
 public:
     SimplexTable() {}
-    SimplexTable(const LinProblem& problem);
+    SimplexTable(const LinearProblem& problem);
 
     void print() const;
     double rowMax(int Row) const;

@@ -5,7 +5,7 @@ void EquationManager::convertToEquations(std::string equations)
 {
     std::vector<std::string> result;
     boost::split(result, equations, boost::is_any_of("\n"));
-    for (const auto & equation : result)
+    for (const auto& equation : result)
     {
         if (equation == "")
             continue;
@@ -17,18 +17,17 @@ void EquationManager::convertToEquations(std::string equations)
 std::string EquationManager::convertEquationsToString() const
 {
     std::string expresionStr = "";
-    std::for_each(m_equationVector.begin(), m_equationVector.end(), [&expresionStr](const auto & expresion) {
-        expresionStr += (expresion->toString() + "\n");
-    });
+    std::for_each(m_equationVector.begin(), m_equationVector.end(),
+        [&expresionStr](const auto& expresion) { expresionStr += (expresion->toString() + "\n"); });
     return expresionStr;
 }
 
-const Equation & EquationManager::getObjectiveFunction() const
+const Equation& EquationManager::getObjectiveFunction() const
 {
     return *m_equationVector[0];
 }
 
-const Equation & EquationManager::getConstraintFunction(const int number) const
+const Equation& EquationManager::getConstraintFunction(const int number) const
 {
-    return *m_equationVector[number+1];
+    return *m_equationVector[number + 1];
 }

@@ -1,4 +1,4 @@
-﻿#include "LinProg.hpp"
+﻿#include "LinearProblem.hpp"
 #include <iostream>
 #include <sstream>
 #include <fstream>
@@ -6,26 +6,26 @@
 
 using namespace std;
 
-LinProblem::LinProblem(int _n, OptimizeType _type)
+LinearProblem::LinearProblem(OptimizeType _type)
 {
-    n = _n;
+    n = 0;
     type = _type;
     m = 0;
 }
 
-void LinProblem::SetObjFunc(Equation& ObjFuncOrig)
+void LinearProblem::SetObjFunc(Equation& ObjFuncOrig)
 {
     ObjFunc = ObjFuncOrig;
     n = ObjFunc.getIndexOfLastCofficient();
 }
 
-void LinProblem::setConstrains(const std::vector<Equation>& constrains)
+void LinearProblem::setConstrains(const std::vector<Equation>& constrains)
 {
     ConstrSet = constrains;
     m = constrains.size();
 }
 
-double LinProblem::RemoveLastConstr()
+double LinearProblem::RemoveLastConstr()
 {
     double LastConstrb = ConstrSet[m].getCoefficient(0);
     ConstrSet.pop_back();
@@ -33,7 +33,7 @@ double LinProblem::RemoveLastConstr()
     return LastConstrb;
 }
 
-void LinProblem::print() const
+void LinearProblem::print() const
 {
     int i;
 
@@ -57,7 +57,7 @@ void LinProblem::print() const
     qDebug() << endl;
 }
 
-int LinProblem::numLessEqualConstr() const
+int LinearProblem::numLessEqualConstr() const
 {
     int lessEqualCnt = 0;
     for (int i = 0; i < this->m; i++)
@@ -67,7 +67,7 @@ int LinProblem::numLessEqualConstr() const
     return lessEqualCnt;
 }
 
-int LinProblem::numGreaterEqualConstr() const
+int LinearProblem::numGreaterEqualConstr() const
 {
     int greaterEqualCnt = 0;
     for (int i = 0; i < this->m; i++)
@@ -77,20 +77,20 @@ int LinProblem::numGreaterEqualConstr() const
     return greaterEqualCnt;
 }
 
-Equation LinProblem::getConstr(int constrNum) const
+Equation LinearProblem::getConstr(int constrNum) const
 {
     if (constrNum >= m)
         constrNum = m - 1;
     return ConstrSet[constrNum];
 }
 
-LinProblemSolution::LinProblemSolution(int _n)
+LinearProblemSolution::LinearProblemSolution(int _n)
 {
     Case = LinProblemCase::UNKNOWN;
     VariableValues.resize(_n, 0);
 }
 
-void LinProblemSolution::print() const
+void LinearProblemSolution::print() const
 {
     QString str;
     str += QString("\nRozwiazanie:\n");
