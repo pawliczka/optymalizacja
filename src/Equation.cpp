@@ -1,6 +1,7 @@
 #include "Equation.hpp"
 #include <algorithm>
 #include <boost/algorithm/string.hpp>
+#include <QDebug>
 
 namespace
 {
@@ -37,6 +38,7 @@ template <typename T> std::string getCoefficientAsStringWithoutZeros(T number)
 {
     std::string str = std::to_string(number);
     boost::trim_right_if(str, boost::is_any_of("0"));
+    boost::trim_right_if(str, boost::is_any_of(","));
     boost::trim_right_if(str, boost::is_any_of("."));
     return str;
 }

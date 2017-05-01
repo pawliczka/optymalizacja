@@ -105,21 +105,37 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionWczytaj">
+   <property name="icon">
+    <iconset resource="../res/res.qrc">
+     <normaloff>:/new/images/loadFile.png</normaloff>:/new/images/loadFile.png</iconset>
+   </property>
    <property name="text">
     <string>&amp;Wczytaj</string>
    </property>
   </action>
   <action name="actionZapisz">
+   <property name="icon">
+    <iconset resource="../res/res.qrc">
+     <normaloff>:/new/images/save.png</normaloff>:/new/images/save.png</iconset>
+   </property>
    <property name="text">
     <string>&amp;Zapisz</string>
    </property>
   </action>
   <action name="actionZapisz_jako">
+   <property name="icon">
+    <iconset resource="../res/res.qrc">
+     <normaloff>:/new/images/saveAs.png</normaloff>:/new/images/saveAs.png</iconset>
+   </property>
    <property name="text">
     <string>Zapisz &amp;jako</string>
    </property>
   </action>
   <action name="actionZamknij">
+   <property name="icon">
+    <iconset resource="../res/res.qrc">
+     <normaloff>:/new/images/exit.png</normaloff>:/new/images/exit.png</iconset>
+   </property>
    <property name="text">
     <string>Z&amp;amknij</string>
    </property>
@@ -139,7 +155,7 @@
      <normaloff>:/new/images/new-file.png</normaloff>:/new/images/new-file.png</iconset>
    </property>
    <property name="text">
-    <string>Nowy</string>
+    <string>&amp;Nowy</string>
    </property>
   </action>
  </widget>

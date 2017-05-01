@@ -39,7 +39,7 @@ QString MainWindow::getTextFromTextConFun() const
 }
 void MainWindow::setTextToDispLogger(QString text)
 {
-    ui->disp_logger->setPlainText(text);
+    ui->disp_logger->append(text);
 }
 
 void MainWindow::closeAplication()

@@ -50,7 +50,7 @@ TEST_F(EquationManagerTestSuite, shouldReturnCorrectlyConstraintFunctions)
     sut.convertToEquations("x1+1=3x1+5\nx1+1<=0\nx1+2<=0\nx1+3<=0");
 
     auto conFuns = sut.getConstraintFunctions();
-    ASSERT_EQ(conFun0, *conFuns[0]);
-    ASSERT_EQ(conFun1, *conFuns[1]);
-    ASSERT_EQ(conFun2, *conFuns[2]);
+    ASSERT_EQ(conFun0, conFuns[0]);
+    ASSERT_EQ(conFun1, conFuns[1]);
+    ASSERT_EQ(conFun2, conFuns[2]);
 }

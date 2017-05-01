@@ -8,5 +8,6 @@ void Controler::foo()
     auto text = objfun + "=0\n" + constraints;
     m_eqManager->convertToEquations(text.toStdString());
     auto text1 = m_eqManager->convertEquationsToString();
-    m_view.setTextToDispLogger(QString::fromStdString(text1));
+    auto asd = QString::fromStdString(text1);
+    m_view.setTextToDispLogger(asd);
 }

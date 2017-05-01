@@ -3,5 +3,9 @@
         <file>hammer.png</file>
         <file>calculator.png</file>
         <file>new-file.png</file>
+        <file>saveAs.png</file>
+        <file>save.png</file>
+        <file>exit.png</file>
+        <file>loadFile.png</file>
     </qresource>
 </RCC>

@@ -14,10 +14,10 @@ public:
     void convertToEquations(std::string equations);
     std::string convertEquationsToString() const;
     const Equation& getObjectiveFunction() const;
-    const std::vector<std::shared_ptr<Equation>>& getConstraintFunctions() const;
+    const std::vector<Equation> &getConstraintFunctions() const;
 
 private:
     std::shared_ptr<IEquationConventer> m_eqationConverter;
-    std::shared_ptr<Equation> m_objFun;
-    std::vector<std::shared_ptr<Equation>> m_constraintsVector;
+    Equation m_objFun;
+    std::vector<Equation> m_constraintsVector;
 };
