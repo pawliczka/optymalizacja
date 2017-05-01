@@ -246,7 +246,7 @@ void Simplex::DisturbTable()
 std::shared_ptr<LinearProblemSolution> Simplex::Solve()
 {
     //  Table.print();
-    State.Status = STATUS_BUSY;
+    State.Status = SimplexStatus::STATUS_BUSY;
     State.Case = LinProblemCase::ONE_SOLUTION;
     Solve1Phase();
     CheckNoSolutions();
@@ -254,14 +254,14 @@ std::shared_ptr<LinearProblemSolution> Simplex::Solve()
     switch (State.Case)
     {
         case LinProblemCase::INCONSISTENT:
-            State.Status = STATUS_WRONG_TABLE;
+            State.Status = SimplexStatus::STATUS_WRONG_TABLE;
             break;
         case LinProblemCase::NO_SOLUTIONS:
-            State.Status = STATUS_WRONG_TABLE;
+            State.Status = SimplexStatus::STATUS_WRONG_TABLE;
             break;
         default:
             Solve2Phase();
-            State.Status = STATUS_SOLVED;
+            State.Status = SimplexStatus::STATUS_SOLVED;
     }
 
     Solution->Case = State.Case;

@@ -11,7 +11,7 @@
  *  3. STATUS_SOLVED - algorytm zakonczyl dzialanie i zwrocił wynik
  *	4. STATUS_INITIALIZED - algorytm zostal poprawnie zainicjalizowany
  */
-enum SimplexStatus
+enum class SimplexStatus
 {
     STATUS_INITIALIZED,
     STATUS_BUSY,
@@ -21,7 +21,7 @@ enum SimplexStatus
 
 struct SimplexState
 {
-    SimplexStatus Status = STATUS_INITIALIZED;
+    SimplexStatus Status = SimplexStatus::STATUS_INITIALIZED;
     LinProblemCase Case = LinProblemCase::UNKNOWN;
     int LoopCnt1Phase = 0;
     int LoopCnt2Phase = 0;

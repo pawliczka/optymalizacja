@@ -13,10 +13,15 @@ LinearProblem::LinearProblem(OptimizeType _type)
     m = 0;
 }
 
-void LinearProblem::SetObjFunc(Equation& ObjFuncOrig)
+void LinearProblem::SetObjFunc(const Equation& ObjFuncOrig)
 {
+    n = ObjFuncOrig.getIndexOfLastCofficient();
+    if(type == OptimizeType::MIN)
+    {
+        ObjFunc = ObjFuncOrig.getWithNegativeSign();
+        return;
+    }
     ObjFunc = ObjFuncOrig;
-    n = ObjFunc.getIndexOfLastCofficient();
 }
 
 void LinearProblem::setConstrains(const std::vector<Equation>& constrains)

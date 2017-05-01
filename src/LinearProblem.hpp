@@ -28,7 +28,7 @@ public:
      * Tworzy funkcję celu na postawie przekazanej tablicy współczynników
      * rzeczywistych.
      */
-    void SetObjFunc(Equation& ObjFuncOrig);
+    void SetObjFunc(const Equation &ObjFuncOrig);
 
     /**
      * \brief Tworzy i dodaje ograniczenie do zbioru ograniczeń

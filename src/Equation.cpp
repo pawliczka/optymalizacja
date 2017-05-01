@@ -81,6 +81,15 @@ void Equation::setComparisonOperator(std::string comparisonOperator)
     m_comparisonOperator = convertStringToComparasionOperator(comparisonOperator);
 }
 
+Equation Equation::getWithNegativeSign() const
+{
+    std::vector<Coefficient> negative;
+    std::transform(m_coefficients.begin(),m_coefficients.end(),std::inserter(negative,negative.begin()),[](auto coef){
+        return -coef;
+    });
+    return Equation(negative,getComparisonOperator());
+}
+
 int Equation::getIndexOfLastCofficient() const
 {
     return m_coefficients.size() - 1;

@@ -24,6 +24,7 @@ public:
     void setCoefficient(Term term);
     void setComparisonOperator(ComparisonOperator comparisonOperator);
     void setComparisonOperator(std::string comparisonOperator);
+    Equation getWithNegativeSign() const;
     int getIndexOfLastCofficient() const;
     bool operator==(const Equation& equationSecond) const;
     std::string toString() const;
