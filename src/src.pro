@@ -19,9 +19,9 @@ SOURCES += \
     Equation.cpp \
     EquationManager.cpp \
     Controler.cpp \
-    simplex.cpp \
-    simplex_table.cpp \
-    linprog.cpp
+    Simplex.cpp \
+    SimplexTable.cpp \
+    LinProg.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -34,9 +34,10 @@ HEADERS += \
     EquationManager.hpp \
     Controler.hpp \
     IEquationManager.hpp \
-    simplex.hpp \
-    simplex_table.hpp \
-    linprog.hpp
+    SimplexTable.hpp \
+    Simplex.hpp \
+    LinProg.hpp \
+    LinearProblemCase.hpp
 
 FORMS += \
     mainwindow.ui

@@ -1,21 +1,16 @@
-#include "simplex.hpp"
-#include "linprog.hpp"
+#include "Simplex.hpp"
+#include "LinProg.hpp"
 #include <gmock/gmock.h>
 #include <vector>
 #include <iostream>
-
-
 
 class SimplexTestSuite : public testing::Test
 {
 };
 
-
-
 TEST_F(SimplexTestSuite, ExampleFromYouTube)
 {
-    LinProblem  linproblem(2, OptimizeType::MAX);
-
+    LinProblem linproblem(2, OptimizeType::MAX);
 
     std::vector<Equation> constrains = {
         {{5480, 420, 760}, ComparisonOperator::LessEqual},
@@ -31,7 +26,6 @@ TEST_F(SimplexTestSuite, ExampleFromYouTube)
     auto result = simplex.Solve();
 
     EXPECT_DOUBLE_EQ(3380, result->ObjFuncValue);
-
 }
 
 TEST_F(SimplexTestSuite, ExampleFromYouTube2)
@@ -50,6 +44,7 @@ TEST_F(SimplexTestSuite, ExampleFromYouTube2)
     Simplex simplex(linproblem);
 
     auto result = simplex.Solve();
+    EXPECT_DOUBLE_EQ(16.85, result->ObjFuncValue);
 }
 
 TEST_F(SimplexTestSuite, ExampleFromSzlachcicLecture)
@@ -71,9 +66,7 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicLecture)
     auto result = simplex.Solve();
 
     EXPECT_DOUBLE_EQ(31./4., result->ObjFuncValue);
-
 }
-
 
 TEST_F(SimplexTestSuite, sz1)
 {
@@ -93,7 +86,6 @@ TEST_F(SimplexTestSuite, sz1)
 
     auto result = simplex.Solve();
 }
-
 
 //For original "RAK" implementation:
 //TEST_F(SimplexTestSuite, ExampleFromYouTube)
