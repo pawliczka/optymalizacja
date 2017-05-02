@@ -38,5 +38,4 @@ private:
 
     std::vector<Coefficient> m_coefficients;
     ComparisonOperator m_comparisonOperator;
-    bool m_isFirstElementPrinted = false;
 };

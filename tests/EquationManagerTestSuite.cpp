@@ -54,3 +54,16 @@ TEST_F(EquationManagerTestSuite, shouldReturnCorrectlyConstraintFunctions)
     ASSERT_EQ(conFun1, conFuns[1]);
     ASSERT_EQ(conFun2, conFuns[2]);
 }
+
+TEST_F(EquationManagerTestSuite, shouldResizeFunctions)
+{
+    auto objFun = Equation({-4, -2}, ComparisonOperator::Equal);
+    auto conFun0 = Equation({-1, 1, 0, 0, 1}, ComparisonOperator::LessEqual);
+    auto objFunReturned = Equation({-4, -2, 0, 0, 0}, ComparisonOperator::Equal);
+
+    EXPECT_CALL(*m_equationConventerMock, convert("x1+1=3x1+5")).WillOnce(Return(objFun));
+    EXPECT_CALL(*m_equationConventerMock, convert("x4+x1-1<=0")).WillOnce(Return(conFun0));
+    sut.convertToEquations("x1+1=3x1+5\nx4+x1-1<=0");
+
+    ASSERT_EQ(objFunReturned, sut.getObjectiveFunction());
+}
