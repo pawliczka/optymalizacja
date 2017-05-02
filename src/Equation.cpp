@@ -81,7 +81,7 @@ void Equation::setComparisonOperator(ComparisonOperator comparisonOperator)
     m_comparisonOperator = comparisonOperator;
 }
 
-void Equation::setComparisonOperator(const std::__cxx11::string &comparisonOperator)
+void Equation::setComparisonOperator(const std:: string &comparisonOperator)
 {
     m_comparisonOperator = convertStringToComparasionOperator(comparisonOperator);
 }

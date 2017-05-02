@@ -13,8 +13,8 @@ TEST_F(SimplexTestSuite, ExampleFromYouTube)
     LinearProblem linproblem(OptimizeType::MAX);
 
     std::vector<Equation> constrains = {
-        {{5480, 420, 760}, ComparisonOperator::LessEqual},
-        {{61, 9, 5}, ComparisonOperator::LessEqual}};
+        {{-5480, 420, 760}, ComparisonOperator::LessEqual},
+        {{-61, 9, 5}, ComparisonOperator::LessEqual}};
 
     Equation objectiveFunction = {{0, 340, 404}, ComparisonOperator::Equal};
 
@@ -36,8 +36,8 @@ TEST_F(SimplexTestSuite, ExampleFromYouTube2)
     LinearProblem linproblem(OptimizeType::MAX);
 
     std::vector<Equation> constrains = {
-        {{24, 3, 4}, ComparisonOperator::LessEqual},
-        {{22, 2, 5}, ComparisonOperator::LessEqual}};
+        {{-24, 3, 4}, ComparisonOperator::LessEqual},
+        {{-22, 2, 5}, ComparisonOperator::LessEqual}};
 
     Equation objectiveFunction = {{0, 2, 3}, ComparisonOperator::Equal};
 
@@ -59,9 +59,9 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicLecture)
     LinearProblem  linproblem(OptimizeType::MAX);
 
     std::vector<Equation> constrains = {
-        {{5, 1, 1}, ComparisonOperator::LessEqual},
-        {{0, -1, 1}, ComparisonOperator::LessEqual},
-        {{21, 6, 2}, ComparisonOperator::LessEqual}};
+        {{-5, 1, 1}, ComparisonOperator::LessEqual},
+        {{-0, -1, 1}, ComparisonOperator::LessEqual},
+        {{-21, 6, 2}, ComparisonOperator::LessEqual}};
 
     Equation objectiveFunction = {{0, 2, 1}, ComparisonOperator::Equal};
 
@@ -83,9 +83,9 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicLecture1)
     LinearProblem  linproblem(OptimizeType::MAX);
 
     std::vector<Equation> constrains = {
-        {{2, 2, 1}, ComparisonOperator::GreaterEqual},
-        {{3, -1, 1}, ComparisonOperator::LessEqual},
-        {{6, 1, 1}, ComparisonOperator::LessEqual}};
+        {{-2, 2, 1}, ComparisonOperator::GreaterEqual},
+        {{-3, -1, 1}, ComparisonOperator::LessEqual},
+        {{-6, 1, 1}, ComparisonOperator::LessEqual}};
 
     Equation objectiveFunction = {{0, 1, 6}, ComparisonOperator::Equal};
 
@@ -107,9 +107,9 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicLecture3)
     LinearProblem  linproblem(OptimizeType::MAX);
 
     std::vector<Equation> constrains = {
-        {{2, -0.5, 2, 1}, ComparisonOperator::LessEqual},
-        {{3, -0.5, 2, -1}, ComparisonOperator::GreaterEqual},
-        {{2, 0, 1, -1}, ComparisonOperator::LessEqual}};
+        {{-2, -0.5, 2, 1}, ComparisonOperator::LessEqual},
+        {{-3, -0.5, 2, -1}, ComparisonOperator::GreaterEqual},
+        {{-2, 0, 1, -1}, ComparisonOperator::LessEqual}};
 
     Equation objectiveFunction = {{0, 0.5, -1, -1}, ComparisonOperator::Equal};
 
@@ -127,8 +127,8 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicLecture4)
     LinearProblem  linproblem(OptimizeType::MAX);
 
     std::vector<Equation> constrains = {
-        {{4, -1, 1}, ComparisonOperator::LessEqual},
-        {{6, 2, 1}, ComparisonOperator::LessEqual}};
+        {{-4, -1, 1}, ComparisonOperator::LessEqual},
+        {{-6, 2, 1}, ComparisonOperator::LessEqual}};
 
     Equation objectiveFunction = {{0, 4, 2}, ComparisonOperator::Equal};
 
@@ -149,8 +149,8 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicLecture5)
     LinearProblem  linproblem(OptimizeType::MAX);
 
     std::vector<Equation> constrains = {
-        {{1, -2, 1}, ComparisonOperator::LessEqual},
-        {{4, -1, 2}, ComparisonOperator::LessEqual}};
+        {{-1, -2, 1}, ComparisonOperator::LessEqual},
+        {{-4, -1, 2}, ComparisonOperator::LessEqual}};
 
     Equation objectiveFunction = {{0, -2, 4}, ComparisonOperator::Equal};
 
@@ -171,8 +171,8 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicLecture6)
     LinearProblem  linproblem(OptimizeType::MAX);
 
     std::vector<Equation> constrains = {
-        {{4, 1, 1}, ComparisonOperator::LessEqual},
-        {{-2, 1, -1}, ComparisonOperator::LessEqual}};
+        {{-4, 1, 1}, ComparisonOperator::LessEqual},
+        {{2, 1, -1}, ComparisonOperator::LessEqual}};
 
     Equation objectiveFunction = {{0, 1, 4}, ComparisonOperator::Equal};
 
@@ -193,9 +193,9 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicLecture7)
     LinearProblem  linproblem(OptimizeType::MIN);
 
     std::vector<Equation> constrains = {
-        {{8, 1, 2}, ComparisonOperator::GreaterEqual},
-        {{6, 2, 1}, ComparisonOperator::GreaterEqual},
-        {{5, 1, 1}, ComparisonOperator::GreaterEqual}};
+        {{-8, 1, 2}, ComparisonOperator::GreaterEqual},
+        {{-6, 2, 1}, ComparisonOperator::GreaterEqual},
+        {{-5, 1, 1}, ComparisonOperator::GreaterEqual}};
 
     Equation objectiveFunction = {{0, 1, 1}, ComparisonOperator::Equal};
 
@@ -216,8 +216,8 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicLecture8)
     LinearProblem  linproblem(OptimizeType::MIN);
 
     std::vector<Equation> constrains = {
-        {{2, -1, -1}, ComparisonOperator::GreaterEqual},
-        {{1, -1, 1}, ComparisonOperator::GreaterEqual}};
+        {{-2, -1, -1}, ComparisonOperator::GreaterEqual},
+        {{-1, -1, 1}, ComparisonOperator::GreaterEqual}};
 
     Equation objectiveFunction = {{0, -1, -1}, ComparisonOperator::Equal};
 
@@ -236,9 +236,9 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples1)
     LinearProblem  linproblem(OptimizeType::MAX);
 
     std::vector<Equation> constrains = {
-        {{3, -2, 1}, ComparisonOperator::LessEqual},
-        {{6, 1, 1}, ComparisonOperator::LessEqual},
-        {{20, 5, 2}, ComparisonOperator::LessEqual}};
+        {{-3, -2, 1}, ComparisonOperator::LessEqual},
+        {{-6, 1, 1}, ComparisonOperator::LessEqual},
+        {{-20, 5, 2}, ComparisonOperator::LessEqual}};
 
     Equation objectiveFunction = {{0, 1, -1}, ComparisonOperator::Equal};
 
@@ -260,9 +260,9 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples2)
     LinearProblem  linproblem(OptimizeType::MAX);
 
     std::vector<Equation> constrains = {
-        {{3, -2, 1}, ComparisonOperator::LessEqual},
-        {{6, 1, 1}, ComparisonOperator::LessEqual},
-        {{20, 5, 2}, ComparisonOperator::LessEqual}};
+        {{-3, -2, 1}, ComparisonOperator::LessEqual},
+        {{-6, 1, 1}, ComparisonOperator::LessEqual},
+        {{-20, 5, 2}, ComparisonOperator::LessEqual}};
 
     Equation objectiveFunction = {{0, 1, 1}, ComparisonOperator::Equal};
 
@@ -284,9 +284,9 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples3)
     LinearProblem  linproblem(OptimizeType::MAX);
 
     std::vector<Equation> constrains = {
-        {{3, -2, 1}, ComparisonOperator::LessEqual},
-        {{6, 1, 1}, ComparisonOperator::LessEqual},
-        {{20, 5, 2}, ComparisonOperator::LessEqual}};
+        {{-3, -2, 1}, ComparisonOperator::LessEqual},
+        {{-6, 1, 1}, ComparisonOperator::LessEqual},
+        {{-20, 5, 2}, ComparisonOperator::LessEqual}};
 
     Equation objectiveFunction = {{0, 1, 2}, ComparisonOperator::Equal};
 
@@ -308,9 +308,9 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples4)
     LinearProblem  linproblem(OptimizeType::MIN);
 
     std::vector<Equation> constrains = {
-        {{3, -2, 1}, ComparisonOperator::LessEqual},
-        {{6, 1, 1}, ComparisonOperator::LessEqual},
-        {{20, 5, 2}, ComparisonOperator::LessEqual}};
+        {{-3, -2, 1}, ComparisonOperator::LessEqual},
+        {{-6, 1, 1}, ComparisonOperator::LessEqual},
+        {{-20, 5, 2}, ComparisonOperator::LessEqual}};
 
     Equation objectiveFunction = {{0, 1, -1}, ComparisonOperator::Equal};
 
@@ -332,8 +332,8 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples5)
     LinearProblem  linproblem(OptimizeType::MAX);
 
     std::vector<Equation> constrains = {
-        {{2, -2, 1}, ComparisonOperator::GreaterEqual},
-        {{2, 1, -2}, ComparisonOperator::GreaterEqual}};
+        {{-2, -2, 1}, ComparisonOperator::GreaterEqual},
+        {{-2, 1, -2}, ComparisonOperator::GreaterEqual}};
 
     Equation objectiveFunction = {{0, 1, 2}, ComparisonOperator::Equal};
 
@@ -351,8 +351,8 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples6)
     LinearProblem  linproblem(OptimizeType::MAX);
 
     std::vector<Equation> constrains = {
-        {{2, 1, -1}, ComparisonOperator::LessEqual},
-        {{2, -1, -1}, ComparisonOperator::GreaterEqual}};
+        {{-2, 1, -1}, ComparisonOperator::LessEqual},
+        {{-2, -1, -1}, ComparisonOperator::GreaterEqual}};
 
     Equation objectiveFunction = {{0, 1, 2}, ComparisonOperator::Equal};
 
@@ -370,8 +370,8 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples7)
     LinearProblem  linproblem(OptimizeType::MIN);
 
     std::vector<Equation> constrains = {
-        {{2100, 7, 3, 0}, ComparisonOperator::GreaterEqual},
-        {{1200, 0, 1, 2}, ComparisonOperator::GreaterEqual}};
+        {{-2100, 7, 3, 0}, ComparisonOperator::GreaterEqual},
+        {{-1200, 0, 1, 2}, ComparisonOperator::GreaterEqual}};
 
     Equation objectiveFunction = {{0, 0.3, 0.6, 0.2}, ComparisonOperator::Equal};
 
@@ -394,8 +394,8 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples8)
     LinearProblem  linproblem(OptimizeType::MAX);
 
     std::vector<Equation> constrains = {
-        {{2, -2, 1}, ComparisonOperator::GreaterEqual},
-        {{2, 1, -2}, ComparisonOperator::GreaterEqual}};
+        {{-2, -2, 1}, ComparisonOperator::GreaterEqual},
+        {{-2, 1, -2}, ComparisonOperator::GreaterEqual}};
 
     Equation objectiveFunction = {{0, 2100, 1200}, ComparisonOperator::Equal};
 
@@ -414,9 +414,9 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples9)
     LinearProblem  linproblem(OptimizeType::MAX);
 
     std::vector<Equation> constrains = {
-        {{100, 1, 1}, ComparisonOperator::LessEqual},
-        {{720, 6, 9}, ComparisonOperator::LessEqual},
-        {{60, 0, 1}, ComparisonOperator::LessEqual}};
+        {{-100, 1, 1}, ComparisonOperator::LessEqual},
+        {{-720, 6, 9}, ComparisonOperator::LessEqual},
+        {{-60, 0, 1}, ComparisonOperator::LessEqual}};
 
     Equation objectiveFunction = {{0, 1, 2}, ComparisonOperator::Equal};
 
@@ -438,9 +438,9 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples10)
     LinearProblem  linproblem(OptimizeType::MAX);
 
     std::vector<Equation> constrains = {
-        {{1, -1, 1}, ComparisonOperator::LessEqual},
-        {{5, 1, 2}, ComparisonOperator::GreaterEqual},
-        {{3, 1, 0}, ComparisonOperator::LessEqual}};
+        {{-1, -1, 1}, ComparisonOperator::LessEqual},
+        {{-5, 1, 2}, ComparisonOperator::GreaterEqual},
+        {{-3, 1, 0}, ComparisonOperator::LessEqual}};
 
     Equation objectiveFunction = {{0, 1, 1}, ComparisonOperator::Equal};
 
@@ -462,9 +462,9 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples11)
     LinearProblem  linproblem(OptimizeType::MIN);
 
     std::vector<Equation> constrains = {
-        {{1, -1, 1}, ComparisonOperator::LessEqual},
-        {{5, 1, 2}, ComparisonOperator::GreaterEqual},
-        {{3, 1, 0}, ComparisonOperator::LessEqual}};
+        {{-1, -1, 1}, ComparisonOperator::LessEqual},
+        {{-5, 1, 2}, ComparisonOperator::GreaterEqual},
+        {{-3, 1, 0}, ComparisonOperator::LessEqual}};
 
     Equation objectiveFunction = {{0, 1, -4}, ComparisonOperator::Equal};
 
@@ -486,8 +486,8 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples12)
     LinearProblem  linproblem(OptimizeType::MIN);
 
     std::vector<Equation> constrains = {
-        {{12000, 4, 1, 8, 5, 2, 0}, ComparisonOperator::GreaterEqual},
-        {{18000, 0, 1, 0, 1, 2, 3}, ComparisonOperator::GreaterEqual}};
+        {{-12000, 4, 1, 8, 5, 2, 0}, ComparisonOperator::GreaterEqual},
+        {{-18000, 0, 1, 0, 1, 2, 3}, ComparisonOperator::GreaterEqual}};
 
     Equation objectiveFunction = {{0, 0.1, 0.2, 0.2, 0.3, 0.4, 0}, ComparisonOperator::Equal};
 
@@ -506,9 +506,9 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples13)
     LinearProblem  linproblem(OptimizeType::MIN);
 
     std::vector<Equation> constrains = {
-        {{6, 1, 2}, ComparisonOperator::LessEqual},
-        {{2, 1, 2}, ComparisonOperator::GreaterEqual},
-        {{2, 2, -1}, ComparisonOperator::LessEqual}};
+        {{-6, 1, 2}, ComparisonOperator::LessEqual},
+        {{-2, 1, 2}, ComparisonOperator::GreaterEqual},
+        {{-2, 2, -1}, ComparisonOperator::LessEqual}};
 
     Equation objectiveFunction = {{0, -2, 1}, ComparisonOperator::Equal};
 
@@ -530,8 +530,8 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples14)
     LinearProblem  linproblem(OptimizeType::MIN);
 
     std::vector<Equation> constrains = {
-        {{2, 1, 2}, ComparisonOperator::GreaterEqual},
-        {{2, 2, -1}, ComparisonOperator::LessEqual}};
+        {{-2, 1, 2}, ComparisonOperator::GreaterEqual},
+        {{-2, 2, -1}, ComparisonOperator::LessEqual}};
 
     Equation objectiveFunction = {{0, -2, 1}, ComparisonOperator::Equal};
 
@@ -553,10 +553,10 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples15)
     LinearProblem  linproblem(OptimizeType::MIN);
 
     std::vector<Equation> constrains = {
-        {{4, 1, 2}, ComparisonOperator::GreaterEqual},
-        {{6, 2, 2}, ComparisonOperator::GreaterEqual},
-        {{3, 1.5, 1.5}, ComparisonOperator::GreaterEqual},
-        {{12, 6, 4}, ComparisonOperator::GreaterEqual}};
+        {{-4, 1, 2}, ComparisonOperator::GreaterEqual},
+        {{-6, 2, 2}, ComparisonOperator::GreaterEqual},
+        {{-3, 1.5, 1.5}, ComparisonOperator::GreaterEqual},
+        {{-12, 6, 4}, ComparisonOperator::GreaterEqual}};
 
     Equation objectiveFunction = {{0, 900, 1200}, ComparisonOperator::Equal};
 
@@ -578,9 +578,9 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples16)
     LinearProblem  linproblem(OptimizeType::MAX);
 
     std::vector<Equation> constrains = {
-        {{5, 1, 2}, ComparisonOperator::GreaterEqual},
-        {{1, -1, 1}, ComparisonOperator::LessEqual},
-        {{3, 1, 0}, ComparisonOperator::LessEqual}};
+        {{-5, 1, 2}, ComparisonOperator::GreaterEqual},
+        {{-1, -1, 1}, ComparisonOperator::LessEqual},
+        {{-3, 1, 0}, ComparisonOperator::LessEqual}};
 
     Equation objectiveFunction = {{0, 1, 1}, ComparisonOperator::Equal};
 

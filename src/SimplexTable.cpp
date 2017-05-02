@@ -19,12 +19,12 @@ void SimplexTable::ConstrToRow(Equation Constr, int Row)
     switch (Constr.getComparisonOperator())
     {
         case ComparisonOperator::GreaterEqual:
-            Tab[Row][0] = -Constr.getCoefficient(0);
+            Tab[Row][0] = Constr.getCoefficient(0);
             for (int j = 1; j < numCols; j++)
                 Tab[Row][j] = -Constr.getCoefficient(j);
             break;
         case ComparisonOperator::LessEqual:
-            Tab[Row][0] = Constr.getCoefficient(0);
+            Tab[Row][0] = -Constr.getCoefficient(0);
             for (int j = 1; j < numCols; j++)
                 Tab[Row][j] = Constr.getCoefficient(j);
             break;
