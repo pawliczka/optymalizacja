@@ -1,7 +1,8 @@
 #include "Controler.hpp"
 #include <QString>
+#include <QDebug>
 
-void Controler::foo()
+void Controler::calculate()
 {
     auto objfun = m_view.getTextFromTextObjFun();
     auto constraints = m_view.getTextFromTextConFun();

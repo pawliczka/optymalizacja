@@ -37,9 +37,20 @@ QString MainWindow::getTextFromTextConFun() const
 {
     return ui->text_conFun->toPlainText();
 }
+
+QString MainWindow::getOptymalizationType() const
+{
+    return ui->comb_type->currentText();
+}
+
 void MainWindow::setTextToDispLogger(QString text)
 {
     ui->disp_logger->append(text);
+}
+
+float MainWindow::getPrecision() const
+{
+    return ui->text_precision->text().toFloat();
 }
 
 void MainWindow::closeAplication()

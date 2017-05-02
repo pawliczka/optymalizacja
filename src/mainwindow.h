@@ -20,6 +20,8 @@ public:
     QPushButton* getCalcBtn() const;
     QString getTextFromTextObjFun() const;
     QString getTextFromTextConFun() const;
+    QString getOptymalizationType() const;
+    float getPrecision() const;
     void setTextToDispLogger(QString text);
 
 private:

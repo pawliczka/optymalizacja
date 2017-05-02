@@ -11,11 +11,11 @@ public:
     Controler(MainWindow& view)
         : m_view(view)
     {
-        connect(m_view.getCalcBtn(), &QPushButton::clicked, this, &Controler::foo);
+        connect(m_view.getCalcBtn(), &QPushButton::clicked, this, &Controler::calculate);
     }
 
     slots public:
-    void foo();
+    void calculate();
 
 private:
     MainWindow& m_view;

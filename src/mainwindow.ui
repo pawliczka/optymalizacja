@@ -19,6 +19,52 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QPushButton" name="btn_calc">
+        <property name="text">
+         <string>Calculate</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_optType">
+        <property name="text">
+         <string>Rodzaj optymalizacji:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="comb_type">
+        <item>
+         <property name="text">
+          <string>MAX</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>MIN</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_precision">
+        <property name="text">
+         <string>Precyzja:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="text_precision">
+        <property name="text">
+         <string>0.0001</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
     <item row="1" column="0">
      <widget class="QLabel" name="label_objFun">
       <property name="text">
@@ -33,13 +79,6 @@
       </property>
       <property name="backgroundVisible">
        <bool>false</bool>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="0">
-     <widget class="QPushButton" name="btn_calc">
-      <property name="text">
-       <string>Calculate</string>
       </property>
      </widget>
     </item>
