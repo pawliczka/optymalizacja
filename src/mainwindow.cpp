@@ -30,7 +30,7 @@ QPushButton* MainWindow::getCalcBtn() const
 
 QString MainWindow::getTextFromTextObjFun() const
 {
-    return ui->text_objFun->toPlainText();
+    return ui->text_objFun->text();
 }
 
 QString MainWindow::getTextFromTextConFun() const
@@ -72,7 +72,7 @@ void MainWindow::openFile()
     if (!sFile.atEnd())
     {
         QString objFun = sFile.readLine();
-        ui->text_objFun->setPlainText(objFun);
+        ui->text_objFun->setText(objFun);
     }
     QString consFun;
     while (!sFile.atEnd())

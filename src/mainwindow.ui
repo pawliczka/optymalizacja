@@ -72,16 +72,6 @@
       </property>
      </widget>
     </item>
-    <item row="2" column="0">
-     <widget class="QPlainTextEdit" name="text_objFun">
-      <property name="enabled">
-       <bool>true</bool>
-      </property>
-      <property name="backgroundVisible">
-       <bool>false</bool>
-      </property>
-     </widget>
-    </item>
     <item row="3" column="0">
      <widget class="QLabel" name="label_conFun">
       <property name="text">
@@ -101,6 +91,9 @@
     </item>
     <item row="6" column="0">
      <widget class="QTextBrowser" name="disp_logger"/>
+    </item>
+    <item row="2" column="0">
+     <widget class="QLineEdit" name="text_objFun"/>
     </item>
    </layout>
   </widget>
@@ -127,19 +120,13 @@
     <addaction name="separator"/>
     <addaction name="actionZamknij"/>
    </widget>
-   <widget class="QMenu" name="menuOpcje">
-    <property name="title">
-     <string>Op&amp;cje</string>
-    </property>
-   </widget>
    <widget class="QMenu" name="menuPomoc">
     <property name="title">
-     <string>Pomoc</string>
+     <string>Pomo&amp;c</string>
     </property>
     <addaction name="actionTw_rcy"/>
    </widget>
    <addaction name="menuPlik"/>
-   <addaction name="menuOpcje"/>
    <addaction name="menuPomoc"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
