@@ -26,6 +26,8 @@ TEST_F(SimplexTestSuite, ExampleFromYouTube)
 
     EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.Status);
     EXPECT_EQ(LinearProblemCase::ONE_SOLUTION, result->Case);
+    EXPECT_EQ(0, simplex.LoopCnt1Phase);
+    EXPECT_EQ(2, simplex.LoopCnt2Phase);
     EXPECT_FLOAT_EQ(4,result->VariableValues[0]);
     EXPECT_FLOAT_EQ(5,result->VariableValues[1]);
     EXPECT_FLOAT_EQ(3380, result->ObjFuncValue);
@@ -49,6 +51,8 @@ TEST_F(SimplexTestSuite, ExampleFromYouTube2)
 
     EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.Status);
     EXPECT_EQ(LinearProblemCase::ONE_SOLUTION, result->Case);
+    EXPECT_EQ(0, simplex.LoopCnt1Phase);
+    EXPECT_EQ(2, simplex.LoopCnt2Phase);
     EXPECT_FLOAT_EQ(32./7.,result->VariableValues[0]);
     EXPECT_FLOAT_EQ(18./7.,result->VariableValues[1]);
     EXPECT_FLOAT_EQ(118./7., result->ObjFuncValue);
@@ -73,6 +77,8 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicLecture)
 
     EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.Status);
     EXPECT_EQ(LinearProblemCase::ONE_SOLUTION, result->Case);
+    EXPECT_EQ(0, simplex.LoopCnt1Phase);
+    EXPECT_EQ(2, simplex.LoopCnt2Phase);
     EXPECT_FLOAT_EQ(11./4.,result->VariableValues[0]);
     EXPECT_FLOAT_EQ(9./4.,result->VariableValues[1]);
     EXPECT_FLOAT_EQ(31./4., result->ObjFuncValue);
@@ -97,6 +103,8 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicLecture1)
 
     EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.Status);
     EXPECT_EQ(LinearProblemCase::ONE_SOLUTION, result->Case);
+    EXPECT_EQ(1, simplex.LoopCnt1Phase);
+    EXPECT_EQ(3, simplex.LoopCnt2Phase);
     EXPECT_FLOAT_EQ(1.5, result->VariableValues[0]);
     EXPECT_FLOAT_EQ(4.5, result->VariableValues[1]);
     EXPECT_FLOAT_EQ(28.5, result->ObjFuncValue);
@@ -140,6 +148,8 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicLecture4)
     std::shared_ptr<LinearProblemSolution> result = simplex.Solve();
     EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.Status);
     EXPECT_EQ(LinearProblemCase::INF_SOLUTIONS_BOUND, result->Case);
+    EXPECT_EQ(0, simplex.LoopCnt1Phase);
+    EXPECT_EQ(1, simplex.LoopCnt2Phase);
     EXPECT_FLOAT_EQ(3, result->VariableValues[0]);
     EXPECT_FLOAT_EQ(0, result->VariableValues[1]);
     EXPECT_FLOAT_EQ(12, result->ObjFuncValue);
@@ -162,6 +172,8 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicLecture5)
     std::shared_ptr<LinearProblemSolution> result = simplex.Solve();
     EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.Status);
     EXPECT_EQ(LinearProblemCase::INF_SOLUTIONS_UNBOUND, result->Case);
+    EXPECT_EQ(0, simplex.LoopCnt1Phase);
+    EXPECT_EQ(2, simplex.LoopCnt2Phase);
     EXPECT_FLOAT_EQ(2./3., result->VariableValues[0]);
     EXPECT_FLOAT_EQ(7./3., result->VariableValues[1]);
     EXPECT_FLOAT_EQ(8, result->ObjFuncValue);
@@ -184,6 +196,8 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicLecture6)
     std::shared_ptr<LinearProblemSolution> result = simplex.Solve();
     EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.Status);
     EXPECT_EQ(LinearProblemCase::ONE_SOLUTION, result->Case);
+    EXPECT_EQ(1, simplex.LoopCnt1Phase);
+    EXPECT_EQ(2, simplex.LoopCnt2Phase);
     EXPECT_FLOAT_EQ(0, result->VariableValues[0]);
     EXPECT_FLOAT_EQ(4, result->VariableValues[1]);
     EXPECT_FLOAT_EQ(16, result->ObjFuncValue);
@@ -207,6 +221,8 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicLecture7)
     std::shared_ptr<LinearProblemSolution> result = simplex.Solve();
     EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.Status);
     EXPECT_EQ(LinearProblemCase::INF_SOLUTIONS_BOUND, result->Case);
+    EXPECT_EQ(3, simplex.LoopCnt1Phase);
+    EXPECT_EQ(0, simplex.LoopCnt2Phase);
     EXPECT_FLOAT_EQ(1, result->VariableValues[0]);
     EXPECT_FLOAT_EQ(4, result->VariableValues[1]);
     EXPECT_FLOAT_EQ(5, result->ObjFuncValue);
@@ -251,6 +267,8 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples1)
 
     EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.Status);
     EXPECT_EQ(LinearProblemCase::ONE_SOLUTION, result->Case);
+    EXPECT_EQ(0, simplex.LoopCnt1Phase);
+    EXPECT_EQ(1, simplex.LoopCnt2Phase);
     EXPECT_FLOAT_EQ(4, result->VariableValues[0]);
     EXPECT_FLOAT_EQ(0, result->VariableValues[1]);
     EXPECT_FLOAT_EQ(4, result->ObjFuncValue);
@@ -275,6 +293,8 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples2)
 
     EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.Status);
     EXPECT_EQ(LinearProblemCase::INF_SOLUTIONS_BOUND, result->Case);
+    EXPECT_EQ(0, simplex.LoopCnt1Phase);
+    EXPECT_EQ(2, simplex.LoopCnt2Phase);
     EXPECT_FLOAT_EQ(8./3., result->VariableValues[0]);
     EXPECT_FLOAT_EQ(10./3., result->VariableValues[1]);
     EXPECT_FLOAT_EQ(6, result->ObjFuncValue);
@@ -299,6 +319,8 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples3)
 
     EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.Status);
     EXPECT_EQ(LinearProblemCase::ONE_SOLUTION, result->Case);
+    EXPECT_EQ(0, simplex.LoopCnt1Phase);
+    EXPECT_EQ(2, simplex.LoopCnt2Phase);
     EXPECT_FLOAT_EQ(1, result->VariableValues[0]);
     EXPECT_FLOAT_EQ(5, result->VariableValues[1]);
     EXPECT_FLOAT_EQ(11, result->ObjFuncValue);
@@ -323,6 +345,8 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples4)
 
     EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.Status);
     EXPECT_EQ(LinearProblemCase::ONE_SOLUTION, result->Case);
+    EXPECT_EQ(0, simplex.LoopCnt1Phase);
+    EXPECT_EQ(2, simplex.LoopCnt2Phase);
     EXPECT_FLOAT_EQ(1, result->VariableValues[0]);
     EXPECT_FLOAT_EQ(5, result->VariableValues[1]);
     EXPECT_FLOAT_EQ(-4, result->ObjFuncValue);
@@ -384,6 +408,8 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples7)
 
     EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.Status);
     EXPECT_EQ(LinearProblemCase::ONE_SOLUTION, result->Case);
+    EXPECT_EQ(2, simplex.LoopCnt1Phase);
+    EXPECT_EQ(0, simplex.LoopCnt2Phase);
     EXPECT_FLOAT_EQ(300, result->VariableValues[0]);
     EXPECT_FLOAT_EQ(0, result->VariableValues[1]);
     EXPECT_FLOAT_EQ(600, result->VariableValues[2]);
@@ -429,6 +455,8 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples9)
 
     EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.Status);
     EXPECT_EQ(LinearProblemCase::ONE_SOLUTION, result->Case);
+    EXPECT_EQ(0, simplex.LoopCnt1Phase);
+    EXPECT_EQ(2, simplex.LoopCnt2Phase);
     EXPECT_FLOAT_EQ(30, result->VariableValues[0]);
     EXPECT_FLOAT_EQ(60, result->VariableValues[1]);
     EXPECT_FLOAT_EQ(150, result->ObjFuncValue);
@@ -453,6 +481,8 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples10)
 
     EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.Status);
     EXPECT_EQ(LinearProblemCase::ONE_SOLUTION, result->Case);
+    EXPECT_EQ(2, simplex.LoopCnt1Phase);
+    EXPECT_EQ(1, simplex.LoopCnt2Phase);
     EXPECT_FLOAT_EQ(3, result->VariableValues[0]);
     EXPECT_FLOAT_EQ(4, result->VariableValues[1]);
     EXPECT_FLOAT_EQ(7, result->ObjFuncValue);
@@ -477,6 +507,8 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples11)
 
     EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.Status);
     EXPECT_EQ(LinearProblemCase::ONE_SOLUTION, result->Case);
+    EXPECT_EQ(2, simplex.LoopCnt1Phase);
+    EXPECT_EQ(1, simplex.LoopCnt2Phase);
     EXPECT_FLOAT_EQ(3, result->VariableValues[0]);
     EXPECT_FLOAT_EQ(4, result->VariableValues[1]);
     EXPECT_FLOAT_EQ(-13, result->ObjFuncValue);
@@ -521,6 +553,8 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples13)
 
     EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.Status);
     EXPECT_EQ(LinearProblemCase::INF_SOLUTIONS_BOUND, result->Case);
+    EXPECT_EQ(1, simplex.LoopCnt1Phase);
+    EXPECT_EQ(1, simplex.LoopCnt2Phase);
     EXPECT_FLOAT_EQ(1.2, result->VariableValues[0]);
     EXPECT_FLOAT_EQ(0.4, result->VariableValues[1]);
     EXPECT_FLOAT_EQ(-2, result->ObjFuncValue);
@@ -544,6 +578,8 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples14)
 
     EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.Status);
     EXPECT_EQ(LinearProblemCase::INF_SOLUTIONS_UNBOUND, result->Case);
+    EXPECT_EQ(1, simplex.LoopCnt1Phase);
+    EXPECT_EQ(1, simplex.LoopCnt2Phase);
     EXPECT_FLOAT_EQ(1.2, result->VariableValues[0]);
     EXPECT_FLOAT_EQ(0.4, result->VariableValues[1]);
     EXPECT_FLOAT_EQ(-2, result->ObjFuncValue);
@@ -569,6 +605,8 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples15)
 
     EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.Status);
     EXPECT_EQ(LinearProblemCase::ONE_SOLUTION, result->Case);
+    EXPECT_EQ(4, simplex.LoopCnt1Phase);
+    EXPECT_EQ(1, simplex.LoopCnt2Phase);
     EXPECT_FLOAT_EQ(2, result->VariableValues[0]);
     EXPECT_FLOAT_EQ(1, result->VariableValues[1]);
     EXPECT_FLOAT_EQ(3000, result->ObjFuncValue);
@@ -593,6 +631,8 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples16)
 
     EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.Status);
     EXPECT_EQ(LinearProblemCase::ONE_SOLUTION, result->Case);
+    EXPECT_EQ(2, simplex.LoopCnt1Phase);
+    EXPECT_EQ(1, simplex.LoopCnt2Phase);
     EXPECT_FLOAT_EQ(3, result->VariableValues[0]);
     EXPECT_FLOAT_EQ(4, result->VariableValues[1]);
     EXPECT_FLOAT_EQ(7, result->ObjFuncValue);
