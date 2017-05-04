@@ -1,5 +1,4 @@
 ﻿#include "Simplex.hpp"
-#include <assert.h>
 #include <iostream>
 #include <QDebug>
 
@@ -27,7 +26,7 @@ void Simplex::CheckNoSolutions()
                 }
             if (NoSolutions)
             {
-                State.Case = LinProblemCase::NO_SOLUTIONS;
+                Solution->Case = LinearProblemCase::NO_SOLUTIONS;
                 return;
             }
         }
@@ -50,7 +49,7 @@ void Simplex::CheckInconsistent()
 
             if (Inconsistent)
             {
-                State.Case = LinProblemCase::INCONSISTENT;
+                Solution->Case = LinearProblemCase::INCONSISTENT;
                 return;
             }
         }
@@ -64,7 +63,7 @@ void Simplex::CheckInfSolutionsBounded()
             for (int i = 1; i < Table.getnumRows(); i++)
                 if (Table.getTabElem(i, 0) > 0 && Table.getTabElem(i, j) > 0)
                 {
-                    State.Case = LinProblemCase::INF_SOLUTIONS_BOUND;
+                    Solution->Case = LinearProblemCase::INF_SOLUTIONS_BOUND;
                     return;
                 }
         }
@@ -87,7 +86,7 @@ void Simplex::CheckInfSolutionsUnbounded()
 
             if (InfSolutionsUnbound)
             {
-                State.Case = LinProblemCase::INF_SOLUTIONS_UNBOUND;
+                Solution->Case = LinearProblemCase::INF_SOLUTIONS_UNBOUND;
                 return;
             }
         }
@@ -240,31 +239,30 @@ void Simplex::DisturbTable()
     Table.setTabElem(SecondMinIndex, 0, Table.getTabElem(MinIndex, 0) - 0.0001 * Multiplicator);
     Multiplicator *= 2;
     if (Multiplicator > 1000)
-        State.Case = LinProblemCase::INCONSISTENT;
+        Solution->Case = LinearProblemCase::INCONSISTENT;
 }
 
 std::shared_ptr<LinearProblemSolution> Simplex::Solve()
 {
     //  Table.print();
-    State.Status = SimplexStatus::STATUS_BUSY;
-    State.Case = LinProblemCase::ONE_SOLUTION;
+    Status = SimplexStatus::STATUS_BUSY;
+    Solution->Case = LinearProblemCase::ONE_SOLUTION;
     Solve1Phase();
     CheckNoSolutions();
 
-    switch (State.Case)
+    switch (Solution->Case)
     {
-        case LinProblemCase::INCONSISTENT:
-            State.Status = SimplexStatus::STATUS_WRONG_TABLE;
+        case LinearProblemCase::INCONSISTENT:
+            Status = SimplexStatus::STATUS_WRONG_TABLE;
             break;
-        case LinProblemCase::NO_SOLUTIONS:
-            State.Status = SimplexStatus::STATUS_WRONG_TABLE;
+        case LinearProblemCase::NO_SOLUTIONS:
+            Status = SimplexStatus::STATUS_WRONG_TABLE;
             break;
         default:
             Solve2Phase();
-            State.Status = SimplexStatus::STATUS_SOLVED;
+            Status = SimplexStatus::STATUS_SOLVED;
     }
 
-    Solution->Case = State.Case;
     if (Type == OptimizeType::MIN)
         Solution->ObjFuncValue *= -1;
     return Solution;
@@ -278,9 +276,9 @@ std::shared_ptr<LinearProblemSolution> Simplex::Solve1Phase()
 
     while (!IsPermissible())
     {
-        State.LoopCnt1Phase++;
+        LoopCnt1Phase++;
         CheckInconsistent();
-        if (State.Case == LinProblemCase::INCONSISTENT)
+        if (Solution->Case == LinearProblemCase::INCONSISTENT)
             break;
 
         int TempObjFuncIndex = ChooseTempObjFunc();
@@ -288,7 +286,7 @@ std::shared_ptr<LinearProblemSolution> Simplex::Solve1Phase()
         int DeletedFromBase = ChooseFromBase2Delete1Phase(InputToBase);
         if (DeletedFromBase == -1)
         {
-            State.Case = LinProblemCase::NO_SOLUTIONS;
+            Solution->Case = LinearProblemCase::NO_SOLUTIONS;
             return NULL;
         }
 
@@ -313,12 +311,12 @@ std::shared_ptr<LinearProblemSolution> Simplex::Solve2Phase()
     int Step = 0;
     while (!IsOptimal())
     {
-        State.LoopCnt2Phase++;
+        LoopCnt2Phase++;
         int InputToBase = ChooseNewBaseVar();
         int DeletedFromBase = ChooseFromBase2Delete(InputToBase);
         if (DeletedFromBase == -1)
         {
-            State.Case = LinProblemCase::NO_SOLUTIONS;
+            Solution->Case = LinearProblemCase::NO_SOLUTIONS;
             return NULL;
         }
 

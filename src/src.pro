@@ -21,7 +21,8 @@ SOURCES += \
     Controler.cpp \
     Simplex.cpp \
     SimplexTable.cpp \
-    LinearProblem.cpp
+    LinearProblem.cpp \
+    LinearProblemSolution.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -37,7 +38,9 @@ HEADERS += \
     SimplexTable.hpp \
     Simplex.hpp \
     LinearProblemCase.hpp \
-    LinearProblem.hpp
+    LinearProblem.hpp \
+    SimplexStatus.hpp \
+    LinearProblemSolution.hpp
 
 FORMS += \
     mainwindow.ui

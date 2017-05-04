@@ -88,24 +88,3 @@ Equation LinearProblem::getConstr(int constrNum) const
         constrNum = m - 1;
     return ConstrSet[constrNum];
 }
-
-LinearProblemSolution::LinearProblemSolution(int _n)
-{
-    Case = LinProblemCase::UNKNOWN;
-    VariableValues.resize(_n, 0);
-}
-
-void LinearProblemSolution::print() const
-{
-    QString str;
-    str += QString("\nRozwiazanie:\n");
-    for (int i = 0; i < static_cast<int>(VariableValues.size()); i++)
-    {
-        str += QString("\tx") + QString::number(i + 1) + QString(" = ") + QString::number(VariableValues[i]) +
-               QString("\n");
-    }
-
-    qDebug() << str;
-    qDebug() << "Wartosc funkcji celu:";
-    qDebug() << "\t" << ObjFuncValue << endl;
-}

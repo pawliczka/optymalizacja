@@ -24,8 +24,8 @@ TEST_F(SimplexTestSuite, ExampleFromYouTube)
     Simplex simplex(linproblem);
     auto result = simplex.Solve();
 
-    EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.State.Status);
-    EXPECT_EQ(LinProblemCase::ONE_SOLUTION, simplex.State.Case);
+    EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.Status);
+    EXPECT_EQ(LinearProblemCase::ONE_SOLUTION, result->Case);
     EXPECT_FLOAT_EQ(4,result->VariableValues[0]);
     EXPECT_FLOAT_EQ(5,result->VariableValues[1]);
     EXPECT_FLOAT_EQ(3380, result->ObjFuncValue);
@@ -47,8 +47,8 @@ TEST_F(SimplexTestSuite, ExampleFromYouTube2)
     Simplex simplex(linproblem);
     std::shared_ptr<LinearProblemSolution> result = simplex.Solve();
 
-    EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.State.Status);
-    EXPECT_EQ(LinProblemCase::ONE_SOLUTION, simplex.State.Case);
+    EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.Status);
+    EXPECT_EQ(LinearProblemCase::ONE_SOLUTION, result->Case);
     EXPECT_FLOAT_EQ(32./7.,result->VariableValues[0]);
     EXPECT_FLOAT_EQ(18./7.,result->VariableValues[1]);
     EXPECT_FLOAT_EQ(118./7., result->ObjFuncValue);
@@ -71,8 +71,8 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicLecture)
     Simplex simplex(linproblem);
     std::shared_ptr<LinearProblemSolution> result = simplex.Solve();
 
-    EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.State.Status);
-    EXPECT_EQ(LinProblemCase::ONE_SOLUTION, simplex.State.Case);
+    EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.Status);
+    EXPECT_EQ(LinearProblemCase::ONE_SOLUTION, result->Case);
     EXPECT_FLOAT_EQ(11./4.,result->VariableValues[0]);
     EXPECT_FLOAT_EQ(9./4.,result->VariableValues[1]);
     EXPECT_FLOAT_EQ(31./4., result->ObjFuncValue);
@@ -95,8 +95,8 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicLecture1)
     Simplex simplex(linproblem);
     std::shared_ptr<LinearProblemSolution> result = simplex.Solve();
 
-    EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.State.Status);
-    EXPECT_EQ(LinProblemCase::ONE_SOLUTION, simplex.State.Case);
+    EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.Status);
+    EXPECT_EQ(LinearProblemCase::ONE_SOLUTION, result->Case);
     EXPECT_FLOAT_EQ(1.5, result->VariableValues[0]);
     EXPECT_FLOAT_EQ(4.5, result->VariableValues[1]);
     EXPECT_FLOAT_EQ(28.5, result->ObjFuncValue);
@@ -117,9 +117,10 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicLecture3)
     linproblem.setConstrains(constrains);
 
     Simplex simplex(linproblem);
-    simplex.Solve();
-    EXPECT_EQ(SimplexStatus::STATUS_WRONG_TABLE, simplex.State.Status);
-    EXPECT_EQ(LinProblemCase::INCONSISTENT, simplex.State.Case);
+    auto result = simplex.Solve();
+
+    EXPECT_EQ(SimplexStatus::STATUS_WRONG_TABLE, simplex.Status);
+    EXPECT_EQ(LinearProblemCase::INCONSISTENT, result->Case);
 }
 
 TEST_F(SimplexTestSuite, ExampleFromSzlachcicLecture4)
@@ -137,8 +138,8 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicLecture4)
 
     Simplex simplex(linproblem);
     std::shared_ptr<LinearProblemSolution> result = simplex.Solve();
-    EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.State.Status);
-    EXPECT_EQ(LinProblemCase::INF_SOLUTIONS_BOUND, simplex.State.Case);
+    EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.Status);
+    EXPECT_EQ(LinearProblemCase::INF_SOLUTIONS_BOUND, result->Case);
     EXPECT_FLOAT_EQ(3, result->VariableValues[0]);
     EXPECT_FLOAT_EQ(0, result->VariableValues[1]);
     EXPECT_FLOAT_EQ(12, result->ObjFuncValue);
@@ -159,8 +160,8 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicLecture5)
 
     Simplex simplex(linproblem);
     std::shared_ptr<LinearProblemSolution> result = simplex.Solve();
-    EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.State.Status);
-    EXPECT_EQ(LinProblemCase::INF_SOLUTIONS_UNBOUND, simplex.State.Case);
+    EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.Status);
+    EXPECT_EQ(LinearProblemCase::INF_SOLUTIONS_UNBOUND, result->Case);
     EXPECT_FLOAT_EQ(2./3., result->VariableValues[0]);
     EXPECT_FLOAT_EQ(7./3., result->VariableValues[1]);
     EXPECT_FLOAT_EQ(8, result->ObjFuncValue);
@@ -181,8 +182,8 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicLecture6)
 
     Simplex simplex(linproblem);
     std::shared_ptr<LinearProblemSolution> result = simplex.Solve();
-    EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.State.Status);
-    EXPECT_EQ(LinProblemCase::ONE_SOLUTION, simplex.State.Case);
+    EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.Status);
+    EXPECT_EQ(LinearProblemCase::ONE_SOLUTION, result->Case);
     EXPECT_FLOAT_EQ(0, result->VariableValues[0]);
     EXPECT_FLOAT_EQ(4, result->VariableValues[1]);
     EXPECT_FLOAT_EQ(16, result->ObjFuncValue);
@@ -204,8 +205,8 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicLecture7)
 
     Simplex simplex(linproblem);
     std::shared_ptr<LinearProblemSolution> result = simplex.Solve();
-    EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.State.Status);
-    EXPECT_EQ(LinProblemCase::INF_SOLUTIONS_BOUND, simplex.State.Case);
+    EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.Status);
+    EXPECT_EQ(LinearProblemCase::INF_SOLUTIONS_BOUND, result->Case);
     EXPECT_FLOAT_EQ(1, result->VariableValues[0]);
     EXPECT_FLOAT_EQ(4, result->VariableValues[1]);
     EXPECT_FLOAT_EQ(5, result->ObjFuncValue);
@@ -226,8 +227,8 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicLecture8)
 
     Simplex simplex(linproblem);
     std::shared_ptr<LinearProblemSolution> result = simplex.Solve();
-    EXPECT_EQ(SimplexStatus::STATUS_WRONG_TABLE, simplex.State.Status);
-    EXPECT_EQ(LinProblemCase::INCONSISTENT, simplex.State.Case);
+    EXPECT_EQ(SimplexStatus::STATUS_WRONG_TABLE, simplex.Status);
+    EXPECT_EQ(LinearProblemCase::INCONSISTENT, result->Case);
 }
 
 //http://staff.iiar.pwr.wroc.pl/ewa.szlachcic/materialy%20dydaktyczne/air_studia_2_stopnia/liniowe_zadania_testowe.pdf
@@ -248,8 +249,8 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples1)
     Simplex simplex(linproblem);
     std::shared_ptr<LinearProblemSolution> result = simplex.Solve();
 
-    EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.State.Status);
-    EXPECT_EQ(LinProblemCase::ONE_SOLUTION, simplex.State.Case);
+    EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.Status);
+    EXPECT_EQ(LinearProblemCase::ONE_SOLUTION, result->Case);
     EXPECT_FLOAT_EQ(4, result->VariableValues[0]);
     EXPECT_FLOAT_EQ(0, result->VariableValues[1]);
     EXPECT_FLOAT_EQ(4, result->ObjFuncValue);
@@ -272,8 +273,8 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples2)
     Simplex simplex(linproblem);
     std::shared_ptr<LinearProblemSolution> result = simplex.Solve();
 
-    EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.State.Status);
-    EXPECT_EQ(LinProblemCase::INF_SOLUTIONS_BOUND, simplex.State.Case);
+    EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.Status);
+    EXPECT_EQ(LinearProblemCase::INF_SOLUTIONS_BOUND, result->Case);
     EXPECT_FLOAT_EQ(8./3., result->VariableValues[0]);
     EXPECT_FLOAT_EQ(10./3., result->VariableValues[1]);
     EXPECT_FLOAT_EQ(6, result->ObjFuncValue);
@@ -296,8 +297,8 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples3)
     Simplex simplex(linproblem);
     std::shared_ptr<LinearProblemSolution> result = simplex.Solve();
 
-    EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.State.Status);
-    EXPECT_EQ(LinProblemCase::ONE_SOLUTION, simplex.State.Case);
+    EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.Status);
+    EXPECT_EQ(LinearProblemCase::ONE_SOLUTION, result->Case);
     EXPECT_FLOAT_EQ(1, result->VariableValues[0]);
     EXPECT_FLOAT_EQ(5, result->VariableValues[1]);
     EXPECT_FLOAT_EQ(11, result->ObjFuncValue);
@@ -320,8 +321,8 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples4)
     Simplex simplex(linproblem);
     std::shared_ptr<LinearProblemSolution> result = simplex.Solve();
 
-    EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.State.Status);
-    EXPECT_EQ(LinProblemCase::ONE_SOLUTION, simplex.State.Case);
+    EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.Status);
+    EXPECT_EQ(LinearProblemCase::ONE_SOLUTION, result->Case);
     EXPECT_FLOAT_EQ(1, result->VariableValues[0]);
     EXPECT_FLOAT_EQ(5, result->VariableValues[1]);
     EXPECT_FLOAT_EQ(-4, result->ObjFuncValue);
@@ -342,8 +343,8 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples5)
 
     Simplex simplex(linproblem);
     std::shared_ptr<LinearProblemSolution> result = simplex.Solve();
-    EXPECT_EQ(SimplexStatus::STATUS_WRONG_TABLE, simplex.State.Status);
-    EXPECT_EQ(LinProblemCase::INCONSISTENT, simplex.State.Case);
+    EXPECT_EQ(SimplexStatus::STATUS_WRONG_TABLE, simplex.Status);
+    EXPECT_EQ(LinearProblemCase::INCONSISTENT, result->Case);
 }
 
 TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples6)
@@ -361,8 +362,8 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples6)
 
     Simplex simplex(linproblem);
     std::shared_ptr<LinearProblemSolution> result = simplex.Solve();
-    EXPECT_EQ(SimplexStatus::STATUS_WRONG_TABLE, simplex.State.Status);
-    EXPECT_EQ(LinProblemCase::INCONSISTENT, simplex.State.Case);
+    EXPECT_EQ(SimplexStatus::STATUS_WRONG_TABLE, simplex.Status);
+    EXPECT_EQ(LinearProblemCase::INCONSISTENT, result->Case);
 }
 
 TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples7)
@@ -381,8 +382,8 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples7)
     Simplex simplex(linproblem);
     std::shared_ptr<LinearProblemSolution> result = simplex.Solve();
 
-    EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.State.Status);
-    EXPECT_EQ(LinProblemCase::ONE_SOLUTION, simplex.State.Case);
+    EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.Status);
+    EXPECT_EQ(LinearProblemCase::ONE_SOLUTION, result->Case);
     EXPECT_FLOAT_EQ(300, result->VariableValues[0]);
     EXPECT_FLOAT_EQ(0, result->VariableValues[1]);
     EXPECT_FLOAT_EQ(600, result->VariableValues[2]);
@@ -405,8 +406,8 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples8)
     Simplex simplex(linproblem);
     std::shared_ptr<LinearProblemSolution> result = simplex.Solve();
 
-    EXPECT_EQ(SimplexStatus::STATUS_WRONG_TABLE, simplex.State.Status);
-    EXPECT_EQ(LinProblemCase::INCONSISTENT, simplex.State.Case);
+    EXPECT_EQ(SimplexStatus::STATUS_WRONG_TABLE, simplex.Status);
+    EXPECT_EQ(LinearProblemCase::INCONSISTENT, result->Case);
 }
 
 TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples9)
@@ -426,8 +427,8 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples9)
     Simplex simplex(linproblem);
     std::shared_ptr<LinearProblemSolution> result = simplex.Solve();
 
-    EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.State.Status);
-    EXPECT_EQ(LinProblemCase::ONE_SOLUTION, simplex.State.Case);
+    EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.Status);
+    EXPECT_EQ(LinearProblemCase::ONE_SOLUTION, result->Case);
     EXPECT_FLOAT_EQ(30, result->VariableValues[0]);
     EXPECT_FLOAT_EQ(60, result->VariableValues[1]);
     EXPECT_FLOAT_EQ(150, result->ObjFuncValue);
@@ -450,8 +451,8 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples10)
     Simplex simplex(linproblem);
     std::shared_ptr<LinearProblemSolution> result = simplex.Solve();
 
-    EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.State.Status);
-    EXPECT_EQ(LinProblemCase::ONE_SOLUTION, simplex.State.Case);
+    EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.Status);
+    EXPECT_EQ(LinearProblemCase::ONE_SOLUTION, result->Case);
     EXPECT_FLOAT_EQ(3, result->VariableValues[0]);
     EXPECT_FLOAT_EQ(4, result->VariableValues[1]);
     EXPECT_FLOAT_EQ(7, result->ObjFuncValue);
@@ -474,8 +475,8 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples11)
     Simplex simplex(linproblem);
     std::shared_ptr<LinearProblemSolution> result = simplex.Solve();
 
-    EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.State.Status);
-    EXPECT_EQ(LinProblemCase::ONE_SOLUTION, simplex.State.Case);
+    EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.Status);
+    EXPECT_EQ(LinearProblemCase::ONE_SOLUTION, result->Case);
     EXPECT_FLOAT_EQ(3, result->VariableValues[0]);
     EXPECT_FLOAT_EQ(4, result->VariableValues[1]);
     EXPECT_FLOAT_EQ(-13, result->ObjFuncValue);
@@ -497,8 +498,8 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples12)
     Simplex simplex(linproblem);
     std::shared_ptr<LinearProblemSolution> result = simplex.Solve();
 
-    EXPECT_EQ(SimplexStatus::STATUS_WRONG_TABLE, simplex.State.Status);
-    EXPECT_EQ(LinProblemCase::INCONSISTENT, simplex.State.Case);
+    EXPECT_EQ(SimplexStatus::STATUS_WRONG_TABLE, simplex.Status);
+    EXPECT_EQ(LinearProblemCase::INCONSISTENT, result->Case);
 }
 
 TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples13)
@@ -518,8 +519,8 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples13)
     Simplex simplex(linproblem);
     std::shared_ptr<LinearProblemSolution> result = simplex.Solve();
 
-    EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.State.Status);
-    EXPECT_EQ(LinProblemCase::INF_SOLUTIONS_BOUND, simplex.State.Case);
+    EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.Status);
+    EXPECT_EQ(LinearProblemCase::INF_SOLUTIONS_BOUND, result->Case);
     EXPECT_FLOAT_EQ(1.2, result->VariableValues[0]);
     EXPECT_FLOAT_EQ(0.4, result->VariableValues[1]);
     EXPECT_FLOAT_EQ(-2, result->ObjFuncValue);
@@ -541,8 +542,8 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples14)
     Simplex simplex(linproblem);
     std::shared_ptr<LinearProblemSolution> result = simplex.Solve();
 
-    EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.State.Status);
-    EXPECT_EQ(LinProblemCase::INF_SOLUTIONS_UNBOUND, simplex.State.Case);
+    EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.Status);
+    EXPECT_EQ(LinearProblemCase::INF_SOLUTIONS_UNBOUND, result->Case);
     EXPECT_FLOAT_EQ(1.2, result->VariableValues[0]);
     EXPECT_FLOAT_EQ(0.4, result->VariableValues[1]);
     EXPECT_FLOAT_EQ(-2, result->ObjFuncValue);
@@ -566,8 +567,8 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples15)
     Simplex simplex(linproblem);
     std::shared_ptr<LinearProblemSolution> result = simplex.Solve();
 
-    EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.State.Status);
-    EXPECT_EQ(LinProblemCase::ONE_SOLUTION, simplex.State.Case);
+    EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.Status);
+    EXPECT_EQ(LinearProblemCase::ONE_SOLUTION, result->Case);
     EXPECT_FLOAT_EQ(2, result->VariableValues[0]);
     EXPECT_FLOAT_EQ(1, result->VariableValues[1]);
     EXPECT_FLOAT_EQ(3000, result->ObjFuncValue);
@@ -590,8 +591,8 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples16)
     Simplex simplex(linproblem);
     std::shared_ptr<LinearProblemSolution> result = simplex.Solve();
 
-    EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.State.Status);
-    EXPECT_EQ(LinProblemCase::ONE_SOLUTION, simplex.State.Case);
+    EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.Status);
+    EXPECT_EQ(LinearProblemCase::ONE_SOLUTION, result->Case);
     EXPECT_FLOAT_EQ(3, result->VariableValues[0]);
     EXPECT_FLOAT_EQ(4, result->VariableValues[1]);
     EXPECT_FLOAT_EQ(7, result->ObjFuncValue);

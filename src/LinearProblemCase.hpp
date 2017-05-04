@@ -13,7 +13,7 @@
  *					  nieograniczonym obszarze
  *  6. UNKNOWN -	  domyslnie: nieznany stan
  */
-enum class LinProblemCase
+enum class LinearProblemCase
 {
     ONE_SOLUTION,
     NO_SOLUTIONS,
