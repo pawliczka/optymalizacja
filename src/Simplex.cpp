@@ -287,7 +287,7 @@ std::shared_ptr<LinearProblemSolution> Simplex::Solve1Phase()
         if (DeletedFromBase == -1)
         {
             Solution->Case = LinearProblemCase::NO_SOLUTIONS;
-            return NULL;
+            return Solution;
         }
 
         Table.swapRowColIndexes(InputToBase, DeletedFromBase);
@@ -317,7 +317,7 @@ std::shared_ptr<LinearProblemSolution> Simplex::Solve2Phase()
         if (DeletedFromBase == -1)
         {
             Solution->Case = LinearProblemCase::NO_SOLUTIONS;
-            return NULL;
+            return Solution;
         }
 
         Table.swapRowColIndexes(InputToBase, DeletedFromBase);
