@@ -24,7 +24,7 @@ SOURCES += \
     LinearProblem.cpp \
     LinearProblemSolution.cpp \
     BranchAndBoundTreeDisplayer.cpp \
-    BranchAndBound.cpp
+    BranchAndBoundSolver.cpp
 
 HEADERS += \
     mainwindow.hpp \
@@ -44,7 +44,8 @@ HEADERS += \
     SimplexStatus.hpp \
     LinearProblemSolution.hpp \
     BranchAndBoundTreeDisplayer.hpp \
-    BranchAndBound.hpp
+    BranchAndBoundSolver.hpp \
+    TreeOfSolution.hpp
 
 FORMS += \
     mainwindow.ui \
