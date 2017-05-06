@@ -1,5 +1,6 @@
 #pragma once
-#include "mainwindow.h"
+#include "MainWindow.hpp"
+#include "BranchAndBoundTreeViewer.hpp"
 #include <QObject>
 #include <QPushButton>
 #include <memory>

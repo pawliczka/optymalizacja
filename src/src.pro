@@ -13,7 +13,6 @@ TEMPLATE = lib
 TARGET = optymalizacja
 
 SOURCES += \
-    mainwindow.cpp \
     EquationConventer.cpp \
     TermConverter.cpp \
     Equation.cpp \
@@ -22,10 +21,11 @@ SOURCES += \
     Simplex.cpp \
     SimplexTable.cpp \
     LinearProblem.cpp \
-    LinearProblemSolution.cpp
+    LinearProblemSolution.cpp \
+    BranchAndBoundTreeViewer.cpp \
+    MainWindow.cpp
 
 HEADERS += \
-    mainwindow.h \
     EquationConventer.hpp \
     IEquationConventer.hpp \
     ITermConverter.hpp \
@@ -40,10 +40,13 @@ HEADERS += \
     LinearProblemCase.hpp \
     LinearProblem.hpp \
     SimplexStatus.hpp \
-    LinearProblemSolution.hpp
+    LinearProblemSolution.hpp \
+    BranchAndBoundTreeViewer.hpp \
+    MainWindow.hpp
 
 FORMS += \
-    mainwindow.ui
+    MainWindow.ui \
+    BranchAndBoundTreeViewer.ui
 
 RESOURCES += \
     ../res/res.qrc
