@@ -64,22 +64,22 @@ void LinearProblem::print() const
 
 int LinearProblem::numLessEqualConstr() const
 {
-    int lessEqualCnt = 0;
+    int lessEqualCounter = 0;
     for (int i = 0; i < this->m; i++)
         if (ConstrSet[i].getComparisonOperator() == ComparisonOperator::LessEqual)
-            lessEqualCnt++;
+            lessEqualCounter++;
 
-    return lessEqualCnt;
+    return lessEqualCounter;
 }
 
 int LinearProblem::numGreaterEqualConstr() const
 {
-    int greaterEqualCnt = 0;
+    int greaterEqualCounter = 0;
     for (int i = 0; i < this->m; i++)
         if (ConstrSet[i].getComparisonOperator() == ComparisonOperator::GreaterEqual)
-            greaterEqualCnt++;
+            greaterEqualCounter++;
 
-    return greaterEqualCnt;
+    return greaterEqualCounter;
 }
 
 Equation LinearProblem::getConstr(int constrNum) const
