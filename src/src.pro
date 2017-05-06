@@ -23,7 +23,7 @@ SOURCES += \
     SimplexTable.cpp \
     LinearProblem.cpp \
     LinearProblemSolution.cpp \
-    BranchAndBound.cpp
+    BranchAndBoundSolver.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -42,7 +42,8 @@ HEADERS += \
     LinearProblem.hpp \
     SimplexStatus.hpp \
     LinearProblemSolution.hpp \
-    BranchAndBound.hpp
+    BranchAndBoundSolver.hpp \
+    TreeOfSolution.hpp
 
 FORMS += \
     mainwindow.ui
