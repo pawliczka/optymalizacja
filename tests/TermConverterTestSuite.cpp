@@ -122,9 +122,14 @@ TEST_F(TermConverterTestSuite, shouldConvertFloat6)
     ASSERT_EQ(result, std::make_pair(float(-0.134), 2));
 }
 
-
 TEST_F(TermConverterTestSuite, shouldConvertFloat7)
 {
     auto result = sut.convert(" 0.134x2 ");
     ASSERT_EQ(result, std::make_pair(float(0.134), 2));
+}
+
+TEST_F(TermConverterTestSuite, shouldConvertWithNestedZero)
+{
+    auto result = sut.convert(" 01x02 ");
+    ASSERT_EQ(result, std::make_pair(float(1), 2));
 }
