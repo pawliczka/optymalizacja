@@ -8,11 +8,11 @@
 class Simplex
 {
 public:
-    int LoopCnt1Phase = 0;
-    int LoopCnt2Phase = 0;
     Simplex(const LinearProblem& Problem);
     std::shared_ptr<LinearProblemSolution> Solve();
-    SimplexStatus Status;
+    SimplexStatus getStatus() const;
+    int getLoopCnt1Phase() const;
+    int getLoopCnt2Phase() const;
 
 private:
     std::shared_ptr<LinearProblemSolution> Solve1Phase();
@@ -32,7 +32,10 @@ private:
     void UpdateTable(int k, int r);
     void DisturbTable();
 
+    int LoopCnt1Phase = 0;
+    int LoopCnt2Phase = 0;
     SimplexTable Table;
+    SimplexStatus Status;
     std::shared_ptr<LinearProblemSolution> Solution;
     OptimizeType Type;
 };
