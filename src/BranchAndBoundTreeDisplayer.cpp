@@ -17,26 +17,25 @@ BranchAndBoundTreeDisplayer::~BranchAndBoundTreeDisplayer()
 
 void BranchAndBoundTreeDisplayer::addTreeRoot(QString name, QString description)
 {
-    // QTreeWidgetItem(QTreeWidget * parent, int type = Type)
     QTreeWidgetItem* treeItem = new QTreeWidgetItem(ui->treeWidget);
 
-    // QTreeWidgetItem::setText(int column, const QString & text)
     treeItem->setText(0, name);
+    treeItem->setIcon(0, QIcon(":/new/images/exit.png"));
     treeItem->setText(1, description);
     treeItem->setText(2, description);
+    treeItem->setExpanded( true );
     addTreeChild(treeItem, name + "A", "Child_first");
 }
 
 QTreeWidgetItem* BranchAndBoundTreeDisplayer::addTreeChild(QTreeWidgetItem* parent, QString name, QString description)
 {
-    // QTreeWidgetItem(QTreeWidget * parent, int type = Type)
     QTreeWidgetItem* treeItem = new QTreeWidgetItem();
 
-    // QTreeWidgetItem::setText(int column, const QString & text)
     treeItem->setText(0, name);
     treeItem->setText(1, description);
+    treeItem->setIcon(0, QIcon(":/new/images/exit.png"));
+    treeItem->setExpanded( true );
 
-    // QTreeWidgetItem::addChild(QTreeWidgetItem * child)
     parent->addChild(treeItem);
     return treeItem;
 }
