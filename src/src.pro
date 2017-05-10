@@ -46,8 +46,8 @@ HEADERS += \
     LinearProblemSolution.hpp \
     BranchAndBoundTreeDisplayer.hpp \
     BranchAndBoundSolver.hpp \
-    TreeOfSolution.hpp \
-    EquationValidator.hpp
+    EquationValidator.hpp \
+    NodeOfSolution.hpp
 
 FORMS += \
     mainwindow.ui \

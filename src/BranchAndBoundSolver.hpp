@@ -1,7 +1,7 @@
 #pragma once
 #include "Simplex.hpp"
 #include "LinearProblem.hpp"
-#
+#include "NodeOfSolution.hpp"
 
 class BranchAndBoundSolver
 {
