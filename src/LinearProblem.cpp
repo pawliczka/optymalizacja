@@ -30,6 +30,12 @@ void LinearProblem::setConstrains(const std::vector<Equation>& constrains)
     m = constrains.size();
 }
 
+void LinearProblem::addConstrain(const Equation &constrain)
+{
+    ConstrSet.push_back(constrain);
+    m++;
+}
+
 double LinearProblem::RemoveLastConstr()
 {
     double LastConstrb = ConstrSet[m].getCoefficient(0);

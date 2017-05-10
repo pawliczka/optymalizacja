@@ -6,6 +6,8 @@
 
 class SimplexTestSuite : public testing::Test
 {
+public:
+    Simplex simplex;
 };
 
 TEST_F(SimplexTestSuite, ExampleFromYouTube)
@@ -21,8 +23,7 @@ TEST_F(SimplexTestSuite, ExampleFromYouTube)
     linproblem.SetObjFunc(objectiveFunction);
     linproblem.setConstrains(constrains);
 
-    Simplex simplex(linproblem);
-    auto result = simplex.Solve();
+    auto result = simplex.Solve(linproblem);
 
     EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.getStatus());
     EXPECT_EQ(LinearProblemCase::ONE_SOLUTION, result->Case);
@@ -46,8 +47,7 @@ TEST_F(SimplexTestSuite, ExampleFromYouTube2)
     linproblem.SetObjFunc(objectiveFunction);
     linproblem.setConstrains(constrains);
 
-    Simplex simplex(linproblem);
-    std::shared_ptr<LinearProblemSolution> result = simplex.Solve();
+    std::shared_ptr<LinearProblemSolution> result = simplex.Solve(linproblem);
 
     EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.getStatus());
     EXPECT_EQ(LinearProblemCase::ONE_SOLUTION, result->Case);
@@ -60,7 +60,7 @@ TEST_F(SimplexTestSuite, ExampleFromYouTube2)
 
 TEST_F(SimplexTestSuite, ExampleFromSzlachcicLecture)
 {
-    LinearProblem  linproblem(OptimizeType::MAX);
+    LinearProblem linproblem(OptimizeType::MAX);
 
     std::vector<Equation> constrains = {
         {{-5, 1, 1}, ComparisonOperator::LessEqual},
@@ -72,8 +72,7 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicLecture)
     linproblem.SetObjFunc(objectiveFunction);
     linproblem.setConstrains(constrains);
 
-    Simplex simplex(linproblem);
-    std::shared_ptr<LinearProblemSolution> result = simplex.Solve();
+    std::shared_ptr<LinearProblemSolution> result = simplex.Solve(linproblem);
 
     EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.getStatus());
     EXPECT_EQ(LinearProblemCase::ONE_SOLUTION, result->Case);
@@ -86,7 +85,7 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicLecture)
 
 TEST_F(SimplexTestSuite, ExampleFromSzlachcicLecture1)
 {
-    LinearProblem  linproblem(OptimizeType::MAX);
+    LinearProblem linproblem(OptimizeType::MAX);
 
     std::vector<Equation> constrains = {
         {{-2, 2, 1}, ComparisonOperator::GreaterEqual},
@@ -98,8 +97,7 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicLecture1)
     linproblem.SetObjFunc(objectiveFunction);
     linproblem.setConstrains(constrains);
 
-    Simplex simplex(linproblem);
-    std::shared_ptr<LinearProblemSolution> result = simplex.Solve();
+    std::shared_ptr<LinearProblemSolution> result = simplex.Solve(linproblem);
 
     EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.getStatus());
     EXPECT_EQ(LinearProblemCase::ONE_SOLUTION, result->Case);
@@ -112,7 +110,7 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicLecture1)
 
 TEST_F(SimplexTestSuite, ExampleFromSzlachcicLecture3)
 {
-    LinearProblem  linproblem(OptimizeType::MAX);
+    LinearProblem linproblem(OptimizeType::MAX);
 
     std::vector<Equation> constrains = {
         {{-2, -0.5, 2, 1}, ComparisonOperator::LessEqual},
@@ -124,8 +122,7 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicLecture3)
     linproblem.SetObjFunc(objectiveFunction);
     linproblem.setConstrains(constrains);
 
-    Simplex simplex(linproblem);
-    auto result = simplex.Solve();
+    auto result = simplex.Solve(linproblem);
 
     EXPECT_EQ(SimplexStatus::STATUS_WRONG_TABLE, simplex.getStatus());
     EXPECT_EQ(LinearProblemCase::INCONSISTENT, result->Case);
@@ -133,7 +130,7 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicLecture3)
 
 TEST_F(SimplexTestSuite, ExampleFromSzlachcicLecture4)
 {
-    LinearProblem  linproblem(OptimizeType::MAX);
+    LinearProblem linproblem(OptimizeType::MAX);
 
     std::vector<Equation> constrains = {
         {{-4, -1, 1}, ComparisonOperator::LessEqual},
@@ -144,8 +141,8 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicLecture4)
     linproblem.SetObjFunc(objectiveFunction);
     linproblem.setConstrains(constrains);
 
-    Simplex simplex(linproblem);
-    std::shared_ptr<LinearProblemSolution> result = simplex.Solve();
+    std::shared_ptr<LinearProblemSolution> result = simplex.Solve(linproblem);
+
     EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.getStatus());
     EXPECT_EQ(LinearProblemCase::INF_SOLUTIONS_BOUND, result->Case);
     EXPECT_EQ(0, simplex.getLoopCnt1Phase());
@@ -157,7 +154,7 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicLecture4)
 
 TEST_F(SimplexTestSuite, ExampleFromSzlachcicLecture5)
 {
-    LinearProblem  linproblem(OptimizeType::MAX);
+    LinearProblem linproblem(OptimizeType::MAX);
 
     std::vector<Equation> constrains = {
         {{-1, -2, 1}, ComparisonOperator::LessEqual},
@@ -168,8 +165,8 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicLecture5)
     linproblem.SetObjFunc(objectiveFunction);
     linproblem.setConstrains(constrains);
 
-    Simplex simplex(linproblem);
-    std::shared_ptr<LinearProblemSolution> result = simplex.Solve();
+    std::shared_ptr<LinearProblemSolution> result = simplex.Solve(linproblem);
+
     EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.getStatus());
     EXPECT_EQ(LinearProblemCase::INF_SOLUTIONS_UNBOUND, result->Case);
     EXPECT_EQ(0, simplex.getLoopCnt1Phase());
@@ -181,7 +178,7 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicLecture5)
 
 TEST_F(SimplexTestSuite, ExampleFromSzlachcicLecture6)
 {
-    LinearProblem  linproblem(OptimizeType::MAX);
+    LinearProblem linproblem(OptimizeType::MAX);
 
     std::vector<Equation> constrains = {
         {{-4, 1, 1}, ComparisonOperator::LessEqual},
@@ -192,8 +189,8 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicLecture6)
     linproblem.SetObjFunc(objectiveFunction);
     linproblem.setConstrains(constrains);
 
-    Simplex simplex(linproblem);
-    std::shared_ptr<LinearProblemSolution> result = simplex.Solve();
+    std::shared_ptr<LinearProblemSolution> result = simplex.Solve(linproblem);
+
     EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.getStatus());
     EXPECT_EQ(LinearProblemCase::ONE_SOLUTION, result->Case);
     EXPECT_EQ(1, simplex.getLoopCnt1Phase());
@@ -205,7 +202,7 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicLecture6)
 
 TEST_F(SimplexTestSuite, ExampleFromSzlachcicLecture7)
 {
-    LinearProblem  linproblem(OptimizeType::MIN);
+    LinearProblem linproblem(OptimizeType::MIN);
 
     std::vector<Equation> constrains = {
         {{-8, 1, 2}, ComparisonOperator::GreaterEqual},
@@ -217,8 +214,8 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicLecture7)
     linproblem.SetObjFunc(objectiveFunction);
     linproblem.setConstrains(constrains);
 
-    Simplex simplex(linproblem);
-    std::shared_ptr<LinearProblemSolution> result = simplex.Solve();
+    std::shared_ptr<LinearProblemSolution> result = simplex.Solve(linproblem);
+
     EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.getStatus());
     EXPECT_EQ(LinearProblemCase::INF_SOLUTIONS_BOUND, result->Case);
     EXPECT_EQ(3, simplex.getLoopCnt1Phase());
@@ -230,7 +227,7 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicLecture7)
 
 TEST_F(SimplexTestSuite, ExampleFromSzlachcicLecture8)
 {
-    LinearProblem  linproblem(OptimizeType::MIN);
+    LinearProblem linproblem(OptimizeType::MIN);
 
     std::vector<Equation> constrains = {
         {{-2, -1, -1}, ComparisonOperator::GreaterEqual},
@@ -241,8 +238,8 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicLecture8)
     linproblem.SetObjFunc(objectiveFunction);
     linproblem.setConstrains(constrains);
 
-    Simplex simplex(linproblem);
-    std::shared_ptr<LinearProblemSolution> result = simplex.Solve();
+    std::shared_ptr<LinearProblemSolution> result = simplex.Solve(linproblem);
+
     EXPECT_EQ(SimplexStatus::STATUS_WRONG_TABLE, simplex.getStatus());
     EXPECT_EQ(LinearProblemCase::INCONSISTENT, result->Case);
 }
@@ -250,7 +247,7 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicLecture8)
 //http://staff.iiar.pwr.wroc.pl/ewa.szlachcic/materialy%20dydaktyczne/air_studia_2_stopnia/liniowe_zadania_testowe.pdf
 TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples1)
 {
-    LinearProblem  linproblem(OptimizeType::MAX);
+    LinearProblem linproblem(OptimizeType::MAX);
 
     std::vector<Equation> constrains = {
         {{-3, -2, 1}, ComparisonOperator::LessEqual},
@@ -262,8 +259,7 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples1)
     linproblem.SetObjFunc(objectiveFunction);
     linproblem.setConstrains(constrains);
 
-    Simplex simplex(linproblem);
-    std::shared_ptr<LinearProblemSolution> result = simplex.Solve();
+    std::shared_ptr<LinearProblemSolution> result = simplex.Solve(linproblem);
 
     EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.getStatus());
     EXPECT_EQ(LinearProblemCase::ONE_SOLUTION, result->Case);
@@ -276,7 +272,7 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples1)
 
 TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples2)
 {
-    LinearProblem  linproblem(OptimizeType::MAX);
+    LinearProblem linproblem(OptimizeType::MAX);
 
     std::vector<Equation> constrains = {
         {{-3, -2, 1}, ComparisonOperator::LessEqual},
@@ -288,8 +284,7 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples2)
     linproblem.SetObjFunc(objectiveFunction);
     linproblem.setConstrains(constrains);
 
-    Simplex simplex(linproblem);
-    std::shared_ptr<LinearProblemSolution> result = simplex.Solve();
+    std::shared_ptr<LinearProblemSolution> result = simplex.Solve(linproblem);
 
     EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.getStatus());
     EXPECT_EQ(LinearProblemCase::INF_SOLUTIONS_BOUND, result->Case);
@@ -302,7 +297,7 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples2)
 
 TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples3)
 {
-    LinearProblem  linproblem(OptimizeType::MAX);
+    LinearProblem linproblem(OptimizeType::MAX);
 
     std::vector<Equation> constrains = {
         {{-3, -2, 1}, ComparisonOperator::LessEqual},
@@ -314,8 +309,7 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples3)
     linproblem.SetObjFunc(objectiveFunction);
     linproblem.setConstrains(constrains);
 
-    Simplex simplex(linproblem);
-    std::shared_ptr<LinearProblemSolution> result = simplex.Solve();
+    std::shared_ptr<LinearProblemSolution> result = simplex.Solve(linproblem);
 
     EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.getStatus());
     EXPECT_EQ(LinearProblemCase::ONE_SOLUTION, result->Case);
@@ -328,7 +322,7 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples3)
 
 TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples4)
 {
-    LinearProblem  linproblem(OptimizeType::MIN);
+    LinearProblem linproblem(OptimizeType::MIN);
 
     std::vector<Equation> constrains = {
         {{-3, -2, 1}, ComparisonOperator::LessEqual},
@@ -340,8 +334,7 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples4)
     linproblem.SetObjFunc(objectiveFunction);
     linproblem.setConstrains(constrains);
 
-    Simplex simplex(linproblem);
-    std::shared_ptr<LinearProblemSolution> result = simplex.Solve();
+    std::shared_ptr<LinearProblemSolution> result = simplex.Solve(linproblem);
 
     EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.getStatus());
     EXPECT_EQ(LinearProblemCase::ONE_SOLUTION, result->Case);
@@ -354,7 +347,7 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples4)
 
 TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples5)
 {
-    LinearProblem  linproblem(OptimizeType::MAX);
+    LinearProblem linproblem(OptimizeType::MAX);
 
     std::vector<Equation> constrains = {
         {{-2, -2, 1}, ComparisonOperator::GreaterEqual},
@@ -365,15 +358,15 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples5)
     linproblem.SetObjFunc(objectiveFunction);
     linproblem.setConstrains(constrains);
 
-    Simplex simplex(linproblem);
-    std::shared_ptr<LinearProblemSolution> result = simplex.Solve();
+    std::shared_ptr<LinearProblemSolution> result = simplex.Solve(linproblem);
+
     EXPECT_EQ(SimplexStatus::STATUS_WRONG_TABLE, simplex.getStatus());
     EXPECT_EQ(LinearProblemCase::INCONSISTENT, result->Case);
 }
 
 TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples6)
 {
-    LinearProblem  linproblem(OptimizeType::MAX);
+    LinearProblem linproblem(OptimizeType::MAX);
 
     std::vector<Equation> constrains = {
         {{-2, 1, -1}, ComparisonOperator::LessEqual},
@@ -384,15 +377,15 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples6)
     linproblem.SetObjFunc(objectiveFunction);
     linproblem.setConstrains(constrains);
 
-    Simplex simplex(linproblem);
-    std::shared_ptr<LinearProblemSolution> result = simplex.Solve();
+    std::shared_ptr<LinearProblemSolution> result = simplex.Solve(linproblem);
+
     EXPECT_EQ(SimplexStatus::STATUS_WRONG_TABLE, simplex.getStatus());
     EXPECT_EQ(LinearProblemCase::INCONSISTENT, result->Case);
 }
 
 TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples7)
 {
-    LinearProblem  linproblem(OptimizeType::MIN);
+    LinearProblem linproblem(OptimizeType::MIN);
 
     std::vector<Equation> constrains = {
         {{-2100, 7, 3, 0}, ComparisonOperator::GreaterEqual},
@@ -403,8 +396,7 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples7)
     linproblem.SetObjFunc(objectiveFunction);
     linproblem.setConstrains(constrains);
 
-    Simplex simplex(linproblem);
-    std::shared_ptr<LinearProblemSolution> result = simplex.Solve();
+    std::shared_ptr<LinearProblemSolution> result = simplex.Solve(linproblem);
 
     EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.getStatus());
     EXPECT_EQ(LinearProblemCase::ONE_SOLUTION, result->Case);
@@ -418,7 +410,7 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples7)
 
 TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples8)
 {
-    LinearProblem  linproblem(OptimizeType::MAX);
+    LinearProblem linproblem(OptimizeType::MAX);
 
     std::vector<Equation> constrains = {
         {{-2, -2, 1}, ComparisonOperator::GreaterEqual},
@@ -429,8 +421,7 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples8)
     linproblem.SetObjFunc(objectiveFunction);
     linproblem.setConstrains(constrains);
 
-    Simplex simplex(linproblem);
-    std::shared_ptr<LinearProblemSolution> result = simplex.Solve();
+    std::shared_ptr<LinearProblemSolution> result = simplex.Solve(linproblem);
 
     EXPECT_EQ(SimplexStatus::STATUS_WRONG_TABLE, simplex.getStatus());
     EXPECT_EQ(LinearProblemCase::INCONSISTENT, result->Case);
@@ -438,7 +429,7 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples8)
 
 TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples9)
 {
-    LinearProblem  linproblem(OptimizeType::MAX);
+    LinearProblem linproblem(OptimizeType::MAX);
 
     std::vector<Equation> constrains = {
         {{-100, 1, 1}, ComparisonOperator::LessEqual},
@@ -450,8 +441,7 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples9)
     linproblem.SetObjFunc(objectiveFunction);
     linproblem.setConstrains(constrains);
 
-    Simplex simplex(linproblem);
-    std::shared_ptr<LinearProblemSolution> result = simplex.Solve();
+    std::shared_ptr<LinearProblemSolution> result = simplex.Solve(linproblem);
 
     EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.getStatus());
     EXPECT_EQ(LinearProblemCase::ONE_SOLUTION, result->Case);
@@ -464,7 +454,7 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples9)
 
 TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples10)
 {
-    LinearProblem  linproblem(OptimizeType::MAX);
+    LinearProblem linproblem(OptimizeType::MAX);
 
     std::vector<Equation> constrains = {
         {{-1, -1, 1}, ComparisonOperator::LessEqual},
@@ -476,8 +466,7 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples10)
     linproblem.SetObjFunc(objectiveFunction);
     linproblem.setConstrains(constrains);
 
-    Simplex simplex(linproblem);
-    std::shared_ptr<LinearProblemSolution> result = simplex.Solve();
+    std::shared_ptr<LinearProblemSolution> result = simplex.Solve(linproblem);
 
     EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.getStatus());
     EXPECT_EQ(LinearProblemCase::ONE_SOLUTION, result->Case);
@@ -490,7 +479,7 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples10)
 
 TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples11)
 {
-    LinearProblem  linproblem(OptimizeType::MIN);
+    LinearProblem linproblem(OptimizeType::MIN);
 
     std::vector<Equation> constrains = {
         {{-1, -1, 1}, ComparisonOperator::LessEqual},
@@ -502,8 +491,7 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples11)
     linproblem.SetObjFunc(objectiveFunction);
     linproblem.setConstrains(constrains);
 
-    Simplex simplex(linproblem);
-    std::shared_ptr<LinearProblemSolution> result = simplex.Solve();
+    std::shared_ptr<LinearProblemSolution> result = simplex.Solve(linproblem);
 
     EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.getStatus());
     EXPECT_EQ(LinearProblemCase::ONE_SOLUTION, result->Case);
@@ -516,7 +504,7 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples11)
 
 TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples12)
 {
-    LinearProblem  linproblem(OptimizeType::MIN);
+    LinearProblem linproblem(OptimizeType::MIN);
 
     std::vector<Equation> constrains = {
         {{-12000, 4, 1, 8, 5, 2, 0}, ComparisonOperator::GreaterEqual},
@@ -527,8 +515,7 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples12)
     linproblem.SetObjFunc(objectiveFunction);
     linproblem.setConstrains(constrains);
 
-    Simplex simplex(linproblem);
-    std::shared_ptr<LinearProblemSolution> result = simplex.Solve();
+    std::shared_ptr<LinearProblemSolution> result = simplex.Solve(linproblem);
 
     EXPECT_EQ(SimplexStatus::STATUS_WRONG_TABLE, simplex.getStatus());
     EXPECT_EQ(LinearProblemCase::INCONSISTENT, result->Case);
@@ -536,7 +523,7 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples12)
 
 TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples13)
 {
-    LinearProblem  linproblem(OptimizeType::MIN);
+    LinearProblem linproblem(OptimizeType::MIN);
 
     std::vector<Equation> constrains = {
         {{-6, 1, 2}, ComparisonOperator::LessEqual},
@@ -548,8 +535,7 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples13)
     linproblem.SetObjFunc(objectiveFunction);
     linproblem.setConstrains(constrains);
 
-    Simplex simplex(linproblem);
-    std::shared_ptr<LinearProblemSolution> result = simplex.Solve();
+    std::shared_ptr<LinearProblemSolution> result = simplex.Solve(linproblem);
 
     EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.getStatus());
     EXPECT_EQ(LinearProblemCase::INF_SOLUTIONS_BOUND, result->Case);
@@ -562,7 +548,7 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples13)
 
 TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples14)
 {
-    LinearProblem  linproblem(OptimizeType::MIN);
+    LinearProblem linproblem(OptimizeType::MIN);
 
     std::vector<Equation> constrains = {
         {{-2, 1, 2}, ComparisonOperator::GreaterEqual},
@@ -573,8 +559,7 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples14)
     linproblem.SetObjFunc(objectiveFunction);
     linproblem.setConstrains(constrains);
 
-    Simplex simplex(linproblem);
-    std::shared_ptr<LinearProblemSolution> result = simplex.Solve();
+    std::shared_ptr<LinearProblemSolution> result = simplex.Solve(linproblem);
 
     EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.getStatus());
     EXPECT_EQ(LinearProblemCase::INF_SOLUTIONS_UNBOUND, result->Case);
@@ -587,7 +572,7 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples14)
 
 TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples15)
 {
-    LinearProblem  linproblem(OptimizeType::MIN);
+    LinearProblem linproblem(OptimizeType::MIN);
 
     std::vector<Equation> constrains = {
         {{-4, 1, 2}, ComparisonOperator::GreaterEqual},
@@ -600,8 +585,7 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples15)
     linproblem.SetObjFunc(objectiveFunction);
     linproblem.setConstrains(constrains);
 
-    Simplex simplex(linproblem);
-    std::shared_ptr<LinearProblemSolution> result = simplex.Solve();
+    std::shared_ptr<LinearProblemSolution> result = simplex.Solve(linproblem);
 
     EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.getStatus());
     EXPECT_EQ(LinearProblemCase::ONE_SOLUTION, result->Case);
@@ -614,7 +598,7 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples15)
 
 TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples16)
 {
-    LinearProblem  linproblem(OptimizeType::MAX);
+    LinearProblem linproblem(OptimizeType::MAX);
 
     std::vector<Equation> constrains = {
         {{-5, 1, 2}, ComparisonOperator::GreaterEqual},
@@ -626,8 +610,7 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples16)
     linproblem.SetObjFunc(objectiveFunction);
     linproblem.setConstrains(constrains);
 
-    Simplex simplex(linproblem);
-    std::shared_ptr<LinearProblemSolution> result = simplex.Solve();
+    std::shared_ptr<LinearProblemSolution> result = simplex.Solve(linproblem);
 
     EXPECT_EQ(SimplexStatus::STATUS_SOLVED, simplex.getStatus());
     EXPECT_EQ(LinearProblemCase::ONE_SOLUTION, result->Case);
@@ -636,4 +619,56 @@ TEST_F(SimplexTestSuite, ExampleFromSzlachcicExamples16)
     EXPECT_FLOAT_EQ(3, result->VariableValues[0]);
     EXPECT_FLOAT_EQ(4, result->VariableValues[1]);
     EXPECT_FLOAT_EQ(7, result->ObjFuncValue);
+}
+
+TEST_F(SimplexTestSuite, x1plusx2and)
+{
+    LinearProblem linproblem(OptimizeType::MAX);
+
+    std::vector<Equation> constrains = {
+        {{-10, 3, 3}, ComparisonOperator::LessEqual}};
+
+    Equation objectiveFunction = {{0, 1, 1}, ComparisonOperator::Equal};
+
+    linproblem.SetObjFunc(objectiveFunction);
+    linproblem.setConstrains(constrains);
+
+    std::shared_ptr<LinearProblemSolution> result = simplex.Solve(linproblem);
+    EXPECT_FLOAT_EQ(10./3., result->VariableValues[0]);
+    EXPECT_FLOAT_EQ(0, result->VariableValues[1]);
+
+    linproblem.addConstrain(Equation({-3, 1, 0}, ComparisonOperator::LessEqual));
+    result = simplex.Solve(linproblem);
+    EXPECT_FLOAT_EQ(3, result->VariableValues[0]);
+    EXPECT_FLOAT_EQ(1./3., result->VariableValues[1]);
+
+    linproblem.addConstrain(Equation({-1, 0, 1}, ComparisonOperator::GreaterEqual));
+    result = simplex.Solve(linproblem);
+    EXPECT_FLOAT_EQ(7./3., result->VariableValues[0]);
+    EXPECT_FLOAT_EQ(1, result->VariableValues[1]);
+
+    linproblem.addConstrain(Equation({-2, 0, 1}, ComparisonOperator::GreaterEqual));
+    result = simplex.Solve(linproblem);
+    EXPECT_FLOAT_EQ(4./3., result->VariableValues[0]);
+    EXPECT_FLOAT_EQ(2, result->VariableValues[1]);
+
+    linproblem.addConstrain(Equation({-1, 1, 0}, ComparisonOperator::LessEqual));
+    result = simplex.Solve(linproblem);
+    EXPECT_FLOAT_EQ(1, result->VariableValues[0]);
+    EXPECT_FLOAT_EQ(7./3., result->VariableValues[1]);
+
+    linproblem.addConstrain(Equation({-3, 0, 1}, ComparisonOperator::GreaterEqual));
+    result = simplex.Solve(linproblem);
+    EXPECT_FLOAT_EQ(1./3., result->VariableValues[0]);
+    EXPECT_FLOAT_EQ(3, result->VariableValues[1]);
+
+    linproblem.addConstrain(Equation({-0, 1, 0}, ComparisonOperator::LessEqual));
+    result = simplex.Solve(linproblem);
+    EXPECT_FLOAT_EQ(0, result->VariableValues[0]);
+    EXPECT_FLOAT_EQ(10./3., result->VariableValues[1]);
+
+    linproblem.addConstrain(Equation({-3, 0, 1}, ComparisonOperator::LessEqual));
+    result = simplex.Solve(linproblem);
+    EXPECT_FLOAT_EQ(0, result->VariableValues[0]);
+    EXPECT_FLOAT_EQ(3, result->VariableValues[1]);
 }
