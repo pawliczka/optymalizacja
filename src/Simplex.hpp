@@ -8,8 +8,8 @@
 class Simplex
 {
 public:
-    Simplex(const LinearProblem& Problem);
-    std::shared_ptr<LinearProblemSolution> Solve();
+    Simplex();
+    std::shared_ptr<LinearProblemSolution> Solve(const LinearProblem &problem);
     SimplexStatus getStatus() const;
     int getLoopCnt1Phase() const;
     int getLoopCnt2Phase() const;

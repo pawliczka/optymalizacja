@@ -16,6 +16,7 @@ public:
     LinearProblem(OptimizeType _type);
     void SetObjFunc(const Equation &ObjFuncOrig);
     void setConstrains(const std::vector<Equation>& constrains);
+    void addConstrain(const Equation& constrain);
     double RemoveLastConstr();
     void print() const;
     int getn() const { return n; }

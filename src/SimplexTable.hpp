@@ -6,9 +6,7 @@
 class SimplexTable
 {
 public:
-    SimplexTable() {}
-    SimplexTable(const LinearProblem& problem);
-
+    SimplexTable(){}
     void print() const;
     double rowMax(int Row) const;
     double rowMin(int Row) const;
@@ -26,6 +24,7 @@ public:
     int getRowIndex(int num) const;
     void swapRowColIndexes(int col, int row);
     void setTabElem(int row, int col, double val);
+    void fill(const LinearProblem &problem);
 
 private:
     int numBaseVars;

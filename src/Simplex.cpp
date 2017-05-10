@@ -2,11 +2,8 @@
 #include <iostream>
 #include <QDebug>
 
-Simplex::Simplex(const LinearProblem& Problem)
-    : Table(Problem)
+Simplex::Simplex()
 {
-    Type = Problem.gettype();
-    Solution = std::make_shared<LinearProblemSolution>(Problem.getn());
 }
 
 void Simplex::CheckNoSolutions()
@@ -257,9 +254,13 @@ SimplexStatus Simplex::getStatus() const
     return Status;
 }
 
-std::shared_ptr<LinearProblemSolution> Simplex::Solve()
+std::shared_ptr<LinearProblemSolution> Simplex::Solve(const LinearProblem& problem)
 {
-    //  Table.print();
+    LoopCnt1Phase = 0;
+    LoopCnt2Phase = 0;
+    Type = problem.gettype();
+    Solution = std::make_shared<LinearProblemSolution>(problem.getn());
+    Table.fill(problem);
     Status = SimplexStatus::STATUS_BUSY;
     Solution->Case = LinearProblemCase::ONE_SOLUTION;
     Solve1Phase();
@@ -312,7 +313,7 @@ std::shared_ptr<LinearProblemSolution> Simplex::Solve1Phase()
         if (Table.getTabElem(0, 0) == Last2Values[1])
             DisturbTable();
 
-        qDebug() << "Krok " << Step++ << " I fazy | x0 =" << Table.getTabElem(0, 0) << endl;
+      //  qDebug() << "Krok " << Step++ << " I fazy | x0 =" << Table.getTabElem(0, 0) << endl;
 
         Last2Values[1] = Last2Values[0];
         Last2Values[0] = Table.getTabElem(0, 0);
@@ -338,7 +339,7 @@ std::shared_ptr<LinearProblemSolution> Simplex::Solve2Phase()
         Table.swapRowColIndexes(InputToBase, DeletedFromBase);
         UpdateTable(InputToBase, DeletedFromBase);
         //  Table.print();
-        qDebug() << "Krok " << Step++ << " II fazy | x0 =" << Table.getTabElem(0, 0) << endl;
+      //  qDebug() << "Krok " << Step++ << " II fazy | x0 =" << Table.getTabElem(0, 0) << endl;
     }
 
     CheckInfSolutionsBounded();
