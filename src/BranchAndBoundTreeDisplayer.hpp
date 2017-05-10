@@ -1,9 +1,9 @@
-#ifndef BRANCHANDBOUNDTREEDISPLAYER_HPP
-#define BRANCHANDBOUNDTREEDISPLAYER_HPP
-
+#pragma once
 #include <QDialog>
+#include <QTreeWidget>
 
-namespace Ui {
+namespace Ui
+{
 class BranchAndBoundTreeDisplayer;
 }
 
@@ -12,11 +12,16 @@ class BranchAndBoundTreeDisplayer : public QDialog
     Q_OBJECT
 
 public:
-    explicit BranchAndBoundTreeDisplayer(QWidget *parent = 0);
+    explicit BranchAndBoundTreeDisplayer(QWidget* parent = 0);
     ~BranchAndBoundTreeDisplayer();
 
-private:
-    Ui::BranchAndBoundTreeDisplayer *ui;
-};
+private slots:
 
-#endif // BRANCHANDBOUNDTREEDISPLAYER_HPP
+    void on_treeWidget_itemClicked(QTreeWidgetItem *item, int column);
+
+private:
+    void addTreeRoot(QString name, QString description);
+    QTreeWidgetItem *addTreeChild(QTreeWidgetItem* parent, QString name, QString description);
+
+    Ui::BranchAndBoundTreeDisplayer* ui;
+};

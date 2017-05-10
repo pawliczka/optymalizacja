@@ -10,7 +10,7 @@ int main(int argc, char* argv[])
     QApplication a(argc, argv);
     MainWindow view;
     BranchAndBoundTreeDisplayer asd;
-    asd.show();
+    asd.showMaximized();
     Controler contr(view);
     view.show();
     return a.exec();
