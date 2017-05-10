@@ -44,8 +44,8 @@ HEADERS += \
     SimplexStatus.hpp \
     LinearProblemSolution.hpp \
     BranchAndBoundSolver.hpp \
-    TreeOfSolution.hpp \
-    EquationValidator.hpp
+    EquationValidator.hpp \
+    NodeOfSolution.hpp
 
 FORMS += \
     mainwindow.ui
