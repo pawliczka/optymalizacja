@@ -242,6 +242,21 @@ void Simplex::DisturbTable()
         Solution->Case = LinearProblemCase::INCONSISTENT;
 }
 
+int Simplex::getLoopCnt2Phase() const
+{
+    return LoopCnt2Phase;
+}
+
+int Simplex::getLoopCnt1Phase() const
+{
+    return LoopCnt1Phase;
+}
+
+SimplexStatus Simplex::getStatus() const
+{
+    return Status;
+}
+
 std::shared_ptr<LinearProblemSolution> Simplex::Solve()
 {
     //  Table.print();
