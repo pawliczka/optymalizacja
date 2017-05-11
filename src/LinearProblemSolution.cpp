@@ -1,6 +1,4 @@
 #include "LinearProblemSolution.hpp"
-#include <QString>
-#include <QDebug>
 
 LinearProblemSolution::LinearProblemSolution(int _n)
 {
@@ -8,17 +6,17 @@ LinearProblemSolution::LinearProblemSolution(int _n)
     VariableValues.resize(_n, 0);
 }
 
-void LinearProblemSolution::print() const
+QString LinearProblemSolution::getAsString() const
 {
     QString str;
-    str += QString("\nRozwiazanie:\n");
+    str += QString("Rozwiazanie:\n");
     for (int i = 0; i < static_cast<int>(VariableValues.size()); i++)
     {
         str += QString("\tx") + QString::number(i + 1) + QString(" = ") + QString::number(VariableValues[i]) +
                QString("\n");
     }
 
-    qDebug() << str;
-    qDebug() << "Wartosc funkcji celu:";
-    qDebug() << "\t" << ObjFuncValue << endl;
+    str += "\nWartosc funkcji celu:";
+    str += ("\t" + QString::number(ObjFuncValue));
+    return str;
 }

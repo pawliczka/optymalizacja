@@ -25,7 +25,6 @@ std::vector<std::shared_ptr<LinearProblemSolution>> BranchAndBoundSolver::Solve(
         m_nodesOfSolution.pop_front();
 
         tempNode->m_solution = simplex.Solve(*(tempNode->m_linearProblem.get()));
-        tempNode->m_solution->print();
 
         if(IsSolutionIsInteger(*(tempNode->m_solution.get())))
         {

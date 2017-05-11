@@ -1,6 +1,10 @@
 #include "BranchAndBoundTreeDisplayer.hpp"
 #include "ui_branchandboundtreedisplayer.h"
 #include <iostream>
+#include <QVariant>
+
+Q_DECLARE_SMART_POINTER_METATYPE(std::shared_ptr)
+Q_DECLARE_METATYPE(std::shared_ptr<NodeOfSolution>);
 
 BranchAndBoundTreeDisplayer::BranchAndBoundTreeDisplayer(QWidget* parent)
     : QDialog(parent)
@@ -30,16 +34,23 @@ QTreeWidgetItem* BranchAndBoundTreeDisplayer::createNewTreeItem(QTreeWidgetItem*
     return new QTreeWidgetItem();
 }
 
+void BranchAndBoundTreeDisplayer::fillTreeItem(QTreeWidgetItem* treeItem, const std::shared_ptr<NodeOfSolution>& node)
+{
+    for (int i = 1; i <= static_cast<int>(node->m_solution->VariableValues.size()); i++)
+    {
+        treeItem->setText(i + 1, QString::number(node->m_solution->VariableValues[i - 1]));
+    }
+    QVariant var = QVariant::fromValue(node);
+    treeItem->setData(0, Qt::UserRole, var);
+    treeItem->setIcon(0, QIcon(":/new/images/exit.png"));
+}
+
 QTreeWidgetItem* BranchAndBoundTreeDisplayer::addTreeElement(
     QTreeWidgetItem* parent, const std::shared_ptr<NodeOfSolution>& node)
 {
     QTreeWidgetItem* treeItem = createNewTreeItem(parent);
 
-    for (int i = 1; i <= static_cast<int>(node->m_solution->VariableValues.size()); i++)
-    {
-        treeItem->setText(i + 1, QString::number(node->m_solution->VariableValues[i - 1]));
-    }
-    treeItem->setIcon(0, QIcon(":/new/images/exit.png"));
+    fillTreeItem(treeItem, node);
 
     if (parent != nullptr)
         parent->addChild(treeItem);
@@ -58,7 +69,9 @@ void BranchAndBoundTreeDisplayer::fillTree(const std::shared_ptr<NodeOfSolution>
 
 void BranchAndBoundTreeDisplayer::on_treeWidget_itemClicked(QTreeWidgetItem* item, int column)
 {
-    ui->textBrowser->setPlainText(item->text(column));
+    auto spint2 = item->data(0, Qt::UserRole).value<std::shared_ptr<NodeOfSolution>>();
+
+    ui->textBrowser->setPlainText(spint2->m_solution->getAsString());
 }
 
 void BranchAndBoundTreeDisplayer::setColumnNames(const std::shared_ptr<NodeOfSolution>& node)

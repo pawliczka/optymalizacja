@@ -28,4 +28,5 @@ private:
 
     Ui::BranchAndBoundTreeDisplayer* ui;
     QTreeWidgetItem *createNewTreeItem(QTreeWidgetItem* parent);
+    void fillTreeItem(QTreeWidgetItem* treeItem, const std::shared_ptr<NodeOfSolution>& node);
 };
