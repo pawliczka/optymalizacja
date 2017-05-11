@@ -11,7 +11,8 @@ SOURCES += main.cpp \
     TermConverterTestSuite.cpp \
     EquationTestSuite.cpp \
     EquationManagerTestSuite.cpp \
-    SimplexTestSuite.cpp
+    SimplexTestSuite.cpp \
+    BranchAndBoundSolverTestSuite.cpp
 
 HEADERS += \
     mocks/EquationConventerMock.hpp \
