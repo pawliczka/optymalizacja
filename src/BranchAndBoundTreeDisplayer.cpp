@@ -18,6 +18,7 @@ void BranchAndBoundTreeDisplayer::fillTreeView(const std::shared_ptr<NodeOfSolut
 {
     if (node == nullptr)
         return;
+    ui->treeWidget->clear();
     setColumnNames(node);
     fillTree(node);
 }
