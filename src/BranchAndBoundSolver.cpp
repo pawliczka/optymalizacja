@@ -11,7 +11,9 @@ BranchAndBoundSolver::BranchAndBoundSolver(std::shared_ptr<LinearProblem> linear
     m_newConstrain.clear();
     m_newConstrain.setComparisonOperator(ComparisonOperator::None);
 
-    m_nodesOfSolution.push_front(std::make_shared<NodeOfSolution>(linearProblem, 1, m_newConstrain));
+    m_rootNode = std::make_shared<NodeOfSolution>(linearProblem, 1, m_newConstrain);
+
+    m_nodesOfSolution.push_front(m_rootNode);
     if (linearProblem->gettype() == OptimizeType::MIN)
         m_valueOfBestObjectiveFunction = std::numeric_limits<float>::max();
 
@@ -86,6 +88,7 @@ void BranchAndBoundSolver::SingleBranch(std::shared_ptr<NodeOfSolution> tempNode
     }
 }
 
+
 void BranchAndBoundSolver::Branch(std::shared_ptr<LinearProblem> tempProblem, std::shared_ptr<NodeOfSolution> tempNode)
 {
     SingleBranch(tempNode, tempProblem, ComparisonOperator::LessEqual);
@@ -137,4 +140,9 @@ int BranchAndBoundSolver::getIndexOfFirstNonInteger(const LinearProblemSolution&
         }
     }
     return index;
+}
+
+std::shared_ptr<NodeOfSolution> BranchAndBoundSolver::GetRoot()
+{
+    return m_rootNode;
 }
