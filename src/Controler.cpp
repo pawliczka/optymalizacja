@@ -15,4 +15,5 @@ void Controler::calculate()
     asd->setConstrains(m_eqManager->getConstraintFunctions());
     BranchAndBoundSolver asd1(asd);
     auto asdasdasd = asd1.Solve();
+    m_view.fillTreeView(asd1.GetRoot());
 }

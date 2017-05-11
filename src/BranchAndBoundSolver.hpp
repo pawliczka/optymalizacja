@@ -13,6 +13,7 @@ class BranchAndBoundSolver
 public:
     BranchAndBoundSolver(std::shared_ptr<LinearProblem>);
     std::vector<std::shared_ptr<LinearProblemSolution>> Solve();
+    std::shared_ptr<NodeOfSolution> GetRoot();
 
 private:
     bool IsSolutionIsInteger(const LinearProblemSolution &solution) const;
@@ -21,7 +22,6 @@ private:
     void Branch(std::shared_ptr<LinearProblem> tempProblem, std::shared_ptr<NodeOfSolution> tempNode);
     void SingleBranch(std::shared_ptr<NodeOfSolution>, std::shared_ptr<LinearProblem>, ComparisonOperator);
 
-    std::shared_ptr<NodeOfSolution> GetRoot();
 
     std::vector<std::shared_ptr<LinearProblemSolution>> m_optimalSolutions;
     std::shared_ptr<LinearProblem> m_initialProblem;
