@@ -15,13 +15,16 @@ class BranchAndBoundTreeDisplayer : public QDialog
 public:
     explicit BranchAndBoundTreeDisplayer(QWidget* parent = 0);
     ~BranchAndBoundTreeDisplayer();
+    void fillTreeView(const std::shared_ptr<NodeOfSolution> &node);
 
 private slots:
 
     void on_treeWidget_itemClicked(QTreeWidgetItem *item, int column);
 
 private:
-    QTreeWidgetItem *addTreeElement(QString name, QString description, QTreeWidgetItem* parent = nullptr);
+    void setColumnNames(const std::shared_ptr<NodeOfSolution> &node);
+    void fillTree(const std::shared_ptr<NodeOfSolution>& node, QTreeWidgetItem* parent = nullptr);
+    QTreeWidgetItem *addTreeElement(QTreeWidgetItem *parent, const std::shared_ptr<NodeOfSolution> &node);
 
     Ui::BranchAndBoundTreeDisplayer* ui;
     QTreeWidgetItem *createNewTreeItem(QTreeWidgetItem* parent);
