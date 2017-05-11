@@ -4,7 +4,7 @@
 #include <QVariant>
 
 Q_DECLARE_SMART_POINTER_METATYPE(std::shared_ptr)
-Q_DECLARE_METATYPE(std::shared_ptr<NodeOfSolution>);
+Q_DECLARE_METATYPE(std::shared_ptr<NodeOfSolution>)
 
 BranchAndBoundTreeDisplayer::BranchAndBoundTreeDisplayer(QWidget* parent)
     : QDialog(parent)
@@ -40,6 +40,7 @@ void BranchAndBoundTreeDisplayer::fillTreeItem(QTreeWidgetItem* treeItem, const 
     {
         treeItem->setText(i + 1, QString::number(node->m_solution->VariableValues[i - 1]));
     }
+    treeItem->setText(1, QString::fromStdString(node->m_additionalConstrain.toString()));
     QVariant var = QVariant::fromValue(node);
     treeItem->setData(0, Qt::UserRole, var);
     treeItem->setIcon(0, QIcon(":/new/images/exit.png"));
@@ -63,8 +64,8 @@ void BranchAndBoundTreeDisplayer::fillTree(const std::shared_ptr<NodeOfSolution>
     if (node == nullptr)
         return;
     auto child = addTreeElement(parent, node);
-    fillTree(node->m_idLowerBound, child);
-    fillTree(node->m_idUpperBound, child);
+    fillTree(node->m_lowerBoundNode, child);
+    fillTree(node->m_upperBoundNode, child);
 }
 
 void BranchAndBoundTreeDisplayer::on_treeWidget_itemClicked(QTreeWidgetItem* item, int column)

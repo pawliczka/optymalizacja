@@ -286,7 +286,7 @@ std::shared_ptr<LinearProblemSolution> Simplex::Solve(const LinearProblem& probl
 
 std::shared_ptr<LinearProblemSolution> Simplex::Solve1Phase()
 {
-    int Step = 0;
+    //int Step = 0;
     double Last2Values[2] = {0, 0}; // L2V[0] - wartość w poprzednim kroku
     // L2V[1] - wartość dwa kroki wcześniej
 
@@ -324,7 +324,7 @@ std::shared_ptr<LinearProblemSolution> Simplex::Solve1Phase()
 
 std::shared_ptr<LinearProblemSolution> Simplex::Solve2Phase()
 {
-    int Step = 0;
+   // int Step = 0;
     while (!IsOptimal())
     {
         LoopCnt2Phase++;
