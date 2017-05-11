@@ -12,5 +12,6 @@ struct NodeOfSolution {
     std::shared_ptr<NodeOfSolution> m_idLowerBound;
     std::shared_ptr<NodeOfSolution> m_idUpperBound;
     std::shared_ptr<LinearProblem> m_linearProblem;
+
 };
 
