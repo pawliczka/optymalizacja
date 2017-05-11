@@ -1,6 +1,8 @@
 #include "Controler.hpp"
 #include <QString>
 #include <QDebug>
+#include <LinearProblem.hpp>
+
 
 void Controler::calculate()
 {
@@ -8,7 +10,9 @@ void Controler::calculate()
     auto constraints = m_view.getTextFromTextConFun();
     auto text = objfun + "=0\n" + constraints;
     m_eqManager->convertToEquations(text.toStdString());
-    auto text1 = m_eqManager->convertEquationsToString();
-    auto asd = QString::fromStdString(text1);
-    m_view.setTextToDispLogger(asd);
+    std::shared_ptr<LinearProblem> asd = std::make_shared<LinearProblem>(OptimizeType::MAX);
+    asd->SetObjFunc(m_eqManager->getObjectiveFunction());
+    asd->setConstrains(m_eqManager->getConstraintFunctions());
+    BranchAndBoundSolver asd1(asd);
+    auto asdasdasd = asd1.Solve();
 }

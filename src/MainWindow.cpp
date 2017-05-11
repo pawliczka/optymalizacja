@@ -48,6 +48,16 @@ void MainWindow::setTextToDispLogger(QString text)
     ui->disp_logger->append(text);
 }
 
+void MainWindow::fillTreeView(const std::shared_ptr<NodeOfSolution> &node)
+{
+    m_bAndBDisp.fillTreeView(node);
+}
+
+void MainWindow::showTreeview()
+{
+    m_bAndBDisp.showMaximized();
+}
+
 float MainWindow::getPrecision() const
 {
     return ui->text_precision->text().toFloat();
@@ -121,4 +131,9 @@ void MainWindow::saveFile()
 void MainWindow::aboutApplication()
 {
     QMessageBox::information(this, QString("Jebać studia"), QString("i tak to ujebiemy\n"));
+}
+
+void MainWindow::on_btn_show_clicked()
+{
+    m_bAndBDisp.showMaximized();
 }

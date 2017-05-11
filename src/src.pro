@@ -13,7 +13,7 @@ TEMPLATE = lib
 TARGET = optymalizacja
 
 SOURCES += \
-    mainwindow.cpp \
+    MainWindow.cpp \
     EquationConventer.cpp \
     TermConverter.cpp \
     Equation.cpp \
@@ -29,7 +29,7 @@ SOURCES += \
     NodeOfSolution.cpp
 
 HEADERS += \
-    mainwindow.hpp \
+    MainWindow.hpp \
     EquationConventer.hpp \
     IEquationConventer.hpp \
     ITermConverter.hpp \

@@ -1,9 +1,8 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
-
+#pragma once
 #include <QMainWindow>
 #include <QPushButton>
 #include <QString>
+#include <BranchAndBoundTreeDisplayer.hpp>
 
 namespace Ui
 {
@@ -23,9 +22,12 @@ public:
     QString getOptymalizationType() const;
     float getPrecision() const;
     void setTextToDispLogger(QString text);
+    void fillTreeView(const std::shared_ptr<NodeOfSolution> &node);
+    void showTreeview();
 
 private:
     Ui::MainWindow* ui;
+    BranchAndBoundTreeDisplayer m_bAndBDisp;
     QString m_fileName;
 
 private slots:
@@ -35,6 +37,5 @@ private slots:
     void saveFileAs();
     void saveFile();
     void newFile();
+    void on_btn_show_clicked();
 };
-
-#endif // MAINWINDOW_H
