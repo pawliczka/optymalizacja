@@ -29,6 +29,7 @@ public:
     int getIndexOfLastCofficient() const;
     bool operator==(const Equation& equationSecond) const;
     std::string toString() const;
+    void clear();
 
 private:
     std::string getFirstElementAsString() const;

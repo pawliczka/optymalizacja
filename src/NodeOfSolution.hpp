@@ -1,17 +1,23 @@
 #pragma once
 #include "LinearProblemSolution.hpp"
 #include "LinearProblem.hpp"
+#include "Equation.hpp"
 #include <memory>
 
-struct NodeOfSolution {
-    NodeOfSolution(std::shared_ptr<LinearProblem> problem, int id)
-        : m_linearProblem(problem), m_Id(id){}
+class NodeOfSolution {
+public:
+    NodeOfSolution(std::shared_ptr<LinearProblem> problem, int id, Equation constrain)
+        : m_linearProblem(problem), m_Id(id){m_additionalConstrain = constrain;}
+
+    void setEquation(std::vector<Coefficient> coefficients, ComparisonOperator compOperator); //chyba do wyjebania
+
+    std::shared_ptr<LinearProblem> m_linearProblem;
     int m_Id = 0;
     bool isOptimal = false;
     std::shared_ptr<LinearProblemSolution> m_solution;
-    std::shared_ptr<NodeOfSolution> m_idLowerBound;
-    std::shared_ptr<NodeOfSolution> m_idUpperBound;
-    std::shared_ptr<LinearProblem> m_linearProblem;
+    std::shared_ptr<NodeOfSolution> m_lowerBoundNode;
+    std::shared_ptr<NodeOfSolution> m_upperBoundNode;
+    Equation m_additionalConstrain;
 
 };
 

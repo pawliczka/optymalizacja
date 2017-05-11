@@ -44,4 +44,16 @@ TEST_F(BranchAndBoundSolverTestSuite, asd)
 
     BranchAndBoundSolver sut(std::make_shared<LinearProblem>(linproblem));
     auto solutions = sut.Solve();
+    EXPECT_FLOAT_EQ(0,solutions[0]->VariableValues[0]);
+    EXPECT_FLOAT_EQ(3,solutions[0]->VariableValues[1]);
+
+    EXPECT_FLOAT_EQ(1,solutions[1]->VariableValues[0]);
+    EXPECT_FLOAT_EQ(2,solutions[1]->VariableValues[1]);
+
+    EXPECT_FLOAT_EQ(2,solutions[2]->VariableValues[0]);
+    EXPECT_FLOAT_EQ(1,solutions[2]->VariableValues[1]);
+
+    EXPECT_FLOAT_EQ(3,solutions[3]->VariableValues[0]);
+    EXPECT_FLOAT_EQ(0,solutions[3]->VariableValues[1]);
+
 }

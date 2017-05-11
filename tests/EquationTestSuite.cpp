@@ -119,3 +119,19 @@ TEST_F(EquationTestSuite, shouldCorrectlyResizeEquation)
     EXPECT_EQ(5, sut.getIndexOfLastCofficient());
     EXPECT_EQ(sut, sut2);
 }
+
+TEST_F(EquationTestSuite, shouldClearAllCoefficients)
+{
+    sut = Equation({1, -1, 14}, ComparisonOperator::GreaterEqual);
+
+    EXPECT_EQ(1,sut.getCoefficient(0));
+    EXPECT_EQ(-1,sut.getCoefficient(1));
+    EXPECT_EQ(14.,sut.getCoefficient(2));
+
+    sut.clear();
+
+    EXPECT_EQ(0,sut.getCoefficient(0));
+    EXPECT_EQ(0,sut.getCoefficient(1));
+    EXPECT_EQ(0,sut.getCoefficient(2));
+    EXPECT_EQ(ComparisonOperator::None,sut.getComparisonOperator());
+}

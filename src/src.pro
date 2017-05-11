@@ -24,7 +24,8 @@ SOURCES += \
     LinearProblem.cpp \
     LinearProblemSolution.cpp \
     BranchAndBoundSolver.cpp \
-    EquationValidator.cpp
+    EquationValidator.cpp \
+    NodeOfSolution.cpp
 
 HEADERS += \
     mainwindow.h \

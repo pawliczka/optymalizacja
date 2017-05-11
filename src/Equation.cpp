@@ -184,3 +184,10 @@ std::string Equation::toString() const
 {
     return getFirstElementAsString() + getNonFirstElementAsString() + getComparisonOperatorAndZeroAsString();
 }
+
+void Equation::clear()
+{
+    for (auto& elem : m_coefficients)
+        elem = 0;
+    m_comparisonOperator = ComparisonOperator::None;
+}
