@@ -15,7 +15,7 @@ public:
 
 
 private:
-    bool IsSolutionIsInteger(LinearProblemSolution) const;
+    bool IsSolutionIsInteger(const LinearProblemSolution &solution) const;
     void InsertSolutionIsBetter(std::shared_ptr<NodeOfSolution>);
 
     std::vector<std::shared_ptr<LinearProblemSolution>> m_optimalSolutions;

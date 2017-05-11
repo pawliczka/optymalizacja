@@ -36,7 +36,7 @@ std::vector<std::shared_ptr<LinearProblemSolution>> BranchAndBoundSolver::Solve(
     return m_optimalSolutions;
 }
 
-bool BranchAndBoundSolver::IsSolutionIsInteger(LinearProblemSolution solution) const
+bool BranchAndBoundSolver::IsSolutionIsInteger(const LinearProblemSolution &solution) const
 {
     double FractionalPart;
     double IntegerPart;
@@ -52,14 +52,8 @@ bool BranchAndBoundSolver::IsSolutionIsInteger(LinearProblemSolution solution) c
 
 void BranchAndBoundSolver::InsertSolutionIsBetter(std::shared_ptr<NodeOfSolution> node)
 {
-    if((m_optimizeType == OptimizeType::MAX) && (m_valueOfBestObjectiveFunction < node->m_solution->ObjFuncValue))
-    {
-        m_optimalSolutions.clear();
-        m_valueOfBestObjectiveFunction = node->m_solution->ObjFuncValue;
-        m_optimalSolutions.push_back(node->m_solution);
-    }
-
-    if((m_optimizeType == OptimizeType::MIN) && (m_valueOfBestObjectiveFunction > node->m_solution->ObjFuncValue))
+    if(((m_optimizeType == OptimizeType::MAX) && (m_valueOfBestObjectiveFunction < node->m_solution->ObjFuncValue)) ||
+       ((m_optimizeType == OptimizeType::MIN) && (m_valueOfBestObjectiveFunction > node->m_solution->ObjFuncValue)))
     {
         m_optimalSolutions.clear();
         m_valueOfBestObjectiveFunction = node->m_solution->ObjFuncValue;
@@ -67,8 +61,6 @@ void BranchAndBoundSolver::InsertSolutionIsBetter(std::shared_ptr<NodeOfSolution
     }
 
     if(m_valueOfBestObjectiveFunction == node->m_solution->ObjFuncValue)
-    {
         m_optimalSolutions.push_back(node->m_solution);
-    }
 }
 
