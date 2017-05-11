@@ -1,6 +1,7 @@
 #pragma once
 #include <QDialog>
 #include <QTreeWidget>
+#include "NodeOfSolution.hpp"
 
 namespace Ui
 {
@@ -20,8 +21,8 @@ private slots:
     void on_treeWidget_itemClicked(QTreeWidgetItem *item, int column);
 
 private:
-    void addTreeRoot(QString name, QString description);
-    QTreeWidgetItem *addTreeChild(QTreeWidgetItem* parent, QString name, QString description);
+    QTreeWidgetItem *addTreeElement(QString name, QString description, QTreeWidgetItem* parent = nullptr);
 
     Ui::BranchAndBoundTreeDisplayer* ui;
+    QTreeWidgetItem *createNewTreeItem(QTreeWidgetItem* parent);
 };

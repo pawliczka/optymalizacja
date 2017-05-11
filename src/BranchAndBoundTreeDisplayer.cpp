@@ -7,7 +7,8 @@ BranchAndBoundTreeDisplayer::BranchAndBoundTreeDisplayer(QWidget* parent)
 {
     ui->setupUi(this);
     ui->treeWidget->setColumnCount(3);
-    addTreeRoot("a", "b");
+    auto asd = addTreeElement("a", "b");
+    addTreeElement("2", "3", asd);
 }
 
 BranchAndBoundTreeDisplayer::~BranchAndBoundTreeDisplayer()
@@ -15,26 +16,21 @@ BranchAndBoundTreeDisplayer::~BranchAndBoundTreeDisplayer()
     delete ui;
 }
 
-void BranchAndBoundTreeDisplayer::addTreeRoot(QString name, QString description)
+QTreeWidgetItem* BranchAndBoundTreeDisplayer::createNewTreeItem(QTreeWidgetItem* parent)
 {
-    QTreeWidgetItem* treeItem = new QTreeWidgetItem(ui->treeWidget);
-
-    treeItem->setText(0, name);
-    treeItem->setIcon(0, QIcon(":/new/images/exit.png"));
-    treeItem->setText(1, description);
-    treeItem->setText(2, description);
-    treeItem->setExpanded( true );
-    addTreeChild(treeItem, name + "A", "Child_first");
+    if (parent == nullptr)
+        return new QTreeWidgetItem(ui->treeWidget);
+    return new QTreeWidgetItem();
 }
 
-QTreeWidgetItem* BranchAndBoundTreeDisplayer::addTreeChild(QTreeWidgetItem* parent, QString name, QString description)
+QTreeWidgetItem* BranchAndBoundTreeDisplayer::addTreeElement(QString name, QString description, QTreeWidgetItem* parent)
 {
-    QTreeWidgetItem* treeItem = new QTreeWidgetItem();
+    QTreeWidgetItem* treeItem = createNewTreeItem(parent);
 
     treeItem->setText(0, name);
     treeItem->setText(1, description);
     treeItem->setIcon(0, QIcon(":/new/images/exit.png"));
-    treeItem->setExpanded( true );
+    treeItem->setExpanded(true);
 
     parent->addChild(treeItem);
     return treeItem;

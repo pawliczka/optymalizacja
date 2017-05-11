@@ -5,7 +5,7 @@
 
 struct NodeOfSolution {
     NodeOfSolution(std::shared_ptr<LinearProblem> problem, int id)
-        : m_linearProblem(problem), m_Id(id){}
+        : m_Id(id), m_linearProblem(problem){}
     int m_Id = 0;
     bool isOptimal = false;
     std::shared_ptr<LinearProblemSolution> m_solution;
