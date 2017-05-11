@@ -1,14 +1,16 @@
 #pragma once
 #include "LinearProblemSolution.hpp"
+#include "LinearProblem.hpp"
 #include <memory>
 
-class NodeOfSolution {
-public:
-private:
-    int m_Id = {0};
-    bool isOptimal = {false};
+struct NodeOfSolution {
+    NodeOfSolution(std::shared_ptr<LinearProblem> problem, int id)
+        : m_linearProblem(problem), m_Id(id){}
+    int m_Id = 0;
+    bool isOptimal = false;
     std::shared_ptr<LinearProblemSolution> m_solution;
-    std::shared_ptr<int> m_idLowerBound;
-    std::shared_ptr<int> m_idUpperBound;
+    std::shared_ptr<NodeOfSolution> m_idLowerBound;
+    std::shared_ptr<NodeOfSolution> m_idUpperBound;
+    std::shared_ptr<LinearProblem> m_linearProblem;
 };
 
