@@ -87,8 +87,8 @@ void BranchAndBoundSolver::SingleBranch(std::shared_ptr<NodeOfSolution> tempNode
 
 void BranchAndBoundSolver::Branch(std::shared_ptr<LinearProblem> tempProblem, std::shared_ptr<NodeOfSolution> tempNode)
 {
-    if((m_optimizeType == OptimizeType::MAX) && (m_valueOfBestObjectiveFunction <= tempNode->m_solution->ObjFuncValue) ||
-       (m_optimizeType == OptimizeType::MIN) && (m_valueOfBestObjectiveFunction >= tempNode->m_solution->ObjFuncValue))
+    if(((m_optimizeType == OptimizeType::MAX) && (m_valueOfBestObjectiveFunction <= tempNode->m_solution->ObjFuncValue)) ||
+       ((m_optimizeType == OptimizeType::MIN) && (m_valueOfBestObjectiveFunction >= tempNode->m_solution->ObjFuncValue)))
     {
         SingleBranch(tempNode, tempProblem, ComparisonOperator::LessEqual);
         SingleBranch(tempNode, tempProblem, ComparisonOperator::GreaterEqual);
