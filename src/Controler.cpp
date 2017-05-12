@@ -35,6 +35,7 @@ void Controler::calculate()
     prepareEquations();
     std::shared_ptr<LinearProblem> linProblem = createLinearProblem();
     BranchAndBoundSolver solver(linProblem);
+    solver.setPrecision(m_view.getPrecision());
     auto optimalResult = solver.Solve();
     showOptimalResult(optimalResult);
     m_view.fillTreeView(solver.GetRoot());
