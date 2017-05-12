@@ -1,8 +1,7 @@
 #include "Controler.hpp"
-#include <QString>
-#include <QDebug>
 #include <LinearProblem.hpp>
-
+#include <QDebug>
+#include <QString>
 
 std::shared_ptr<LinearProblem> Controler::createLinearProblem()
 {
@@ -21,11 +20,22 @@ void Controler::prepareEquations()
     m_eqManager->convertToEquations(text.toStdString());
 }
 
+void Controler::showOptimalResult(std::vector<std::shared_ptr<LinearProblemSolution>> optimalResult)
+{
+    QString toDisplay;
+    for (const auto& result: optimalResult)
+    {
+        toDisplay += result->getAsString();
+    }
+    m_view.setTextToDispLogger(toDisplay);
+}
+
 void Controler::calculate()
 {
     prepareEquations();
     std::shared_ptr<LinearProblem> linProblem = createLinearProblem();
     BranchAndBoundSolver solver(linProblem);
     auto optimalResult = solver.Solve();
+    showOptimalResult(optimalResult);
     m_view.fillTreeView(solver.GetRoot());
 }

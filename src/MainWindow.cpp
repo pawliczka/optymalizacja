@@ -46,6 +46,7 @@ QString MainWindow::getOptymalizationType() const
 void MainWindow::setTextToDispLogger(QString text)
 {
     ui->disp_logger->append(text);
+    ui->disp_logger->append("-----------------------------------------------------------");
 }
 
 void MainWindow::fillTreeView(const std::shared_ptr<NodeOfSolution> &node)

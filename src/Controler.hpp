@@ -16,13 +16,14 @@ public:
         connect(m_view.getCalcBtn(), &QPushButton::clicked, this, &Controler::calculate);
     }
 
-    slots public:
+private slots:
     void calculate();
 
 private:
-    MainWindow& m_view;
-
-    std::shared_ptr<EquationManager> m_eqManager = std::make_shared<EquationManager>();
-    std::shared_ptr<LinearProblem> createLinearProblem();
     void prepareEquations();
+    void showOptimalResult(std::vector<std::shared_ptr<LinearProblemSolution>> optimalResult);
+    std::shared_ptr<LinearProblem> createLinearProblem();
+
+    MainWindow& m_view;
+    std::shared_ptr<EquationManager> m_eqManager = std::make_shared<EquationManager>();
 };
