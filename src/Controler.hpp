@@ -23,4 +23,6 @@ private:
     MainWindow& m_view;
 
     std::shared_ptr<EquationManager> m_eqManager = std::make_shared<EquationManager>();
+    std::shared_ptr<LinearProblem> createLinearProblem();
+    void prepareEquations();
 };

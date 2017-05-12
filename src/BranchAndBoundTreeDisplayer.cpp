@@ -18,13 +18,23 @@ BranchAndBoundTreeDisplayer::~BranchAndBoundTreeDisplayer()
     delete ui;
 }
 
+void BranchAndBoundTreeDisplayer::resizeColumnsToContents()
+{
+    for (int i = 0; i < ui->treeWidget->columnCount(); i++)
+    {
+        ui->treeWidget->resizeColumnToContents(i);
+    }
+}
+
 void BranchAndBoundTreeDisplayer::fillTreeView(const std::shared_ptr<NodeOfSolution>& node)
 {
     if (node == nullptr)
         return;
     ui->treeWidget->clear();
+    ui->textBrowser->clear();
     setColumnNames(node);
     fillTree(node);
+    resizeColumnsToContents();
 }
 
 QTreeWidgetItem* BranchAndBoundTreeDisplayer::createNewTreeItem(QTreeWidgetItem* parent)
@@ -34,6 +44,12 @@ QTreeWidgetItem* BranchAndBoundTreeDisplayer::createNewTreeItem(QTreeWidgetItem*
     return new QTreeWidgetItem();
 }
 
+void BranchAndBoundTreeDisplayer::setDataToTreeItem(QTreeWidgetItem* treeItem, const std::shared_ptr<NodeOfSolution>& node)
+{
+    QVariant var = QVariant::fromValue(node);
+    treeItem->setData(0, Qt::UserRole, var);
+}
+
 void BranchAndBoundTreeDisplayer::fillTreeItem(QTreeWidgetItem* treeItem, const std::shared_ptr<NodeOfSolution>& node)
 {
     for (int i = 1; i <= static_cast<int>(node->m_solution->VariableValues.size()); i++)
@@ -41,9 +57,8 @@ void BranchAndBoundTreeDisplayer::fillTreeItem(QTreeWidgetItem* treeItem, const 
         treeItem->setText(i + 1, QString::number(node->m_solution->VariableValues[i - 1]));
     }
     treeItem->setText(1, QString::fromStdString(node->m_additionalConstrain.toString()));
-    QVariant var = QVariant::fromValue(node);
-    treeItem->setData(0, Qt::UserRole, var);
     treeItem->setIcon(0, QIcon(":/new/images/exit.png"));
+    setDataToTreeItem(treeItem, node);
 }
 
 QTreeWidgetItem* BranchAndBoundTreeDisplayer::addTreeElement(
