@@ -77,3 +77,31 @@ TEST_F(BranchAndBoundSolverTestSuite, asd1)
     EXPECT_FLOAT_EQ(0,solutions[0]->VariableValues[1]);
     EXPECT_FLOAT_EQ(10,solutions[0]->VariableValues[2]);
 }
+
+TEST_F(BranchAndBoundSolverTestSuite, asd2)
+{
+    LinearProblem linproblem(OptimizeType::MIN);
+
+    std::vector<Equation> constrains = {
+         {{-80, 2, 1, 1, 1, 0, 0, 0, 0}, ComparisonOperator::GreaterEqual},
+         {{-150, 0, 2, 1, 1, 3, 2, 1, 0}, ComparisonOperator::GreaterEqual},
+         {{-100, 1, 0, 1, 3, 0, 2, 3, 5}, ComparisonOperator::GreaterEqual}};
+
+    Equation objectiveFunction = {{0, 1, 1, 1, 1, 1, 1, 1, 1}, ComparisonOperator::Equal};
+
+    linproblem.SetObjFunc(objectiveFunction);
+    linproblem.setConstrains(constrains);
+
+    BranchAndBoundSolver sut(std::make_shared<LinearProblem>(linproblem));
+    auto solutions = sut.Solve();
+
+    std::cout << "Wszystkie rozwiązania: " << std::endl;
+    for(int i = 0; i < solutions.size(); i++)
+        {
+            for(int j = 0; j < solutions[i]->VariableValues.size(); j++)
+            {
+                std::cout << solutions[i]->VariableValues[j] << "      ";
+            }
+            std::cout << std::endl;
+        }
+}

@@ -16,8 +16,8 @@ BranchAndBoundSolver::BranchAndBoundSolver(std::shared_ptr<LinearProblem> linear
     m_nodesOfSolution.push_front(m_rootNode);
     if (linearProblem->gettype() == OptimizeType::MIN)
         m_valueOfBestObjectiveFunction = std::numeric_limits<float>::max();
-
-    m_valueOfBestObjectiveFunction = std::numeric_limits<float>::lowest();
+    else
+        m_valueOfBestObjectiveFunction = std::numeric_limits<float>::lowest();
     m_optimizeType = linearProblem->gettype();
 }
 
@@ -38,7 +38,10 @@ std::vector<std::shared_ptr<LinearProblemSolution> > BranchAndBoundSolver::Solve
             continue;
 
         if (IsSolutionIsInteger(*(tempNode->m_solution.get())))
+        {
             InsertSolutionIsBetter(tempNode);
+            std::cout << "Rozwiazanie calkowitoliczbowe > branch Not Needed" << std::endl;
+        }
         else
             Branch(tempProblem, tempNode);
     }
@@ -87,6 +90,8 @@ void BranchAndBoundSolver::SingleBranch(std::shared_ptr<NodeOfSolution> tempNode
 
 void BranchAndBoundSolver::Branch(std::shared_ptr<LinearProblem> tempProblem, std::shared_ptr<NodeOfSolution> tempNode)
 {
+    std::cout << "Obecnie BestObjFunValue:  " << m_valueOfBestObjectiveFunction << std::endl;
+    tempNode->print();
     if(((m_optimizeType == OptimizeType::MAX) && (m_valueOfBestObjectiveFunction <= tempNode->m_solution->ObjFuncValue)) ||
        ((m_optimizeType == OptimizeType::MIN) && (m_valueOfBestObjectiveFunction >= tempNode->m_solution->ObjFuncValue)))
     {
