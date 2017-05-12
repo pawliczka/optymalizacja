@@ -10,6 +10,7 @@ public:
         : m_linearProblem(problem), m_Id(id){m_additionalConstrain = constrain;}
 
     void setEquation(std::vector<Coefficient> coefficients, ComparisonOperator compOperator); //chyba do wyjebania
+    void print() const;
 
     std::shared_ptr<LinearProblem> m_linearProblem;
     int m_Id = 0;
@@ -18,6 +19,7 @@ public:
     std::shared_ptr<NodeOfSolution> m_lowerBoundNode;
     std::shared_ptr<NodeOfSolution> m_upperBoundNode;
     Equation m_additionalConstrain;
+
 
 };
 
