@@ -38,9 +38,7 @@ std::vector<std::shared_ptr<LinearProblemSolution> > BranchAndBoundSolver::Solve
             continue;
 
         if (IsSolutionIsInteger(*(tempNode->m_solution.get())))
-        {
             InsertSolutionIsBetter(tempNode);
-        }
         else
             Branch(tempProblem, tempNode);
     }
@@ -70,29 +68,31 @@ void BranchAndBoundSolver::SingleBranch(std::shared_ptr<NodeOfSolution> tempNode
         m_newConstrain.setCoefficient(std::make_pair(-upper_bound, 0));
         m_newConstrain.setComparisonOperator(ComparisonOperator::GreaterEqual);
     }
-
     newProblem->addConstrain(m_newConstrain);
 
     if (typeOfBound == ComparisonOperator::LessEqual)
     {
-        std::shared_ptr<NodeOfSolution> lowerNode = std::make_shared<NodeOfSolution>(newProblem, LOWER_BOUND_ID(tempNode->m_Id), m_newConstrain);
+        std::shared_ptr<NodeOfSolution> lowerNode = std::make_shared<NodeOfSolution>(newProblem, (tempNode->m_Id + 1), m_newConstrain);
         tempNode->m_lowerBoundNode = lowerNode;
         m_nodesOfSolution.push_front(lowerNode);
     }
 
     if (typeOfBound == ComparisonOperator::GreaterEqual)
     {
-        std::shared_ptr<NodeOfSolution> upperNode = std::make_shared<NodeOfSolution>(newProblem, UPPER_BOUND_ID(tempNode->m_Id), m_newConstrain);
+        std::shared_ptr<NodeOfSolution> upperNode = std::make_shared<NodeOfSolution>(newProblem, (tempNode->m_Id + 2), m_newConstrain);
         tempNode->m_upperBoundNode = upperNode;
         m_nodesOfSolution.push_front(upperNode);
     }
 }
 
-
 void BranchAndBoundSolver::Branch(std::shared_ptr<LinearProblem> tempProblem, std::shared_ptr<NodeOfSolution> tempNode)
 {
-    SingleBranch(tempNode, tempProblem, ComparisonOperator::LessEqual);
-    SingleBranch(tempNode, tempProblem, ComparisonOperator::GreaterEqual);
+    if((m_optimizeType == OptimizeType::MAX) && (m_valueOfBestObjectiveFunction <= tempNode->m_solution->ObjFuncValue) ||
+       (m_optimizeType == OptimizeType::MIN) && (m_valueOfBestObjectiveFunction >= tempNode->m_solution->ObjFuncValue))
+    {
+        SingleBranch(tempNode, tempProblem, ComparisonOperator::LessEqual);
+        SingleBranch(tempNode, tempProblem, ComparisonOperator::GreaterEqual);
+    }
 }
 
 bool BranchAndBoundSolver::IsSolutionIsInteger(const LinearProblemSolution& solution) const
@@ -145,4 +145,9 @@ int BranchAndBoundSolver::getIndexOfFirstNonInteger(const LinearProblemSolution&
 std::shared_ptr<NodeOfSolution> BranchAndBoundSolver::GetRoot()
 {
     return m_rootNode;
+}
+
+void BranchAndBoundSolver::setPrecision(float precision)
+{
+    m_precision = precision;
 }
