@@ -12,8 +12,7 @@ QString LinearProblemSolution::getAsString() const
     str += QString("Rozwiazanie:\t");
     for (int i = 0; i < static_cast<int>(VariableValues.size()); i++)
     {
-        str += QString("\tx") + QString::number(i + 1) + QString(" = ") + QString::number(VariableValues[i]) +
-               QString("\t");
+        str += QString("\tx") + QString::number(i + 1) + QString(" = ") + QString::number(VariableValues[i]);
     }
 
     str += "\nWartosc funkcji celu:";
