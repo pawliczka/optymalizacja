@@ -2,10 +2,19 @@
 #include <LinearProblem.hpp>
 #include <QDebug>
 #include <QString>
-
+namespace
+{
+OptimizeType convertQStringToOptimizeType(QString type)
+{
+    if (type == "MAX")
+        return OptimizeType::MAX;
+    return OptimizeType::MIN;
+}
+}
 std::shared_ptr<LinearProblem> Controler::createLinearProblem()
 {
-    std::shared_ptr<LinearProblem> asd = std::make_shared<LinearProblem>(OptimizeType::MAX);
+    std::shared_ptr<LinearProblem> asd =
+        std::make_shared<LinearProblem>(convertQStringToOptimizeType(m_view.getOptymalizationType()));
     asd->SetObjFunc(m_eqManager->getObjectiveFunction());
     asd->setConstrains(m_eqManager->getConstraintFunctions());
 
@@ -23,7 +32,7 @@ void Controler::prepareEquations()
 void Controler::showOptimalResult(std::vector<std::shared_ptr<LinearProblemSolution>> optimalResult)
 {
     QString toDisplay;
-    for (const auto& result: optimalResult)
+    for (const auto& result : optimalResult)
     {
         toDisplay += result->getAsString();
     }
