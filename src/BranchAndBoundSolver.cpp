@@ -21,7 +21,7 @@ BranchAndBoundSolver::BranchAndBoundSolver(std::shared_ptr<LinearProblem> linear
     m_optimizeType = linearProblem->gettype();
 }
 
-std::vector<std::shared_ptr<LinearProblemSolution> > BranchAndBoundSolver::Solve()
+std::vector<std::shared_ptr<LinearProblemSolution>> BranchAndBoundSolver::Solve()
 {
     Simplex simplex;
     std::shared_ptr<LinearProblem> tempProblem = std::make_shared<LinearProblem>(*m_initialProblem);
@@ -29,7 +29,7 @@ std::vector<std::shared_ptr<LinearProblemSolution> > BranchAndBoundSolver::Solve
     while (!m_nodesOfSolution.empty())
     {
         std::cout << "Nakurwiam while'a" << std::endl;
-        std::cout << "Liczba problemow do rozwiazania:   " << m_nodesOfSolution.size() <<std::endl;
+        std::cout << "Liczba problemow do rozwiazania:   " << m_nodesOfSolution.size() << std::endl;
         std::shared_ptr<NodeOfSolution> tempNode = m_nodesOfSolution.front();
         m_nodesOfSolution.pop_front();
 
@@ -50,11 +50,11 @@ std::vector<std::shared_ptr<LinearProblemSolution> > BranchAndBoundSolver::Solve
         }
         else
         {
-            std::cout<< "probuje brancha" <<std::endl;
+            std::cout << "probuje brancha" << std::endl;
             Branch(tempProblem, tempNode);
         }
 
-        std::cout << "Liczba problemow do rozwiazania po petli:   " << m_nodesOfSolution.size() <<std::endl;
+        std::cout << "Liczba problemow do rozwiazania po petli:   " << m_nodesOfSolution.size() << std::endl;
     }
     return m_optimalSolutions;
 }
@@ -62,7 +62,8 @@ std::vector<std::shared_ptr<LinearProblemSolution> > BranchAndBoundSolver::Solve
 #define LOWER_BOUND_ID(ID) (ID * 2 + 1)
 #define UPPER_BOUND_ID(ID) (ID * 2 + 2)
 
-void BranchAndBoundSolver::SingleBranch(std::shared_ptr<NodeOfSolution> tempNode, std::shared_ptr<LinearProblem> tempProblem, ComparisonOperator typeOfBound)
+void BranchAndBoundSolver::SingleBranch(std::shared_ptr<NodeOfSolution> tempNode,
+    std::shared_ptr<LinearProblem> tempProblem, ComparisonOperator typeOfBound)
 {
     int indexOfFirstNonIntegerElement = getIndexOfFirstNonInteger(*(tempNode->m_solution.get()));
 
@@ -86,14 +87,16 @@ void BranchAndBoundSolver::SingleBranch(std::shared_ptr<NodeOfSolution> tempNode
 
     if (typeOfBound == ComparisonOperator::LessEqual)
     {
-        std::shared_ptr<NodeOfSolution> lowerNode = std::make_shared<NodeOfSolution>(newProblem, LOWER_BOUND_ID(tempNode->m_Id), m_newConstrain);
+        std::shared_ptr<NodeOfSolution> lowerNode =
+            std::make_shared<NodeOfSolution>(newProblem, LOWER_BOUND_ID(tempNode->m_Id), m_newConstrain);
         tempNode->m_lowerBoundNode = lowerNode;
         m_nodesOfSolution.push_front(lowerNode);
     }
 
     if (typeOfBound == ComparisonOperator::GreaterEqual)
     {
-        std::shared_ptr<NodeOfSolution> upperNode = std::make_shared<NodeOfSolution>(newProblem, UPPER_BOUND_ID(tempNode->m_Id), m_newConstrain);
+        std::shared_ptr<NodeOfSolution> upperNode =
+            std::make_shared<NodeOfSolution>(newProblem, UPPER_BOUND_ID(tempNode->m_Id), m_newConstrain);
         tempNode->m_upperBoundNode = upperNode;
         m_nodesOfSolution.push_front(upperNode);
     }
@@ -103,8 +106,10 @@ void BranchAndBoundSolver::Branch(std::shared_ptr<LinearProblem> tempProblem, st
 {
     std::cout << "Obecnie BestObjFunValue:  " << m_valueOfBestObjectiveFunction << std::endl;
     tempNode->print();
-    if(((m_optimizeType == OptimizeType::MAX) && (m_valueOfBestObjectiveFunction <= tempNode->m_solution->ObjFuncValue)) ||
-       ((m_optimizeType == OptimizeType::MIN) && (m_valueOfBestObjectiveFunction >= tempNode->m_solution->ObjFuncValue)))
+    if (((m_optimizeType == OptimizeType::MAX) &&
+            (m_valueOfBestObjectiveFunction <= tempNode->m_solution->ObjFuncValue)) ||
+        ((m_optimizeType == OptimizeType::MIN) &&
+            (m_valueOfBestObjectiveFunction >= tempNode->m_solution->ObjFuncValue)))
     {
         SingleBranch(tempNode, tempProblem, ComparisonOperator::LessEqual);
         SingleBranch(tempNode, tempProblem, ComparisonOperator::GreaterEqual);
@@ -128,7 +133,8 @@ bool BranchAndBoundSolver::IsSolutionIsInteger(const LinearProblemSolution& solu
 
 void BranchAndBoundSolver::InsertSolutionIsBetter(std::shared_ptr<NodeOfSolution> node)
 {
-    if (((m_optimizeType == OptimizeType::MAX) && (m_valueOfBestObjectiveFunction < node->m_solution->ObjFuncValue)) || ((m_optimizeType == OptimizeType::MIN) && (m_valueOfBestObjectiveFunction > node->m_solution->ObjFuncValue)))
+    if (((m_optimizeType == OptimizeType::MAX) && (m_valueOfBestObjectiveFunction < node->m_solution->ObjFuncValue)) ||
+        ((m_optimizeType == OptimizeType::MIN) && (m_valueOfBestObjectiveFunction > node->m_solution->ObjFuncValue)))
     {
         m_optimalSolutions.clear();
         m_valueOfBestObjectiveFunction = node->m_solution->ObjFuncValue;
@@ -150,7 +156,8 @@ int BranchAndBoundSolver::getIndexOfFirstNonInteger(const LinearProblemSolution&
     for (int i = 0; i < static_cast<int>(solution.VariableValues.size()); i++)
     {
         FractionalPart = std::modf(solution.VariableValues[i], &IntegerPart);
-        if (FractionalPart > m_precision && FractionalPart < (1 - m_precision)) {
+        if (FractionalPart > m_precision && FractionalPart < (1 - m_precision))
+        {
             index = i;
             break;
         }

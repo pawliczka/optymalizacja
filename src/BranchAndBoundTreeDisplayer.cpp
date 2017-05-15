@@ -44,7 +44,8 @@ QTreeWidgetItem* BranchAndBoundTreeDisplayer::createNewTreeItem(QTreeWidgetItem*
     return new QTreeWidgetItem();
 }
 
-void BranchAndBoundTreeDisplayer::setDataToTreeItem(QTreeWidgetItem* treeItem, const std::shared_ptr<NodeOfSolution>& node)
+void BranchAndBoundTreeDisplayer::setDataToTreeItem(
+    QTreeWidgetItem* treeItem, const std::shared_ptr<NodeOfSolution>& node)
 {
     QVariant var = QVariant::fromValue(node);
     treeItem->setData(0, Qt::UserRole, var);

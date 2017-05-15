@@ -17,9 +17,9 @@ public:
     void setPrecision(float);
 
 private:
-    bool IsSolutionIsInteger(const LinearProblemSolution &solution) const;
+    bool IsSolutionIsInteger(const LinearProblemSolution& solution) const;
     void InsertSolutionIsBetter(std::shared_ptr<NodeOfSolution>);
-    int getIndexOfFirstNonInteger(const LinearProblemSolution &solution) const;
+    int getIndexOfFirstNonInteger(const LinearProblemSolution& solution) const;
     void Branch(std::shared_ptr<LinearProblem> tempProblem, std::shared_ptr<NodeOfSolution> tempNode);
     void SingleBranch(std::shared_ptr<NodeOfSolution>, std::shared_ptr<LinearProblem>, ComparisonOperator);
 
@@ -35,4 +35,3 @@ private:
 
     std::shared_ptr<NodeOfSolution> m_rootNode;
 };
-

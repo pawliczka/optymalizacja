@@ -131,7 +131,7 @@ void MainWindow::saveFile()
 
 void MainWindow::aboutApplication()
 {
-    QMessageBox::information(this, QString("Jebać studia"), QString("i tak to ujebiemy\n"));
+    QMessageBox::information(this, QString("Twórcy"), QString("Paweł Barań\nMateusz Malon"));
 }
 
 void MainWindow::on_btn_show_clicked()
