@@ -23,7 +23,6 @@ public:
     float getPrecision() const;
     void setTextToDispLogger(QString text);
     void fillTreeView(const std::shared_ptr<NodeOfSolution> &node);
-    void showTreeview();
 
 private:
     Ui::MainWindow* ui;

@@ -54,11 +54,6 @@ void MainWindow::fillTreeView(const std::shared_ptr<NodeOfSolution> &node)
     m_bAndBDisp.fillTreeView(node);
 }
 
-void MainWindow::showTreeview()
-{
-    m_bAndBDisp.showMaximized();
-}
-
 float MainWindow::getPrecision() const
 {
     return ui->text_precision->text().toFloat();
