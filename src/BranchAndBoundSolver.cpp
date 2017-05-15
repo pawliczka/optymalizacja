@@ -137,13 +137,16 @@ void BranchAndBoundSolver::InsertSolutionIsBetter(std::shared_ptr<NodeOfSolution
         ((m_optimizeType == OptimizeType::MIN) && (m_valueOfBestObjectiveFunction > node->m_solution->ObjFuncValue)))
     {
         m_optimalSolutions.clear();
+        m_idOptimalNodes.clear();
         m_valueOfBestObjectiveFunction = node->m_solution->ObjFuncValue;
         m_optimalSolutions.push_back(node->m_solution);
+        m_idOptimalNodes.push_back(node->m_Id);
     }
 
     else if (m_valueOfBestObjectiveFunction == node->m_solution->ObjFuncValue)
     {
         m_optimalSolutions.push_back(node->m_solution);
+        m_idOptimalNodes.push_back(node->m_Id);
     }
 }
 

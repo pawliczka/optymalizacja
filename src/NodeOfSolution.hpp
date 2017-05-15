@@ -21,7 +21,7 @@ public:
     long long int m_Id = 0;
     bool isOptimal = false;
     std::shared_ptr<LinearProblemSolution> m_solution;
-    std::shared_ptr<NodeOfSolution> m_lowerBoundNode;
-    std::shared_ptr<NodeOfSolution> m_upperBoundNode;
+    std::shared_ptr<NodeOfSolution> m_lowerBoundNode = nullptr;
+    std::shared_ptr<NodeOfSolution> m_upperBoundNode = nullptr;
     Equation m_additionalConstrain;
 };

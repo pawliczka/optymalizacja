@@ -24,8 +24,10 @@ private:
     void SingleBranch(std::shared_ptr<NodeOfSolution>, std::shared_ptr<LinearProblem>, ComparisonOperator);
 
     std::vector<std::shared_ptr<LinearProblemSolution>> m_optimalSolutions;
+    std::vector<long long int> m_idOptimalNodes;
     std::shared_ptr<LinearProblem> m_initialProblem;
     std::list<std::shared_ptr<NodeOfSolution>> m_nodesOfSolution;
+
     int m_numberOfVariables = 0;
     float m_precision = 0.0001;
     float m_valueOfBestObjectiveFunction = 0;
