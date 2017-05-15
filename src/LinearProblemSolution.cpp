@@ -28,13 +28,13 @@ QString LinearProblemSolution::getAsString() const
         case LinearProblemCase::INF_SOLUTIONS_UNBOUND:
         {
             str = getNormalSolution();
-            str += "INF_SOLUTIONS_UNBOUND\n";
+            str += "Status: Zadanie ma nieskończona liczbe rozwiazan na nieograniczonym obszarze\n";
             break;
         }
         case LinearProblemCase::INF_SOLUTIONS_BOUND:
         {
             str = getNormalSolution();
-            str += "INF_SOLUTIONS_BOUND\n";
+            str += "Status: Zadanie ma nieskończona liczbe rozwiazan na ograniczonym obszarze\n";
             break;
         }
         case LinearProblemCase::ONE_SOLUTION:
@@ -45,12 +45,12 @@ QString LinearProblemSolution::getAsString() const
         case LinearProblemCase::NO_SOLUTIONS:
         case LinearProblemCase::INCONSISTENT:
         {
-            str = "WRONG_TABLE\n";
+            str = "Status: Niepoprawna tablica\n";
             break;
         }
         default:
         {
-            str = "UNKNOWN\n";
+            str = "Status nieokreslony\n";
         }
     }
     return str;

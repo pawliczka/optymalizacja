@@ -60,7 +60,17 @@ void BranchAndBoundTreeDisplayer::fillTreeItem(QTreeWidgetItem* treeItem, const 
     }
     treeItem->setText(1, QString::fromStdString(node->m_additionalConstrain.toString()));
     treeItem->setIcon(0, getIconBasedOnSolutionType(node));
+    setRowColor(treeItem, node);
     setDataToTreeItem(treeItem, node);
+}
+
+void BranchAndBoundTreeDisplayer::setRowColor(QTreeWidgetItem* treeItem, const std::shared_ptr<NodeOfSolution>& node)
+{
+    if (node->isOptimal)
+    {
+        for (int i = 0; i < treeItem->columnCount(); i++)
+            treeItem->setBackground(i, QBrush(Qt::green));
+    }
 }
 
 QIcon BranchAndBoundTreeDisplayer::getIconBasedOnSolutionType(const std::shared_ptr<NodeOfSolution>& node)
@@ -105,8 +115,10 @@ void BranchAndBoundTreeDisplayer::on_treeWidget_itemClicked(QTreeWidgetItem* ite
 void BranchAndBoundTreeDisplayer::setColumnNames(const std::shared_ptr<NodeOfSolution>& node)
 {
     QStringList list;
+    ui->treeWidget->setColumnCount(static_cast<int>(node->m_solution->VariableValues.size()) + 2);
     list << "Status"
-         << "Constr";
+         << "Ograniczenie";
+    ui->treeWidget->setHeaderLabels(list);
     for (int i = 1; i <= static_cast<int>(node->m_solution->VariableValues.size()); i++)
     {
         list << ("x" + QString::number(i));
