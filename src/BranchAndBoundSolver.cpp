@@ -56,6 +56,7 @@ std::vector<std::shared_ptr<LinearProblemSolution>> BranchAndBoundSolver::Solve(
 
         std::cout << "Liczba problemow do rozwiazania po petli:   " << m_nodesOfSolution.size() << std::endl;
     }
+    SetRecursiveOptimalId(m_rootNode);
     return m_optimalSolutions;
 }
 
@@ -166,6 +167,21 @@ int BranchAndBoundSolver::getIndexOfFirstNonInteger(const LinearProblemSolution&
         }
     }
     return index;
+}
+
+void BranchAndBoundSolver::SetRecursiveOptimalId(std::shared_ptr<NodeOfSolution> node)
+{
+    for (auto const &id : m_idOptimalNodes)
+    {
+        if(node->m_Id == id)
+            node->isOptimal = true;
+    }
+
+    if((node->m_lowerBoundNode != nullptr) || (node->m_upperBoundNode != nullptr))
+    {
+        SetRecursiveOptimalId(node->m_lowerBoundNode);
+        SetRecursiveOptimalId(node->m_upperBoundNode);
+    }
 }
 
 std::shared_ptr<NodeOfSolution> BranchAndBoundSolver::GetRoot()
