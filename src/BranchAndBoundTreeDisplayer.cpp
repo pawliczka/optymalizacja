@@ -66,6 +66,9 @@ QIcon BranchAndBoundTreeDisplayer::getIconBasedOnSolutionType(const std::shared_
 {
     if (node->isOptimal)
         return QIcon(":/new/images/green_tick.png");
+    if ((node->m_solution->Case == LinearProblemCase::NO_SOLUTIONS) ||
+        (node->m_solution->Case == LinearProblemCase::INCONSISTENT))
+        return QIcon(":/new/images/red_cross.png");
     return QIcon(":/new/images/exit.png");
 }
 
