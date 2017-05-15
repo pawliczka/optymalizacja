@@ -4,12 +4,17 @@
 #include "Equation.hpp"
 #include <memory>
 
-class NodeOfSolution {
+class NodeOfSolution
+{
 public:
     NodeOfSolution(std::shared_ptr<LinearProblem> problem, long long int id, Equation constrain)
-        : m_linearProblem(problem), m_Id(id){m_additionalConstrain = constrain;}
+        : m_linearProblem(problem)
+        , m_Id(id)
+    {
+        m_additionalConstrain = constrain;
+    }
 
-    void setEquation(std::vector<Coefficient> coefficients, ComparisonOperator compOperator); //chyba do wyjebania
+    void setEquation(std::vector<Coefficient> coefficients, ComparisonOperator compOperator); // chyba do wyjebania
     void print() const;
 
     std::shared_ptr<LinearProblem> m_linearProblem;
@@ -19,7 +24,4 @@ public:
     std::shared_ptr<NodeOfSolution> m_lowerBoundNode;
     std::shared_ptr<NodeOfSolution> m_upperBoundNode;
     Equation m_additionalConstrain;
-
-
 };
-

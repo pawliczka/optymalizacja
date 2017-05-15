@@ -31,4 +31,5 @@ private:
     void fillTreeItem(QTreeWidgetItem* treeItem, const std::shared_ptr<NodeOfSolution>& node);
     void resizeColumnsToContents();
     void setDataToTreeItem(QTreeWidgetItem* treeItem, const std::shared_ptr<NodeOfSolution>& node);
+    QIcon getIconBasedOnSolutionType(const std::shared_ptr<NodeOfSolution> &node);
 };

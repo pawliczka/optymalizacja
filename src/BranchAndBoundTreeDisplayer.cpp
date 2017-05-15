@@ -58,8 +58,15 @@ void BranchAndBoundTreeDisplayer::fillTreeItem(QTreeWidgetItem* treeItem, const 
         treeItem->setText(i + 1, QString::number(node->m_solution->VariableValues[i - 1]));
     }
     treeItem->setText(1, QString::fromStdString(node->m_additionalConstrain.toString()));
-    treeItem->setIcon(0, QIcon(":/new/images/exit.png"));
+    treeItem->setIcon(0, getIconBasedOnSolutionType(node));
     setDataToTreeItem(treeItem, node);
+}
+
+QIcon BranchAndBoundTreeDisplayer::getIconBasedOnSolutionType(const std::shared_ptr<NodeOfSolution>& node)
+{
+    if (node->isOptimal)
+        return QIcon(":/new/images/green_tick.png");
+    return QIcon(":/new/images/exit.png");
 }
 
 QTreeWidgetItem* BranchAndBoundTreeDisplayer::addTreeElement(
