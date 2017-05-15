@@ -9,5 +9,6 @@
         <file>loadFile.png</file>
         <file>green_tick.png</file>
         <file>red_cross.png</file>
+        <file>cut.png</file>
     </qresource>
 </RCC>

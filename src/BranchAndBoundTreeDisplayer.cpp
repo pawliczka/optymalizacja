@@ -84,7 +84,7 @@ void BranchAndBoundTreeDisplayer::setRowColor(QTreeWidgetItem* treeItem, const s
 QIcon BranchAndBoundTreeDisplayer::getIconBasedOnSolutionType(const std::shared_ptr<NodeOfSolution>& node)
 {
     if (node->m_state == StateOfNode::CutOff)
-        return QIcon(":/new/images/hammer.png");
+        return QIcon(":/new/images/cut.png");
     if (node->m_state == StateOfNode::OptimalSolution)
         return QIcon(":/new/images/green_tick.png");
     if ((node->m_solution->Case == LinearProblemCase::NO_SOLUTIONS) ||
