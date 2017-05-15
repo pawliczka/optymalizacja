@@ -11,6 +11,7 @@ BranchAndBoundTreeDisplayer::BranchAndBoundTreeDisplayer(QWidget* parent)
     , ui(new Ui::BranchAndBoundTreeDisplayer)
 {
     ui->setupUi(this);
+    setWindowTitle(QString("Drzewo binarne rozwiazan"));
 }
 
 BranchAndBoundTreeDisplayer::~BranchAndBoundTreeDisplayer()

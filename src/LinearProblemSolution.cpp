@@ -28,13 +28,13 @@ QString LinearProblemSolution::getAsString() const
         case LinearProblemCase::INF_SOLUTIONS_UNBOUND:
         {
             str = getNormalSolution();
-            str += "INF_SOLUTIONS_UNBOUND";
+            str += "INF_SOLUTIONS_UNBOUND\n";
             break;
         }
         case LinearProblemCase::INF_SOLUTIONS_BOUND:
         {
             str = getNormalSolution();
-            str += "INF_SOLUTIONS_BOUND";
+            str += "INF_SOLUTIONS_BOUND\n";
             break;
         }
         case LinearProblemCase::ONE_SOLUTION:
@@ -45,12 +45,12 @@ QString LinearProblemSolution::getAsString() const
         case LinearProblemCase::NO_SOLUTIONS:
         case LinearProblemCase::INCONSISTENT:
         {
-            str = "WRONG_TABLE";
+            str = "WRONG_TABLE\n";
             break;
         }
         default:
         {
-            str = "UNKNOWN";
+            str = "UNKNOWN\n";
         }
     }
     return str;

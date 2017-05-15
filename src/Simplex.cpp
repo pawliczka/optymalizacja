@@ -14,7 +14,6 @@ void Simplex::CheckNoSolutions()
         if (Table.getTabElem(0, i) < 0)
         {
             NoSolutions = 1;
-            // kolejne elementy nie moga byc tylko niedodatnie
             for (int j = 1; j < Table.getnumRows(); j++)
                 if (Table.getTabElem(j, i) > 0)
                 {
@@ -36,7 +35,6 @@ void Simplex::CheckInconsistent()
         if (Table.getTabElem(i, 0) <= 0)
         {
             Inconsistent = 1;
-            // kolejne elementy nie moga byc tylko nieujemne
             for (int j = 1; j < Table.getnumCols(); j++)
                 if (Table.getTabElem(i, j) <= 0)
                 {
@@ -56,7 +54,6 @@ void Simplex::CheckInfSolutionsBounded()
     for (int j = 1; j < Table.getnumCols(); j++)
         if (Table.getTabElem(0, j) == 0)
         {
-            // wyraz w pierwszej kolumnie oraz element centr. musza byc <= 0
             for (int i = 1; i < Table.getnumRows(); i++)
                 if (Table.getTabElem(i, 0) > 0 && Table.getTabElem(i, j) > 0)
                 {
@@ -73,7 +70,6 @@ void Simplex::CheckInfSolutionsUnbounded()
         if (Table.getTabElem(0, i) == 0)
         {
             InfSolutionsUnbound = 1;
-            // kolejne elementy nie moga byc tylko ujemne
             for (int j = 1; j < Table.getnumRows(); j++)
                 if (Table.getTabElem(j, i) >= 0)
                 {
