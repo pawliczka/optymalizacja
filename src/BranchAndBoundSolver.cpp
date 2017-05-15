@@ -28,14 +28,20 @@ std::vector<std::shared_ptr<LinearProblemSolution> > BranchAndBoundSolver::Solve
 
     while (!m_nodesOfSolution.empty())
     {
+        std::cout << "Nakurwiam while'a" << std::endl;
+        std::cout << "Liczba problemow do rozwiazania:   " << m_nodesOfSolution.size() <<std::endl;
         std::shared_ptr<NodeOfSolution> tempNode = m_nodesOfSolution.front();
         m_nodesOfSolution.pop_front();
 
         tempNode->m_solution = simplex.Solve(*(tempNode->m_linearProblem.get()));
 
+
         tempProblem = std::make_shared<LinearProblem>(*(tempNode->m_linearProblem));
         if (simplex.getStatus() != SimplexStatus::STATUS_SOLVED)
+        {
+            std::cout << "Zly status, nastepna petla" << std::endl;
             continue;
+        }
 
         if (IsSolutionIsInteger(*(tempNode->m_solution.get())))
         {
@@ -43,7 +49,12 @@ std::vector<std::shared_ptr<LinearProblemSolution> > BranchAndBoundSolver::Solve
             std::cout << "Rozwiazanie calkowitoliczbowe > branch Not Needed" << std::endl;
         }
         else
+        {
+            std::cout<< "probuje brancha" <<std::endl;
             Branch(tempProblem, tempNode);
+        }
+
+        std::cout << "Liczba problemow do rozwiazania po petli:   " << m_nodesOfSolution.size() <<std::endl;
     }
     return m_optimalSolutions;
 }
@@ -75,14 +86,14 @@ void BranchAndBoundSolver::SingleBranch(std::shared_ptr<NodeOfSolution> tempNode
 
     if (typeOfBound == ComparisonOperator::LessEqual)
     {
-        std::shared_ptr<NodeOfSolution> lowerNode = std::make_shared<NodeOfSolution>(newProblem, (tempNode->m_Id + 1), m_newConstrain);
+        std::shared_ptr<NodeOfSolution> lowerNode = std::make_shared<NodeOfSolution>(newProblem, LOWER_BOUND_ID(tempNode->m_Id), m_newConstrain);
         tempNode->m_lowerBoundNode = lowerNode;
         m_nodesOfSolution.push_front(lowerNode);
     }
 
     if (typeOfBound == ComparisonOperator::GreaterEqual)
     {
-        std::shared_ptr<NodeOfSolution> upperNode = std::make_shared<NodeOfSolution>(newProblem, (tempNode->m_Id + 2), m_newConstrain);
+        std::shared_ptr<NodeOfSolution> upperNode = std::make_shared<NodeOfSolution>(newProblem, UPPER_BOUND_ID(tempNode->m_Id), m_newConstrain);
         tempNode->m_upperBoundNode = upperNode;
         m_nodesOfSolution.push_front(upperNode);
     }

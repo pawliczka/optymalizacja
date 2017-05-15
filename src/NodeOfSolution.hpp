@@ -6,14 +6,14 @@
 
 class NodeOfSolution {
 public:
-    NodeOfSolution(std::shared_ptr<LinearProblem> problem, int id, Equation constrain)
+    NodeOfSolution(std::shared_ptr<LinearProblem> problem, long long int id, Equation constrain)
         : m_linearProblem(problem), m_Id(id){m_additionalConstrain = constrain;}
 
     void setEquation(std::vector<Coefficient> coefficients, ComparisonOperator compOperator); //chyba do wyjebania
     void print() const;
 
     std::shared_ptr<LinearProblem> m_linearProblem;
-    int m_Id = 0;
+    long long int m_Id = 0;
     bool isOptimal = false;
     std::shared_ptr<LinearProblemSolution> m_solution;
     std::shared_ptr<NodeOfSolution> m_lowerBoundNode;
