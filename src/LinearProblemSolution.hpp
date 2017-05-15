@@ -10,4 +10,7 @@ struct LinearProblemSolution
     double ObjFuncValue;
     LinearProblemCase Case;
     QString getAsString() const;
+
+private:
+    QString getNormalSolution() const;
 };

@@ -214,9 +214,7 @@ void Simplex::DisturbTable()
 {
     static double Multiplicator = 1;
 
-    /* indeks elementu o najmniejszej wartosci */
     int MinIndex = Table.colMinIndex(0);
-    /* indeks elementu o drugiej najmniejszej */
     int SecondMinIndex = -1;
     double Min = 999999;
 
@@ -231,8 +229,6 @@ void Simplex::DisturbTable()
         }
     }
 
-    /* do drugiego najmniejszego elementu wpisujemy troche mniejsza wartosc niz
-       byla w najmniejszym */
     Table.setTabElem(SecondMinIndex, 0, Table.getTabElem(MinIndex, 0) - 0.0001 * Multiplicator);
     Multiplicator *= 2;
     if (Multiplicator > 1000)
@@ -286,10 +282,7 @@ std::shared_ptr<LinearProblemSolution> Simplex::Solve(const LinearProblem& probl
 
 std::shared_ptr<LinearProblemSolution> Simplex::Solve1Phase()
 {
-    //int Step = 0;
-    double Last2Values[2] = {0, 0}; // L2V[0] - wartość w poprzednim kroku
-    // L2V[1] - wartość dwa kroki wcześniej
-
+    double Last2Values[2] = {0, 0};
     while (!IsPermissible())
     {
         LoopCnt1Phase++;
@@ -308,23 +301,18 @@ std::shared_ptr<LinearProblemSolution> Simplex::Solve1Phase()
 
         Table.swapRowColIndexes(InputToBase, DeletedFromBase);
         UpdateTable(InputToBase, DeletedFromBase);
-        //  Table.print();
 
         if (Table.getTabElem(0, 0) == Last2Values[1])
             DisturbTable();
 
-      //  qDebug() << "Krok " << Step++ << " I fazy | x0 =" << Table.getTabElem(0, 0) << endl;
-
         Last2Values[1] = Last2Values[0];
         Last2Values[0] = Table.getTabElem(0, 0);
     }
-
     return Solution;
 }
 
 std::shared_ptr<LinearProblemSolution> Simplex::Solve2Phase()
 {
-   // int Step = 0;
     while (!IsOptimal())
     {
         LoopCnt2Phase++;
@@ -338,8 +326,6 @@ std::shared_ptr<LinearProblemSolution> Simplex::Solve2Phase()
 
         Table.swapRowColIndexes(InputToBase, DeletedFromBase);
         UpdateTable(InputToBase, DeletedFromBase);
-        //  Table.print();
-      //  qDebug() << "Krok " << Step++ << " II fazy | x0 =" << Table.getTabElem(0, 0) << endl;
     }
 
     CheckInfSolutionsBounded();

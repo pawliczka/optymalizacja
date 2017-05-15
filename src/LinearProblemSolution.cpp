@@ -6,7 +6,7 @@ LinearProblemSolution::LinearProblemSolution(int _n)
     VariableValues.resize(_n, 0);
 }
 
-QString LinearProblemSolution::getAsString() const
+QString LinearProblemSolution::getNormalSolution() const
 {
     QString str;
     str += QString("Rozwiazanie:\t");
@@ -17,5 +17,41 @@ QString LinearProblemSolution::getAsString() const
 
     str += "\nWartosc funkcji celu:";
     str += ("\t" + QString::number(ObjFuncValue) + "\n");
+    return str;
+}
+
+QString LinearProblemSolution::getAsString() const
+{
+    QString str;
+    switch (Case)
+    {
+        case LinearProblemCase::INF_SOLUTIONS_UNBOUND:
+        {
+            str = getNormalSolution();
+            str += "INF_SOLUTIONS_UNBOUND";
+            break;
+        }
+        case LinearProblemCase::INF_SOLUTIONS_BOUND:
+        {
+            str = getNormalSolution();
+            str += "INF_SOLUTIONS_BOUND";
+            break;
+        }
+        case LinearProblemCase::ONE_SOLUTION:
+        {
+            str = getNormalSolution();
+            break;
+        }
+        case LinearProblemCase::NO_SOLUTIONS:
+        case LinearProblemCase::INCONSISTENT:
+        {
+            str = "WRONG_TABLE";
+            break;
+        }
+        default:
+        {
+            str = "UNKNOWN";
+        }
+    }
     return str;
 }
