@@ -7,5 +7,6 @@
         <file>save.png</file>
         <file>exit.png</file>
         <file>loadFile.png</file>
+        <file>green_tick.png</file>
     </qresource>
 </RCC>
