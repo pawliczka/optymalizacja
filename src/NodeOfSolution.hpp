@@ -4,6 +4,13 @@
 #include "Equation.hpp"
 #include <memory>
 
+enum class StateOfNode
+{
+    None,
+    OptimalSolution,
+    CutOff,
+};
+
 class NodeOfSolution
 {
 public:
@@ -19,7 +26,7 @@ public:
 
     std::shared_ptr<LinearProblem> m_linearProblem;
     long long int m_Id = 0;
-    bool isOptimal = false;
+    StateOfNode m_state = StateOfNode::None;
     std::shared_ptr<LinearProblemSolution> m_solution;
     std::shared_ptr<NodeOfSolution> m_lowerBoundNode = nullptr;
     std::shared_ptr<NodeOfSolution> m_upperBoundNode = nullptr;

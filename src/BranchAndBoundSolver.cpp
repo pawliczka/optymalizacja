@@ -171,17 +171,20 @@ int BranchAndBoundSolver::getIndexOfFirstNonInteger(const LinearProblemSolution&
 
 void BranchAndBoundSolver::SetRecursiveOptimalId(std::shared_ptr<NodeOfSolution> node)
 {
-    for (auto const &id : m_idOptimalNodes)
+    for (auto const& id : m_idOptimalNodes)
     {
-        if(node->m_Id == id)
-            node->isOptimal = true;
+        if (node->m_Id == id)
+            node->m_state = StateOfNode::OptimalSolution;
     }
 
-    if((node->m_lowerBoundNode != nullptr) || (node->m_upperBoundNode != nullptr))
+    if ((node->m_lowerBoundNode != nullptr) || (node->m_upperBoundNode != nullptr))
     {
         SetRecursiveOptimalId(node->m_lowerBoundNode);
         SetRecursiveOptimalId(node->m_upperBoundNode);
     }
+    else if (node->m_state == StateOfNode::None && node->m_solution->Case != LinearProblemCase::INCONSISTENT &&
+             node->m_solution->Case != LinearProblemCase::NO_SOLUTIONS)
+        node->m_state = StateOfNode::CutOff;
 }
 
 std::shared_ptr<NodeOfSolution> BranchAndBoundSolver::GetRoot()

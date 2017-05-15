@@ -56,7 +56,15 @@ void BranchAndBoundTreeDisplayer::fillTreeItem(QTreeWidgetItem* treeItem, const 
 {
     for (int i = 1; i <= static_cast<int>(node->m_solution->VariableValues.size()); i++)
     {
-        treeItem->setText(i + 1, QString::number(node->m_solution->VariableValues[i - 1]));
+        if (node->m_solution->Case == LinearProblemCase::INCONSISTENT ||
+            node->m_solution->Case == LinearProblemCase::NO_SOLUTIONS)
+        {
+            treeItem->setText(i + 1, "-");
+        }
+        else
+        {
+            treeItem->setText(i + 1, QString::number(node->m_solution->VariableValues[i - 1]));
+        }
     }
     treeItem->setText(1, QString::fromStdString(node->m_additionalConstrain.toString()));
     treeItem->setIcon(0, getIconBasedOnSolutionType(node));
@@ -66,7 +74,7 @@ void BranchAndBoundTreeDisplayer::fillTreeItem(QTreeWidgetItem* treeItem, const 
 
 void BranchAndBoundTreeDisplayer::setRowColor(QTreeWidgetItem* treeItem, const std::shared_ptr<NodeOfSolution>& node)
 {
-    if (node->isOptimal)
+    if (node->m_state == StateOfNode::OptimalSolution)
     {
         for (int i = 0; i < treeItem->columnCount(); i++)
             treeItem->setBackground(i, QBrush(Qt::green));
@@ -75,7 +83,9 @@ void BranchAndBoundTreeDisplayer::setRowColor(QTreeWidgetItem* treeItem, const s
 
 QIcon BranchAndBoundTreeDisplayer::getIconBasedOnSolutionType(const std::shared_ptr<NodeOfSolution>& node)
 {
-    if (node->isOptimal)
+    if (node->m_state == StateOfNode::CutOff)
+        return QIcon(":/new/images/hammer.png");
+    if (node->m_state == StateOfNode::OptimalSolution)
         return QIcon(":/new/images/green_tick.png");
     if ((node->m_solution->Case == LinearProblemCase::NO_SOLUTIONS) ||
         (node->m_solution->Case == LinearProblemCase::INCONSISTENT))
