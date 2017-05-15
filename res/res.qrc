@@ -8,5 +8,6 @@
         <file>exit.png</file>
         <file>loadFile.png</file>
         <file>green_tick.png</file>
+        <file>red_cross.png</file>
     </qresource>
 </RCC>
