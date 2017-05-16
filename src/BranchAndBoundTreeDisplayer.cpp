@@ -54,7 +54,8 @@ void BranchAndBoundTreeDisplayer::setDataToTreeItem(
 
 void BranchAndBoundTreeDisplayer::fillTreeItem(QTreeWidgetItem* treeItem, const std::shared_ptr<NodeOfSolution>& node)
 {
-    for (int i = 1; i <= static_cast<int>(node->m_solution->VariableValues.size()); i++)
+    int i;
+    for (i = 1; i <= static_cast<int>(node->m_solution->VariableValues.size()); i++)
     {
         if (node->m_solution->Case == LinearProblemCase::INCONSISTENT ||
             node->m_solution->Case == LinearProblemCase::NO_SOLUTIONS)
@@ -65,6 +66,15 @@ void BranchAndBoundTreeDisplayer::fillTreeItem(QTreeWidgetItem* treeItem, const 
         {
             treeItem->setText(i + 1, QString::number(node->m_solution->VariableValues[i - 1]));
         }
+    }
+    if (node->m_solution->Case == LinearProblemCase::INCONSISTENT ||
+        node->m_solution->Case == LinearProblemCase::NO_SOLUTIONS)
+    {
+        treeItem->setText(i + 1, "-");
+    }
+    else
+    {
+        treeItem->setText(i + 1, QString::number(node->m_solution->ObjFuncValue));
     }
     treeItem->setText(1, QString::fromStdString(node->m_additionalConstrain.toString()));
     treeItem->setIcon(0, getIconBasedOnSolutionType(node));
