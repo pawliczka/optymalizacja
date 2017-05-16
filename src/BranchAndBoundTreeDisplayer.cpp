@@ -133,5 +133,6 @@ void BranchAndBoundTreeDisplayer::setColumnNames(const std::shared_ptr<NodeOfSol
     {
         list << ("x" + QString::number(i));
     }
+    list << "Fun celu";
     ui->treeWidget->setHeaderLabels(list);
 }
