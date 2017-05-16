@@ -45,7 +45,7 @@ QString LinearProblemSolution::getAsString() const
         case LinearProblemCase::NO_SOLUTIONS:
         case LinearProblemCase::INCONSISTENT:
         {
-            str = "Status: Niepoprawna tablica\n";
+            str = "Status: Zbior rozwiazań pusty\n";
             break;
         }
         default:
