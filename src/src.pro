@@ -24,7 +24,6 @@ SOURCES += \
     LinearProblem.cpp \
     LinearProblemSolution.cpp \
     BranchAndBoundSolver.cpp \
-    EquationValidator.cpp \
     NodeOfSolution.cpp
 
 HEADERS += \
@@ -45,7 +44,6 @@ HEADERS += \
     SimplexStatus.hpp \
     LinearProblemSolution.hpp \
     BranchAndBoundSolver.hpp \
-    EquationValidator.hpp \
     NodeOfSolution.hpp
 
 FORMS += \
