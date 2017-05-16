@@ -129,6 +129,11 @@ void MainWindow::aboutApplication()
     QMessageBox::information(this, QString("Twórcy"), QString("Paweł Barań\nMateusz Malon"));
 }
 
+void MainWindow::badData()
+{
+    QMessageBox::information(this, QString("Blad"), QString("Wprowadź poprawne dane"));
+}
+
 void MainWindow::on_btn_show_clicked()
 {
     m_bAndBDisp.showMaximized();

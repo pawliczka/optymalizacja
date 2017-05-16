@@ -25,7 +25,6 @@ SOURCES += \
     LinearProblemSolution.cpp \
     BranchAndBoundTreeDisplayer.cpp \
     BranchAndBoundSolver.cpp \
-    EquationValidator.cpp \
     NodeOfSolution.cpp
 
 HEADERS += \
@@ -47,7 +46,6 @@ HEADERS += \
     LinearProblemSolution.hpp \
     BranchAndBoundTreeDisplayer.hpp \
     BranchAndBoundSolver.hpp \
-    EquationValidator.hpp \
     NodeOfSolution.hpp
 
 FORMS += \

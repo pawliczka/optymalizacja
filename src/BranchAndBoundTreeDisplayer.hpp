@@ -33,4 +33,5 @@ private:
     void setDataToTreeItem(QTreeWidgetItem* treeItem, const std::shared_ptr<NodeOfSolution>& node);
     QIcon getIconBasedOnSolutionType(const std::shared_ptr<NodeOfSolution> &node);
     void setRowColor(QTreeWidgetItem *treeItem, const std::shared_ptr<NodeOfSolution> &node);
+    void setVariableValues(QTreeWidgetItem* treeItem, const std::shared_ptr<NodeOfSolution>& node);
 };

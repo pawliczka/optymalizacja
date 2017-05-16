@@ -26,7 +26,14 @@ void Controler::prepareEquations()
     auto objfun = m_view.getTextFromTextObjFun();
     auto constraints = m_view.getTextFromTextConFun();
     auto text = objfun + "=0\n" + constraints;
-    m_eqManager->convertToEquations(text.toStdString());
+    try
+    {
+        m_eqManager->convertToEquations(text.toStdString());
+    }
+    catch (std::exception ex)
+    {
+        m_view.badData();
+    }
 }
 
 void Controler::showOptimalResult(std::vector<std::shared_ptr<LinearProblemSolution>> optimalResult)

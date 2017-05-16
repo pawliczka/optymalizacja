@@ -23,6 +23,7 @@ public:
     float getPrecision() const;
     void setTextToDispLogger(QString text);
     void fillTreeView(const std::shared_ptr<NodeOfSolution> &node);
+    void badData();
 
 private:
     Ui::MainWindow* ui;
