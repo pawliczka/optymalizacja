@@ -28,8 +28,6 @@ std::vector<std::shared_ptr<LinearProblemSolution>> BranchAndBoundSolver::Solve(
 
     while (!m_nodesOfSolution.empty())
     {
-        std::cout << "Nakurwiam while'a" << std::endl;
-        std::cout << "Liczba problemow do rozwiazania:   " << m_nodesOfSolution.size() << std::endl;
         std::shared_ptr<NodeOfSolution> tempNode = m_nodesOfSolution.front();
         m_nodesOfSolution.pop_front();
 
@@ -39,22 +37,17 @@ std::vector<std::shared_ptr<LinearProblemSolution>> BranchAndBoundSolver::Solve(
         tempProblem = std::make_shared<LinearProblem>(*(tempNode->m_linearProblem));
         if (simplex.getStatus() != SimplexStatus::STATUS_SOLVED)
         {
-            std::cout << "Zly status, nastepna petla" << std::endl;
             continue;
         }
 
         if (IsSolutionIsInteger(*(tempNode->m_solution.get())))
         {
             InsertSolutionIsBetter(tempNode);
-            std::cout << "Rozwiazanie calkowitoliczbowe > branch Not Needed" << std::endl;
         }
         else
         {
-            std::cout << "probuje brancha" << std::endl;
             Branch(tempProblem, tempNode);
         }
-
-        std::cout << "Liczba problemow do rozwiazania po petli:   " << m_nodesOfSolution.size() << std::endl;
     }
     SetRecursiveOptimalId(m_rootNode);
     return m_optimalSolutions;
@@ -105,8 +98,6 @@ void BranchAndBoundSolver::SingleBranch(std::shared_ptr<NodeOfSolution> tempNode
 
 void BranchAndBoundSolver::Branch(std::shared_ptr<LinearProblem> tempProblem, std::shared_ptr<NodeOfSolution> tempNode)
 {
-    std::cout << "Obecnie BestObjFunValue:  " << m_valueOfBestObjectiveFunction << std::endl;
-    tempNode->print();
     if (((m_optimizeType == OptimizeType::MAX) &&
             (m_valueOfBestObjectiveFunction <= tempNode->m_solution->ObjFuncValue)) ||
         ((m_optimizeType == OptimizeType::MIN) &&
