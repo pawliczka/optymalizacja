@@ -47,7 +47,7 @@ std::string getCoefficientAsStringWithoutZeros(Coefficient number)
 std::ostream& operator<<(std::ostream& stream, const Equation& equation)
 {
     for (int i = equation.getIndexOfLastCofficient(); i >= 0; i--)
-        stream << equation.getCoefficient(i) << "x" << i << " ";
+        stream << equation.getCoefficient(i) << "x_" << i << " ";
     return stream;
 }
 
@@ -126,16 +126,16 @@ std::string Equation::getTermAsString(int index) const
     {
         if (coefficient == Coefficient(1))
         {
-            equation += "x" + getCoefficientAsStringWithoutZeros(index);
+            equation += "x_" + getCoefficientAsStringWithoutZeros(index);
         }
         else if (coefficient == Coefficient(-1))
         {
-            equation += "-x" + getCoefficientAsStringWithoutZeros(index);
+            equation += "-x_" + getCoefficientAsStringWithoutZeros(index);
         }
         else
         {
             equation +=
-                getCoefficientAsStringWithoutZeros(coefficient) + "x" + getCoefficientAsStringWithoutZeros(index);
+                getCoefficientAsStringWithoutZeros(coefficient) + "x_" + getCoefficientAsStringWithoutZeros(index);
         }
     }
     else
@@ -166,13 +166,13 @@ std::string Equation::getFirstElementAsString() const
     }
     if (coefficient == Coefficient(1))
     {
-        return "x" + getCoefficientAsStringWithoutZeros(index);
+        return "x_" + getCoefficientAsStringWithoutZeros(index);
     }
     if (coefficient == Coefficient(-1))
     {
-        return "-x" + getCoefficientAsStringWithoutZeros(index);
+        return "-x_" + getCoefficientAsStringWithoutZeros(index);
     }
-    return getCoefficientAsStringWithoutZeros(m_coefficients[index]) + "x" + getCoefficientAsStringWithoutZeros(index);
+    return getCoefficientAsStringWithoutZeros(m_coefficients[index]) + "x_" + getCoefficientAsStringWithoutZeros(index);
 }
 
 std::string Equation::getComparisonOperatorAndZeroAsString() const

@@ -32,6 +32,8 @@ Equation EquationConventer::convert(const std::string expression)
     boost::iter_split(splitedExpresionByCompOperator, expression, boost::first_finder(foundOperator));
     boost::replace_all(splitedExpresionByCompOperator[0], "-", "+-");
     boost::replace_all(splitedExpresionByCompOperator[1], "-", "+-");
+    boost::replace_all(splitedExpresionByCompOperator[0], "x_", "x");
+    boost::replace_all(splitedExpresionByCompOperator[1], "x_", "x");
 
     std::vector<std::string> splitedExpresionIntoTermsLeftSide{};
     std::vector<std::string> splitedExpresionIntoTermsRightSide{};

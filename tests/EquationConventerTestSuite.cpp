@@ -48,28 +48,28 @@ TEST_F(EquationConventerTestSuite, ZeroEqualZero)
 TEST_F(EquationConventerTestSuite, ZeroOnTheRightSide)
 {
     expectTermConverterCalls(
-        {{"2x3", Term(2, 3)}, {"-2x2", Term(-2, 2)}, {"x1", Term(1, 1)}, {"1", Term(1, 0)}, {"0", Term(0, 0)}});
+        {{"2x_3", Term(2, 3)}, {"-2x_2", Term(-2, 2)}, {"x_1", Term(1, 1)}, {"1", Term(1, 0)}, {"0", Term(0, 0)}});
     equation.setComparisonOperator(ComparisonOperator::GreaterEqual);
     setCoefficients({{1, 0}, {1, 1}, {-2, 2}, {2, 3}});
-    ASSERT_EQ(equation, sut.convert("2x3-2x2+x1+1>=0"));
+    ASSERT_EQ(equation, sut.convert("2x_3-2x_2+x_1+1>=0"));
 }
 
 TEST_F(EquationConventerTestSuite, SevenOnTheRightSide)
 {
     expectTermConverterCalls(
-        {{"2x3", Term(2, 3)}, {"-2x2", Term(-2, 2)}, {"x1", Term(1, 1)}, {"1", Term(1, 0)}, {"7", Term(7, 0)}});
+        {{"2x_3", Term(2, 3)}, {"-2x_2", Term(-2, 2)}, {"x_1", Term(1, 1)}, {"1", Term(1, 0)}, {"7", Term(7, 0)}});
     equation.setComparisonOperator(ComparisonOperator::GreaterEqual);
     setCoefficients({{-6, 0}, {1, 1}, {-2, 2}, {2, 3}});
-    ASSERT_EQ(equation, sut.convert("2x3-2x2+x1+1>=7"));
+    ASSERT_EQ(equation, sut.convert("2x_3-2x_2+x_1+1>=7"));
 }
 
 TEST_F(EquationConventerTestSuite, MinusSevenOnTheRightSide)
 {
     expectTermConverterCalls(
-        {{"2x3", Term(2, 3)}, {"-2x2", Term(-2, 2)}, {"x1", Term(1, 1)}, {"1", Term(1, 0)}, {"-7", Term(-7, 0)}});
+        {{"2x_3", Term(2, 3)}, {"-2x_2", Term(-2, 2)}, {"x_1", Term(1, 1)}, {"1", Term(1, 0)}, {"-7", Term(-7, 0)}});
     equation.setComparisonOperator(ComparisonOperator::GreaterEqual);
     setCoefficients({{8, 0}, {1, 1}, {-2, 2}, {2, 3}});
-    ASSERT_EQ(equation, sut.convert("2x3-2x2+x1+1>=-7"));
+    ASSERT_EQ(equation, sut.convert("2x_3-2x_2+x_1+1>=-7"));
 }
 
 TEST_F(EquationConventerTestSuite, WyjebaneWKosmosRownanko)

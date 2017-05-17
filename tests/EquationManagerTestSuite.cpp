@@ -19,9 +19,9 @@ public:
 
 TEST_F(EquationManagerTestSuite, shouldSplitEquationsByNewLineSign)
 {
-    EXPECT_CALL(*m_equationConventerMock, convert("x1+1=3x+5"));
-    EXPECT_CALL(*m_equationConventerMock, convert("x1+2<=3"));
-    sut.convertToEquations("x1+1=3x+5\nx1+2<=3");
+    EXPECT_CALL(*m_equationConventerMock, convert("x_1+1=3x_+5"));
+    EXPECT_CALL(*m_equationConventerMock, convert("x_1+2<=3"));
+    sut.convertToEquations("x_1+1=3x_+5\nx_1+2<=3");
 }
 
 TEST_F(EquationManagerTestSuite, shouldReturnObjectiveFunction)
@@ -29,9 +29,9 @@ TEST_F(EquationManagerTestSuite, shouldReturnObjectiveFunction)
     auto objFun = Equation({-4, -2}, ComparisonOperator::Equal);
     auto conFun = Equation({-1, 1}, ComparisonOperator::LessEqual);
 
-    EXPECT_CALL(*m_equationConventerMock, convert("x1+1=3x1+5")).WillOnce(Return(objFun));
-    EXPECT_CALL(*m_equationConventerMock, convert("x1+2<=3")).WillOnce(Return(conFun));
-    sut.convertToEquations("x1+1=3x1+5\nx1+2<=3");
+    EXPECT_CALL(*m_equationConventerMock, convert("x_1+1=3x_1+5")).WillOnce(Return(objFun));
+    EXPECT_CALL(*m_equationConventerMock, convert("x_1+2<=3")).WillOnce(Return(conFun));
+    sut.convertToEquations("x_1+1=3x_1+5\nx_1+2<=3");
 
     ASSERT_EQ(objFun, sut.getObjectiveFunction());
 }
@@ -43,11 +43,11 @@ TEST_F(EquationManagerTestSuite, shouldReturnCorrectlyConstraintFunctions)
     auto conFun1 = Equation({-1, 1}, ComparisonOperator::LessEqual);
     auto conFun2 = Equation({-1, 1}, ComparisonOperator::LessEqual);
 
-    EXPECT_CALL(*m_equationConventerMock, convert("x1+1=3x1+5")).WillOnce(Return(objFun));
-    EXPECT_CALL(*m_equationConventerMock, convert("x1+1<=0")).WillOnce(Return(conFun0));
-    EXPECT_CALL(*m_equationConventerMock, convert("x1+2<=0")).WillOnce(Return(conFun1));
-    EXPECT_CALL(*m_equationConventerMock, convert("x1+3<=0")).WillOnce(Return(conFun2));
-    sut.convertToEquations("x1+1=3x1+5\nx1+1<=0\nx1+2<=0\nx1+3<=0");
+    EXPECT_CALL(*m_equationConventerMock, convert("x_1+1=3x_1+5")).WillOnce(Return(objFun));
+    EXPECT_CALL(*m_equationConventerMock, convert("x_1+1<=0")).WillOnce(Return(conFun0));
+    EXPECT_CALL(*m_equationConventerMock, convert("x_1+2<=0")).WillOnce(Return(conFun1));
+    EXPECT_CALL(*m_equationConventerMock, convert("x_1+3<=0")).WillOnce(Return(conFun2));
+    sut.convertToEquations("x_1+1=3x_1+5\nx_1+1<=0\nx_1+2<=0\nx_1+3<=0");
 
     auto conFuns = sut.getConstraintFunctions();
     ASSERT_EQ(conFun0, conFuns[0]);
@@ -61,9 +61,9 @@ TEST_F(EquationManagerTestSuite, shouldResizeFunctions)
     auto conFun0 = Equation({-1, 1, 0, 0, 1}, ComparisonOperator::LessEqual);
     auto objFunReturned = Equation({-4, -2, 0, 0, 0}, ComparisonOperator::Equal);
 
-    EXPECT_CALL(*m_equationConventerMock, convert("x1+1=3x1+5")).WillOnce(Return(objFun));
-    EXPECT_CALL(*m_equationConventerMock, convert("x4+x1-1<=0")).WillOnce(Return(conFun0));
-    sut.convertToEquations("x1+1=3x1+5\nx4+x1-1<=0");
+    EXPECT_CALL(*m_equationConventerMock, convert("x_1+1=3x_1+5")).WillOnce(Return(objFun));
+    EXPECT_CALL(*m_equationConventerMock, convert("x_4+x_1-1<=0")).WillOnce(Return(conFun0));
+    sut.convertToEquations("x_1+1=3x_1+5\nx_4+x_1-1<=0");
 
     ASSERT_EQ(objFunReturned, sut.getObjectiveFunction());
 }
