@@ -59,7 +59,7 @@ std::vector<std::shared_ptr<LinearProblemSolution>> BranchAndBoundSolver::Solve(
 void BranchAndBoundSolver::SingleBranch(std::shared_ptr<NodeOfSolution> tempNode,
     std::shared_ptr<LinearProblem> tempProblem, ComparisonOperator typeOfBound)
 {
-    int indexOfFirstNonIntegerElement = getIndexOfFirstNonInteger(*(tempNode->m_solution.get()));
+    int indexOfFirstNonIntegerElement = getIndexOfRandomNonInteger(*(tempNode->m_solution.get()));
 
     std::shared_ptr<LinearProblem> newProblem = std::make_shared<LinearProblem>(*tempProblem);
     m_newConstrain.clear();
@@ -142,7 +142,7 @@ void BranchAndBoundSolver::InsertSolutionIsBetter(std::shared_ptr<NodeOfSolution
     }
 }
 
-int BranchAndBoundSolver::getIndexOfFirstNonInteger(const LinearProblemSolution& solution) const
+int BranchAndBoundSolver::getIndexOfRandomNonInteger(const LinearProblemSolution& solution) const
 {
     int index = 0;
     double FractionalPart;

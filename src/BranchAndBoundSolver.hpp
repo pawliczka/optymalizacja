@@ -19,7 +19,7 @@ public:
 private:
     bool IsSolutionIsInteger(const LinearProblemSolution& solution) const;
     void InsertSolutionIsBetter(std::shared_ptr<NodeOfSolution>);
-    int getIndexOfFirstNonInteger(const LinearProblemSolution& solution) const;
+    int getIndexOfRandomNonInteger(const LinearProblemSolution& solution) const;
     void Branch(std::shared_ptr<LinearProblem> tempProblem, std::shared_ptr<NodeOfSolution> tempNode);
     void SingleBranch(std::shared_ptr<NodeOfSolution>, std::shared_ptr<LinearProblem>, ComparisonOperator);
     void SetRecursiveOptimalId(std::shared_ptr<NodeOfSolution>);
