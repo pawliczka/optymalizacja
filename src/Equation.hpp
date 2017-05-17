@@ -30,6 +30,7 @@ public:
     bool operator==(const Equation& equationSecond) const;
     std::string toString() const;
     void clear();
+    std::vector<Coefficient> returnCoefficients() const;
 
 private:
     std::string getFirstElementAsString() const;

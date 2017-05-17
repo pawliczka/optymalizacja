@@ -191,3 +191,8 @@ void Equation::clear()
         elem = 0;
     m_comparisonOperator = ComparisonOperator::None;
 }
+
+std::vector<Coefficient> Equation::returnCoefficients() const
+{
+    return m_coefficients;
+}

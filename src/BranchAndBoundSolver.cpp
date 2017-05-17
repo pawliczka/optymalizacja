@@ -19,6 +19,7 @@ BranchAndBoundSolver::BranchAndBoundSolver(std::shared_ptr<LinearProblem> linear
     else
         m_valueOfBestObjectiveFunction = std::numeric_limits<float>::lowest();
     m_optimizeType = linearProblem->gettype();
+    setOrederedIndexesOfObjFun();
 }
 
 std::vector<std::shared_ptr<LinearProblemSolution>> BranchAndBoundSolver::Solve()
@@ -150,7 +151,7 @@ int BranchAndBoundSolver::getIndexOfFirstNonInteger(const LinearProblemSolution&
 
     for (int i = 0; i < static_cast<int>(solution.VariableValues.size()); i++)
     {
-        FractionalPart = std::modf(solution.VariableValues[i], &IntegerPart);
+        FractionalPart = std::modf(solution.VariableValues[m_orederedIndexesOfObjFun[i]-1], &IntegerPart);
         if (FractionalPart > m_precision && FractionalPart < (1 - m_precision))
         {
             index = i;
@@ -177,6 +178,36 @@ void BranchAndBoundSolver::SetRecursiveOptimalId(std::shared_ptr<NodeOfSolution>
              node->m_solution->Case != LinearProblemCase::INCONSISTENT &&
              node->m_solution->Case != LinearProblemCase::NO_SOLUTIONS))
         node->m_state = StateOfNode::CutOff;
+}
+
+void BranchAndBoundSolver::setOrederedIndexesOfObjFun()
+{
+    std::vector<float> funkcja = m_initialProblem->getObjFunc().returnCoefficients();
+
+    std::vector<std::pair<float,int>> lista;
+    lista.resize(funkcja.size());
+    m_orederedIndexesOfObjFun.resize(funkcja.size());
+
+    for (int i = 0; i < static_cast<int>(lista.size()); i++)
+    {
+        lista[i].first = funkcja[i];
+        lista[i].second = i;
+    }
+
+    if(m_optimizeType == OptimizeType::MAX)
+    {
+        std::sort(lista.begin(), lista.end(), [](std::pair<float,int> a, std::pair<float,int> b) {
+            return b.first < a.first;});
+    }
+    else
+    {
+        std::sort(lista.begin(), lista.end(), [](std::pair<float,int> a, std::pair<float,int> b) {
+            return b.first > a.first;});
+    }
+    for (int i = 0; i < static_cast<int>(m_orederedIndexesOfObjFun.size()); i++)
+    {
+        m_orederedIndexesOfObjFun[i]=lista[i].second;
+    }
 }
 
 std::shared_ptr<NodeOfSolution> BranchAndBoundSolver::GetRoot()
