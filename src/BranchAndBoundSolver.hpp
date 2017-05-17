@@ -23,7 +23,6 @@ private:
     void Branch(std::shared_ptr<LinearProblem> tempProblem, std::shared_ptr<NodeOfSolution> tempNode);
     void SingleBranch(std::shared_ptr<NodeOfSolution>, std::shared_ptr<LinearProblem>, ComparisonOperator);
     void SetRecursiveOptimalId(std::shared_ptr<NodeOfSolution>);
-    void setOrederedIndexesOfObjFun();
 
     std::vector<std::shared_ptr<LinearProblemSolution>> m_optimalSolutions;
     std::vector<long long int> m_idOptimalNodes;
@@ -33,7 +32,6 @@ private:
     int m_numberOfVariables = 0;
     float m_precision = 0.0001;
     float m_valueOfBestObjectiveFunction = 0;
-    std::vector<int> m_orederedIndexesOfObjFun;
 
     Equation m_newConstrain;
     OptimizeType m_optimizeType = OptimizeType::MAX;
