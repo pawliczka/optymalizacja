@@ -31,7 +31,7 @@ std::vector<std::shared_ptr<LinearProblemSolution>> BranchAndBoundSolver::Solve(
         std::shared_ptr<NodeOfSolution> tempNode = m_nodesOfSolution.front();
         m_nodesOfSolution.pop_front();
 
-        tempNode->m_solution = simplex.Solve(*(tempNode->m_linearProblem.get()));
+        tempNode->m_solution = simplex.Solve(*(tempNode->m_linearProblem));
 
 
         tempProblem = std::make_shared<LinearProblem>(*(tempNode->m_linearProblem));
@@ -40,7 +40,7 @@ std::vector<std::shared_ptr<LinearProblemSolution>> BranchAndBoundSolver::Solve(
             continue;
         }
 
-        if (IsSolutionIsInteger(*(tempNode->m_solution.get())))
+        if (IsSolutionIsInteger(*(tempNode->m_solution)))
         {
             InsertSolutionIsBetter(tempNode);
         }
@@ -173,8 +173,9 @@ void BranchAndBoundSolver::SetRecursiveOptimalId(std::shared_ptr<NodeOfSolution>
         SetRecursiveOptimalId(node->m_lowerBoundNode);
         SetRecursiveOptimalId(node->m_upperBoundNode);
     }
-    else if (node->m_state == StateOfNode::None && node->m_solution->Case != LinearProblemCase::INCONSISTENT &&
-             node->m_solution->Case != LinearProblemCase::NO_SOLUTIONS)
+    else if (!IsSolutionIsInteger(*(node->m_solution)) && (node->m_state == StateOfNode::None &&
+             node->m_solution->Case != LinearProblemCase::INCONSISTENT &&
+             node->m_solution->Case != LinearProblemCase::NO_SOLUTIONS))
         node->m_state = StateOfNode::CutOff;
 }
 
