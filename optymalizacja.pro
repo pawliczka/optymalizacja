@@ -1,8 +1,6 @@
 INCLUDEPATH += $$PWD\src
 INCLUDEPATH += C:\boost
 
-QMAKE_CXXFLAGS += -std=c++14 -Wall -Wextra -pedantic
-
 QT += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
@@ -11,6 +9,8 @@ CONFIG += thread
 CONFIG -= console
 CONFIG -= app_bundle
 CONFIG += c++14
+CONFIG += static
+QMAKE_LFLAGS += -static-libgcc -static-libstdc++
 
 TARGET = optymalizacja
 
@@ -57,3 +57,5 @@ FORMS += \
 
 RESOURCES += \
     res\res.qrc
+
+win32:RC_ICONS += res\calculator.ico
