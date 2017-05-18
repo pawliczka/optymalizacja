@@ -1,6 +1,5 @@
-INCLUDEPATH += $$PWD/src
-INCLUDEPATH += $$PWD/tests/mocks/
-INCLUDEPATH += /usr/local/include
+INCLUDEPATH += $$PWD\src
+INCLUDEPATH += C:\boost
 SRC_DIR = $$PWD
 CONFIG += thread
 

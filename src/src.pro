@@ -1,4 +1,4 @@
-include(../defaults.pri)
+include(..\defaults.pri)
 
 QT += core gui
 
@@ -53,4 +53,4 @@ FORMS += \
     branchandboundtreedisplayer.ui
 
 RESOURCES += \
-    ../res/res.qrc
+    ..\res\res.qrc
