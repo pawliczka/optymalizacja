@@ -35,7 +35,8 @@ SOURCES += \
     src\LinearProblemSolution.cpp \
     src\BranchAndBoundTreeDisplayer.cpp \
     src\BranchAndBoundSolver.cpp \
-    src\NodeOfSolution.cpp
+    src\NodeOfSolution.cpp \
+    src\EquationValidator.cpp
 
 HEADERS += \
     src\MainWindow.hpp \
@@ -56,7 +57,8 @@ HEADERS += \
     src\LinearProblemSolution.hpp \
     src\BranchAndBoundTreeDisplayer.hpp \
     src\BranchAndBoundSolver.hpp \
-    src\NodeOfSolution.hpp
+    src\NodeOfSolution.hpp \
+    src\EquationValidator.hpp
 
 FORMS += \
     src\mainwindow.ui \
