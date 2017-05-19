@@ -20,7 +20,6 @@ private slots:
     void calculate();
 
 private:
-    void prepareEquations();
     void showOptimalResult(std::vector<std::shared_ptr<LinearProblemSolution>> optimalResult);
     std::shared_ptr<LinearProblem> createLinearProblem();
 

@@ -2,6 +2,8 @@
 #include <LinearProblem.hpp>
 #include <QDebug>
 #include <QString>
+#include "EquationValidator.hpp"
+
 namespace
 {
 OptimizeType convertQStringToOptimizeType(QString type)
@@ -9,6 +11,12 @@ OptimizeType convertQStringToOptimizeType(QString type)
     if (type == "MAX")
         return OptimizeType::MAX;
     return OptimizeType::MIN;
+}
+
+bool isEquationsValid(QString objfun, QString constraints)
+{
+    return EquationValidator::isObjFunValid(objfun.toStdString()) &&
+           EquationValidator::isConstraintsValid(constraints.toStdString());
 }
 }
 std::shared_ptr<LinearProblem> Controler::createLinearProblem()
@@ -19,21 +27,6 @@ std::shared_ptr<LinearProblem> Controler::createLinearProblem()
     asd->setConstrains(m_eqManager->getConstraintFunctions());
 
     return asd;
-}
-
-void Controler::prepareEquations()
-{
-    auto objfun = m_view.getTextFromTextObjFun();
-    auto constraints = m_view.getTextFromTextConFun();
-    auto text = objfun + "=0\n" + constraints;
-    try
-    {
-        m_eqManager->convertToEquations(text.toStdString());
-    }
-    catch (std::exception ex)
-    {
-        m_view.badData();
-    }
 }
 
 void Controler::showOptimalResult(std::vector<std::shared_ptr<LinearProblemSolution>> optimalResult)
@@ -48,7 +41,23 @@ void Controler::showOptimalResult(std::vector<std::shared_ptr<LinearProblemSolut
 
 void Controler::calculate()
 {
-    prepareEquations();
+    auto objfun = m_view.getTextFromTextObjFun();
+    auto constraints = m_view.getTextFromTextConFun();
+    if (!isEquationsValid(objfun, constraints))
+    {
+        m_view.badData();
+        return;
+    }
+    auto text = objfun + "=0\n" + constraints;
+    try
+    {
+        m_eqManager->convertToEquations(text.toStdString());
+    }
+    catch (std::exception ex)
+    {
+        m_view.badData();
+        return;
+    }
     std::shared_ptr<LinearProblem> linProblem = createLinearProblem();
     BranchAndBoundSolver solver(linProblem);
     solver.setPrecision(m_view.getPrecision());
