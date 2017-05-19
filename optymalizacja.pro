@@ -8,9 +8,16 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 CONFIG += thread
 CONFIG -= console
 CONFIG -= app_bundle
-CONFIG += c++14
+#CONFIG += c++11
 CONFIG += static
 QMAKE_LFLAGS += -static-libgcc -static-libstdc++
+
+QMAKE_CXXFLAGS += -std=c++14
+
+#QMAKE_LFLAGS += -static -static-libgcc
+#QMAKE_CFLAGS_RELEASE -= -O2
+#QMAKE_CFLAGS_RELEASE += -Os -momit-leaf-frame-pointer
+#DEFINES += QT_STATIC_BUILD
 
 TARGET = optymalizacja
 
