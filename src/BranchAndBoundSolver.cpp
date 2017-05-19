@@ -180,9 +180,9 @@ void BranchAndBoundSolver::SetRecursiveOptimalId(std::shared_ptr<NodeOfSolution>
         SetRecursiveOptimalId(node->m_lowerBoundNode);
         SetRecursiveOptimalId(node->m_upperBoundNode);
     }
-    else if (!IsSolutionIsInteger(*(node->m_solution)) && (node->m_state == StateOfNode::None &&
-             node->m_solution->Case != LinearProblemCase::INCONSISTENT &&
-             node->m_solution->Case != LinearProblemCase::NO_SOLUTIONS))
+    else if (!IsSolutionIsInteger(*(node->m_solution)) &&
+             (node->m_state == StateOfNode::None && node->m_solution->Case != LinearProblemCase::INCONSISTENT &&
+                 node->m_solution->Case != LinearProblemCase::NO_SOLUTIONS))
         node->m_state = StateOfNode::CutOff;
 }
 

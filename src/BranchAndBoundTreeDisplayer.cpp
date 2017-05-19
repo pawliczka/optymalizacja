@@ -11,7 +11,7 @@ BranchAndBoundTreeDisplayer::BranchAndBoundTreeDisplayer(QWidget* parent)
     , ui(new Ui::BranchAndBoundTreeDisplayer)
 {
     ui->setupUi(this);
-    setWindowTitle(QString("Drzewo binarne rozwiazan"));
+    setWindowTitle(QString("Binarne drzewo rozwiązań"));
 }
 
 BranchAndBoundTreeDisplayer::~BranchAndBoundTreeDisplayer()
@@ -139,6 +139,6 @@ void BranchAndBoundTreeDisplayer::setColumnNames(const std::shared_ptr<NodeOfSol
     {
         list << ("x" + QString::number(i));
     }
-    list << "Fun celu";
+    list << "Wartość f-celu";
     ui->treeWidget->setHeaderLabels(list);
 }
