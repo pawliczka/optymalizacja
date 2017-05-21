@@ -22,10 +22,15 @@ public:
     QString getOptymalizationType() const;
     float getPrecision() const;
     void setTextToDispLogger(QString text);
-    void fillTreeView(const std::shared_ptr<NodeOfSolution> &node);
+    void fillTreeView(const std::shared_ptr<NodeOfSolution>& node);
     void badData();
 
 private:
+    void loadPrecison(QTextStream& sFile);
+    void loadOptymalizationType(QTextStream& sFile);
+    void loadObjFun(QTextStream& sFile);
+    void loadConstraints(QTextStream& sFile);
+
     Ui::MainWindow* ui;
     BranchAndBoundTreeDisplayer m_bAndBDisp;
     QString m_fileName;
