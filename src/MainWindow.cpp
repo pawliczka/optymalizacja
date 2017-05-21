@@ -164,7 +164,7 @@ void MainWindow::aboutApplication()
 
 void MainWindow::badData()
 {
-    QMessageBox::information(this, QString("Bląd"), QString("Wprowadź poprawne dane"));
+    QMessageBox::information(this, QString("Błąd"), QString("Wprowadź poprawne dane"));
 }
 
 void MainWindow::on_btn_show_clicked()
