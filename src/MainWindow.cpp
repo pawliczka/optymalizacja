@@ -49,7 +49,7 @@ void MainWindow::setTextToDispLogger(QString text)
     ui->disp_logger->append("-----------------------------------------------------------");
 }
 
-void MainWindow::fillTreeView(const std::shared_ptr<NodeOfSolution> &node)
+void MainWindow::fillTreeView(const std::shared_ptr<NodeOfSolution>& node)
 {
     m_bAndBDisp.fillTreeView(node);
 }
@@ -64,6 +64,44 @@ void MainWindow::closeAplication()
     QApplication::exit();
 }
 
+void MainWindow::loadOptymalizationType(QTextStream& sFile)
+{
+    if (!sFile.atEnd())
+    {
+        QString objFun = sFile.readLine();
+        int index = ui->comb_type->findText(objFun);
+        ui->comb_type->setCurrentIndex(index);
+    }
+}
+
+void MainWindow::loadPrecison(QTextStream& sFile)
+{
+    if (!sFile.atEnd())
+    {
+        QString precision = sFile.readLine();
+        ui->text_precision->setText(precision);
+    }
+}
+
+void MainWindow::loadObjFun(QTextStream &sFile)
+{
+    if (!sFile.atEnd())
+    {
+        QString objFun = sFile.readLine();
+        ui->text_objFun->setText(objFun);
+    }
+}
+
+void MainWindow::loadConstraints(QTextStream &sFile)
+{
+    QString consFun;
+    while (!sFile.atEnd())
+    {
+        consFun += (sFile.readLine() + "\n");
+    }
+    ui->text_conFun->setPlainText(consFun);
+}
+
 void MainWindow::openFile()
 {
     QString fileName = QFileDialog::getOpenFileName(this, "Wczytaj plik", "", "Pliki danych (*.data)");
@@ -75,17 +113,10 @@ void MainWindow::openFile()
         return;
     QTextStream sFile(&file);
 
-    if (!sFile.atEnd())
-    {
-        QString objFun = sFile.readLine();
-        ui->text_objFun->setText(objFun);
-    }
-    QString consFun;
-    while (!sFile.atEnd())
-    {
-        consFun += (sFile.readLine() + "\n");
-    }
-    ui->text_conFun->setPlainText(consFun);
+    loadOptymalizationType(sFile);
+    loadPrecison(sFile);
+    loadObjFun(sFile);
+    loadConstraints(sFile);
     setWindowTitle(QString("Plc Kalkulator - ") + m_fileName);
     file.close();
 }
@@ -119,6 +150,8 @@ void MainWindow::saveFile()
         return;
     }
     QTextStream sFile(&file);
+    sFile << getOptymalizationType() << "\n";
+    sFile << getPrecision() << "\n";
     sFile << getTextFromTextObjFun() << "\n";
     sFile << getTextFromTextConFun();
     file.close();
