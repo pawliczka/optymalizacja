@@ -3,12 +3,12 @@
 #include <cmath>
 #include <iostream>
 
-bool BranchAndBoundSolver::isInteger(double solution) const
+bool BranchAndBoundSolver::isNonInteger(double solution) const
 {
     double FractionalPart;
     double IntegerPart;
     FractionalPart = std::modf(solution, &IntegerPart);
-    return FractionalPart > m_precision && FractionalPart < (1 - m_precision);
+    return (FractionalPart > m_precision) && (FractionalPart < (1 - m_precision));
 }
 
 BranchAndBoundSolver::BranchAndBoundSolver(std::shared_ptr<LinearProblem> linearProblem)
@@ -120,10 +120,9 @@ bool BranchAndBoundSolver::IsSolutionIsInteger(const LinearProblemSolution& solu
 {
     for (auto const& elem : solution.VariableValues)
     {
-        if (isInteger(elem))
+        if (isNonInteger(elem))
             return false;
     }
-
     return true;
 }
 
@@ -159,7 +158,7 @@ int BranchAndBoundSolver::getIndexOfRandomNonInteger(const LinearProblemSolution
 
     for (int i = 0; i < static_cast<int>(randomIndexes.size()); i++)
     {
-        if (isInteger(solution.VariableValues[i]))
+        if (isNonInteger(solution.VariableValues[i]))
         {
             index = i;
             break;
