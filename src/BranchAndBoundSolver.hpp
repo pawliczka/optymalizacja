@@ -23,6 +23,7 @@ private:
     void Branch(std::shared_ptr<LinearProblem> tempProblem, std::shared_ptr<NodeOfSolution> tempNode);
     void SingleBranch(std::shared_ptr<NodeOfSolution>, std::shared_ptr<LinearProblem>, ComparisonOperator);
     void SetRecursiveOptimalId(std::shared_ptr<NodeOfSolution>);
+    bool isInteger(double solution) const;
 
     std::vector<std::shared_ptr<LinearProblemSolution>> m_optimalSolutions;
     std::vector<long long int> m_idOptimalNodes;

@@ -3,6 +3,14 @@
 #include <cmath>
 #include <iostream>
 
+bool BranchAndBoundSolver::isInteger(double solution) const
+{
+    double FractionalPart;
+    double IntegerPart;
+    FractionalPart = std::modf(solution, &IntegerPart);
+    return FractionalPart > m_precision && FractionalPart < (1 - m_precision);
+}
+
 BranchAndBoundSolver::BranchAndBoundSolver(std::shared_ptr<LinearProblem> linearProblem)
 {
     m_initialProblem = linearProblem;
@@ -73,7 +81,7 @@ void BranchAndBoundSolver::SingleBranch(std::shared_ptr<NodeOfSolution> tempNode
     }
     if (typeOfBound == ComparisonOperator::GreaterEqual)
     {
-        float upper_bound = 1 + (std::floor(tempNode->m_solution->VariableValues[indexOfFirstNonIntegerElement]));
+        float upper_bound = std::ceil(tempNode->m_solution->VariableValues[indexOfFirstNonIntegerElement]);
         m_newConstrain.setCoefficient(std::make_pair(-upper_bound, 0));
         m_newConstrain.setComparisonOperator(ComparisonOperator::GreaterEqual);
     }
@@ -110,13 +118,9 @@ void BranchAndBoundSolver::Branch(std::shared_ptr<LinearProblem> tempProblem, st
 
 bool BranchAndBoundSolver::IsSolutionIsInteger(const LinearProblemSolution& solution) const
 {
-    double FractionalPart;
-    double IntegerPart;
-
     for (auto const& elem : solution.VariableValues)
     {
-        FractionalPart = std::modf(elem, &IntegerPart);
-        if (FractionalPart > m_precision && FractionalPart < (1 - m_precision))
+        if (isInteger(elem))
             return false;
     }
 
@@ -145,8 +149,6 @@ void BranchAndBoundSolver::InsertSolutionIsBetter(std::shared_ptr<NodeOfSolution
 int BranchAndBoundSolver::getIndexOfRandomNonInteger(const LinearProblemSolution& solution) const
 {
     int index = 0;
-    double FractionalPart;
-    double IntegerPart;
 
     std::vector<int> randomIndexes;
     randomIndexes.resize(solution.VariableValues.size());
@@ -157,8 +159,7 @@ int BranchAndBoundSolver::getIndexOfRandomNonInteger(const LinearProblemSolution
 
     for (int i = 0; i < static_cast<int>(randomIndexes.size()); i++)
     {
-        FractionalPart = std::modf(solution.VariableValues[i], &IntegerPart);
-        if (FractionalPart > m_precision && FractionalPart < (1 - m_precision))
+        if (isInteger(solution.VariableValues[i]))
         {
             index = i;
             break;
